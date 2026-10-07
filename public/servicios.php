@@ -111,30 +111,64 @@ require __DIR__ . '/../src/content.php';
         </div>
     </section>
 
-    <!-- ESPACIO / INSTALACIONES -->
-    <section class="wrap section two-col">
-        <div class="reveal-scale" style="--delay:0ms">
-            <img src="<?= e(img('espacio.png')) ?>"
-                 alt="Instalaciones del Método ESN"
-                 loading="lazy"
-                 width="1024" height="683"
-                 class="espacio-img">
-        </div>
-        <div>
-            <p class="kicker reveal">Tu entorno de salud</p>
-            <h2 class="reveal" style="--delay:80ms">Un espacio pensado para cuidar de ti</h2>
-            <p class="reveal" style="--delay:160ms">
-                Queremos que desde el primer momento te sientas con total comodidad y confianza. Trabajamos en unas instalaciones modernas en Madrid, equipadas con tecnología de valoración de composición corporal y diseñadas para ofrecer un entorno tranquilo, profesional y cercano.
-            </p>
-            <p class="reveal" style="--delay:220ms">
-                <strong>¿Prefieres no desplazarte?</strong> Disponemos también de consulta online completa con videollamada y seguimiento para acompañarte vivas donde vivas.
-            </p>
-            <p class="reveal" style="--delay:280ms">
+    <!-- ESPACIO / INSTALACIONES REALES -->
+    <section class="band">
+        <div class="wrap section">
+            <div class="clinic-header">
+                <p class="kicker reveal">Tu entorno de salud</p>
+                <h2 class="reveal" style="--delay:80ms">Un espacio pensado para cuidar de ti</h2>
+                <p class="lead reveal" style="--delay:140ms">
+                    Trabajamos en las instalaciones de <strong>Clínica SurgEOM</strong> (Madrid), un entorno médico moderno, tranquilo y profesional equipado con tecnología avanzada de valoración corporal. Y si estás fuera de Madrid, dispones de nuestra videoconsulta 100% online.
+                </p>
+            </div>
+
+            <!-- Showcase con imágenes reales de la consulta y equipamiento -->
+            <div class="clinic-showcase">
+                <div class="clinic-card-main reveal-scale" style="--delay:180ms">
+                    <img src="<?= e(img('clinica.jpeg')) ?>"
+                         alt="Despacho de consulta y valoración del Método ESN en Madrid"
+                         loading="lazy"
+                         width="1024" height="576"
+                         class="clinic-img">
+                    <div class="clinic-caption">
+                        <strong>Despacho de consulta</strong>
+                        <span>Entorno de valoración personalizada y asesoramiento nutricional</span>
+                    </div>
+                </div>
+
+                <div class="clinic-side-cards">
+                    <div class="clinic-card-sub reveal-scale" style="--delay:240ms">
+                        <img src="<?= e(img('clinica2.jpeg')) ?>"
+                             alt="Sala médica y tecnología de valoración en SurgEOM"
+                             loading="lazy"
+                             width="600" height="750"
+                             class="clinic-img">
+                        <div class="clinic-caption">
+                            <strong>Equipamiento clínico</strong>
+                            <span>Aparatología médica y valoración de salud</span>
+                        </div>
+                    </div>
+
+                    <div class="clinic-card-sub reveal-scale" style="--delay:300ms">
+                        <img src="<?= e(img('clinica3.jpg')) ?>"
+                             alt="Puesto de trabajo y planificación del plan individualizado"
+                             loading="lazy"
+                             width="600" height="800"
+                             class="clinic-img">
+                        <div class="clinic-caption">
+                            <strong>Planificación y online</strong>
+                            <span>Seguimiento continuo y videoconsultas en directo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clinic-cta-row reveal" style="--delay:340ms">
                 <a class="btn" href="/reserva-de-citas.php">
-                    <span>Reserva tu cita</span>
+                    <span>Reserva tu cita presencial u online</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
-            </p>
+            </div>
         </div>
     </section>
 

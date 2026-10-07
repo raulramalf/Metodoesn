@@ -113,6 +113,22 @@ require __DIR__ . '/../includes/nav.php';
                     </div>
                 </div>
 
+                <!-- Tarjeta visual con foto real de la fachada exterior -->
+                <div class="clinic-location-card reveal" style="--delay:280ms">
+                    <div class="clinic-location-img-wrap">
+                        <img src="<?= e(img('clinicaporfuera.jpg')) ?>"
+                             alt="Fachada exterior de Clínica SurgEOM en Madrid"
+                             loading="lazy"
+                             width="600" height="800"
+                             class="clinic-location-img">
+                        <span class="clinic-location-badge">Clínica SurgEOM (Madrid)</span>
+                    </div>
+                    <div class="clinic-location-meta">
+                        <strong>Acceso a pie de calle</strong>
+                        <p>Fachada exterior con rótulo corporativo para que localices la entrada sin ninguna dificultad.</p>
+                    </div>
+                </div>
+
                 <!-- Tarjeta destacada de atención y horario -->
                 <div class="contact-box reveal" style="--delay:320ms">
                     <div class="contact-box-header">

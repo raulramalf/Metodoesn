@@ -92,7 +92,7 @@ require __DIR__ . '/../src/content.php';
             <div class="gallery">
                 <img src="<?= e(img('metodo-1.png')) ?>" alt="Metodología ESN en entrenamiento" loading="lazy" width="683" height="1024">
                 <img src="<?= e(img('metodo-2.png')) ?>" alt="Planificación y composición corporal" loading="lazy" width="683" height="1024">
-                <img src="<?= e(img('metodo-3.png')) ?>" alt="Instalaciones y consulta en Madrid" loading="lazy" width="600" height="400">
+                <img src="<?= e(img('clinica.jpeg')) ?>" alt="Consulta médica presencial en Clínica SurgEOM (Madrid)" loading="lazy" width="600" height="400">
             </div>
         </div>
     </section>
