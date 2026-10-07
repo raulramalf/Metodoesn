@@ -77,6 +77,68 @@ document.addEventListener('DOMContentLoaded', () => {
         timelines.forEach(tl => lineObs.observe(tl));
     }
 
+    // ─── Buscador FAQ en tiempo real ──────────────────────────────────────────
+    const faqInput  = document.getElementById('faq-input');
+    const faqClear  = document.getElementById('faq-clear');
+    const faqCount  = document.getElementById('faq-count');
+    const faqEmpty  = document.getElementById('faq-empty');
+    const faqItems  = document.querySelectorAll('.faq-item');
+
+    if (faqInput && faqItems.length) {
+
+        // Guarda el texto original de cada summary para restaurarlo
+        faqItems.forEach(item => {
+            const span = item.querySelector('summary span:first-child');
+            if (span) item.dataset.originalText = span.textContent;
+        });
+
+        function filterFAQ(query) {
+            const q = query.trim().toLowerCase();
+            let visible = 0;
+
+            faqItems.forEach(item => {
+                const haystack = item.dataset.question || '';
+                const match    = !q || haystack.includes(q);
+                item.hidden = !match;
+                if (match) {
+                    visible++;
+                    // Highlight en la pregunta
+                    const span = item.querySelector('summary span:first-child');
+                    if (span) {
+                        if (q) {
+                            const original = item.dataset.originalText;
+                            const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                            span.innerHTML = original.replace(re, '<mark class="faq-mark">$1</mark>');
+                        } else {
+                            span.textContent = item.dataset.originalText;
+                        }
+                    }
+                }
+            });
+
+            // Contador y mensaje vacío
+            if (faqCount) {
+                faqCount.textContent = q
+                    ? `${visible} pregunta${visible !== 1 ? 's' : ''} encontrada${visible !== 1 ? 's' : ''}`
+                    : '';
+            }
+            if (faqEmpty) faqEmpty.hidden = visible > 0;
+
+            // Botón clear
+            if (faqClear) faqClear.hidden = !q;
+        }
+
+        faqInput.addEventListener('input', () => filterFAQ(faqInput.value));
+
+        if (faqClear) {
+            faqClear.addEventListener('click', () => {
+                faqInput.value = '';
+                faqInput.focus();
+                filterFAQ('');
+            });
+        }
+    }
+
     // ─── Hero: parallax suave al mover el ratón (solo escritorio) ────────────
     const heroSection = document.querySelector('.hero');
     const heroMedia   = document.querySelector('.hero-media');
