@@ -2,7 +2,7 @@
     <div class="wrap footer-grid">
         <div class="footer-brand-col">
             <h2 class="footer-title"><?= e(SITE_NAME) ?></h2>
-            <p class="footer-tagline"><strong>Elena Sánchez Novo</strong> · CAFyD & Nutrición Humana y Dietética</p>
+            <p class="footer-tagline"><strong>Elena Sánchez Novo</strong> (Col. Nº <?= e(SITE_COLLEGIATE_NUMBER) ?>) · CAFyD & Nutrición Humana y Dietética</p>
             <p>Entrenamiento personal, nutrición clínica y hábitos para ayudarte a alcanzar tus objetivos de forma sostenible, saludable y adaptada a ti.</p>
         </div>
         <div class="footer-reputation-col">

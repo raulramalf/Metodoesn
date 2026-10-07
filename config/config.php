@@ -2,6 +2,7 @@
 define('SITE_NAME', 'Método ESN');
 define('SITE_TAGLINE', 'Entrenamiento | Salud | Nutrición');
 define('SITE_OWNER', 'Elena Sánchez Novo');
+define('SITE_COLLEGIATE_NUMBER', 'MAD01639');
 define('SITE_EMAIL', 'contacto@metodoesn.com');
 define('SITE_PHONE', '+34 614 467 084');
 define('SITE_PHONE_LINK', '+34614467084');

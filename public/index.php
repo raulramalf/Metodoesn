@@ -18,7 +18,7 @@ require __DIR__ . '/../src/content.php';
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
 
-                <p class="kicker reveal" style="--delay:60ms">Elena Sánchez Novo · CAFyD & Nutrición</p>
+                <p class="kicker reveal" style="--delay:60ms">Elena Sánchez Novo · Col. Nº <?= e(SITE_COLLEGIATE_NUMBER) ?> · CAFyD & Nutrición</p>
                 <h1 class="reveal" style="--delay:120ms">Método ESN</h1>
                 <p class="hero-sub reveal" style="--delay:180ms"><?= e(SITE_TAGLINE) ?></p>
                 <h2 class="hero-lead reveal" style="--delay:240ms">Cuidar de tu salud no debería ser complicado, restrictivo ni temporal.</h2>
