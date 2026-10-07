@@ -63,19 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
         revealEls.forEach(el => el.classList.add('is-visible'));
     }
 
-    // ─── Timeline: dibuja la línea al entrar en viewport ─────────────────────
-    const timeline = document.getElementById('esn-timeline');
-    if (timeline && 'IntersectionObserver' in window) {
+    // ─── Timeline: dibuja la línea al entrar en viewport (todas las páginas) ──
+    const timelines = document.querySelectorAll('.timeline');
+    if (timelines.length && 'IntersectionObserver' in window) {
         const lineObs = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Pequeño delay para que coincida con la aparición de los nodos
-                    setTimeout(() => timeline.classList.add('line-drawn'), 200);
-                    lineObs.unobserve(timeline);
+                    setTimeout(() => entry.target.classList.add('line-drawn'), 200);
+                    lineObs.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.25 });
-        lineObs.observe(timeline);
+        timelines.forEach(tl => lineObs.observe(tl));
     }
 
     // ─── Hero: parallax suave al mover el ratón (solo escritorio) ────────────
