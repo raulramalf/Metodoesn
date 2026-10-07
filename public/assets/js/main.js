@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Menú móvil
+    // ─── Menú móvil ───────────────────────────────────────────────────────────
     const toggle = document.querySelector('.nav-toggle');
     const nav = document.getElementById('nav');
     if (toggle && nav) {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Banner de cookies
+    // ─── Banner de cookies ────────────────────────────────────────────────────
     const KEY = 'esn_cookies';
     const banner = document.getElementById('cookie');
     const store = {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reset.addEventListener('click', () => { store.del(); banner.hidden = false; });
     }
 
-    // Validación básica del formulario de contacto
+    // ─── Validación básica del formulario de contacto ─────────────────────────
     const form = document.getElementById('form-contacto');
     if (form) {
         form.addEventListener('submit', (e) => {
@@ -42,6 +42,67 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (bad) valid = false;
             });
             if (!valid) e.preventDefault();
+        });
+    }
+
+    // ─── Scroll reveal (IntersectionObserver) ────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal, .reveal-scale');
+    if (revealEls.length && 'IntersectionObserver' in window) {
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        revealEls.forEach(el => revealObs.observe(el));
+    } else {
+        // Fallback: mostrar todo sin animación
+        revealEls.forEach(el => el.classList.add('is-visible'));
+    }
+
+    // ─── Timeline: dibuja la línea al entrar en viewport ─────────────────────
+    const timeline = document.getElementById('esn-timeline');
+    if (timeline && 'IntersectionObserver' in window) {
+        const lineObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Pequeño delay para que coincida con la aparición de los nodos
+                    setTimeout(() => timeline.classList.add('line-drawn'), 200);
+                    lineObs.unobserve(timeline);
+                }
+            });
+        }, { threshold: 0.25 });
+        lineObs.observe(timeline);
+    }
+
+    // ─── Hero: parallax suave al mover el ratón (solo escritorio) ────────────
+    const heroSection = document.querySelector('.hero');
+    const heroMedia   = document.querySelector('.hero-media');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (heroSection && heroMedia && !prefersReduced &&
+        window.matchMedia('(hover: hover) and (min-width: 861px)').matches) {
+
+        const imgA = heroMedia.querySelector('.hero-img-a');
+        const imgB = heroMedia.querySelector('.hero-img-b');
+
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroMedia.getBoundingClientRect();
+            const cx = rect.left + rect.width  / 2;
+            const cy = rect.top  + rect.height / 2;
+            const dx = (e.clientX - cx) / (rect.width  / 2);   // -1 … 1
+            const dy = (e.clientY - cy) / (rect.height / 2);   // -1 … 1
+
+            if (imgA) imgA.style.transform = `translate(${dx * -5}px, ${dy * -3}px)`;
+            if (imgB) imgB.style.transform = `translate(${dx *  8}px, ${dy *  5}px)`;
+        });
+
+        heroSection.addEventListener('mouseleave', () => {
+            if (imgA) imgA.style.transform = '';
+            if (imgB) imgB.style.transform = '';
         });
     }
 });
