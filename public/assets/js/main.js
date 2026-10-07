@@ -31,17 +31,58 @@ document.addEventListener('DOMContentLoaded', () => {
         reset.addEventListener('click', () => { store.del(); banner.hidden = false; });
     }
 
-    // ─── Validación básica del formulario de contacto ─────────────────────────
+    // ─── Validación y feedback del formulario de contacto ─────────────────────
     const form = document.getElementById('form-contacto');
     if (form) {
+        const submitBtn = form.querySelector('#btn-submit');
+
+        // Limpiar estado inválido mientras el usuario escribe
+        form.querySelectorAll('input, textarea').forEach(el => {
+            el.addEventListener('input', () => {
+                if (el.classList.contains('invalid')) {
+                    const bad = el.type === 'checkbox' ? !el.checked : !el.value.trim();
+                    if (!bad) el.classList.remove('invalid');
+                }
+            });
+            if (el.type === 'checkbox') {
+                el.addEventListener('change', () => {
+                    if (el.checked) el.classList.remove('invalid');
+                });
+            }
+        });
+
         form.addEventListener('submit', (e) => {
             let valid = true;
+            let firstInvalid = null;
+
             form.querySelectorAll('[required]').forEach((el) => {
-                const bad = el.type === 'checkbox' ? !el.checked : !el.value.trim();
+                let bad = false;
+                if (el.type === 'checkbox') {
+                    bad = !el.checked;
+                } else if (el.type === 'email') {
+                    bad = !el.value.trim() || !el.value.includes('@') || !el.value.includes('.');
+                } else {
+                    bad = !el.value.trim();
+                }
+
                 el.classList.toggle('invalid', bad);
-                if (bad) valid = false;
+                if (bad) {
+                    valid = false;
+                    if (!firstInvalid) firstInvalid = el;
+                }
             });
-            if (!valid) e.preventDefault();
+
+            if (!valid) {
+                e.preventDefault();
+                if (firstInvalid) firstInvalid.focus();
+            } else if (submitBtn) {
+                // Feedback visual de envío y protección contra doble click
+                submitBtn.disabled = true;
+                const btnText = submitBtn.querySelector('.btn-text');
+                if (btnText) btnText.textContent = 'Enviando mensaje...';
+                // Si la validación nativa del form pasa, submit se procesa normalmente
+                form.submit();
+            }
         });
     }
 
