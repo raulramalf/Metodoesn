@@ -17,10 +17,32 @@
         <div class="footer-contact-col">
             <h3>Contacto & Consulta</h3>
             <ul class="plain footer-contact-list">
-                <li><a href="tel:<?= e(SITE_PHONE_LINK) ?>"><?= e(SITE_PHONE) ?></a></li>
-                <li><a href="mailto:<?= e(SITE_EMAIL) ?>"><?= e(SITE_EMAIL) ?></a></li>
-                <li><a href="<?= e(SITE_INSTAGRAM_URL) ?>" target="_blank" rel="noopener"><?= e(SITE_INSTAGRAM) ?></a></li>
-                <li><?= e(SITE_ADDRESS) ?></li>
+                <li>
+                    <a href="tel:<?= e(SITE_PHONE_LINK) ?>" class="footer-contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="footer-item-icon" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <span><?= e(SITE_PHONE) ?></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:<?= e(SITE_EMAIL) ?>" class="footer-contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="footer-item-icon" aria-hidden="true"><path d="m4 4 16 0c1.1 0 2 .9 2 2l0 12c0 1.1-.9 2-2 2l-16 0c-1.1 0-2-.9-2-2l0-12c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+                        <span><?= e(SITE_EMAIL) ?></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= e(SITE_INSTAGRAM_URL) ?>" target="_blank" rel="noopener" class="footer-contact-item footer-instagram-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-item-icon" aria-hidden="true">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                        </svg>
+                        <span><strong>Instagram:</strong> <?= e(SITE_INSTAGRAM) ?></span>
+                    </a>
+                </li>
+                <li class="footer-contact-item footer-contact-address">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="footer-item-icon" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span><?= e(SITE_ADDRESS) ?></span>
+                </li>
             </ul>
         </div>
     </div>
@@ -41,6 +63,11 @@
         <button class="btn btn-sm btn-ghost" data-cookie="denied">Solo necesarias</button>
     </div>
 </div>
+<!-- Librerías de Motion Design y Smooth Scroll -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 <script src="<?= e(asset('js/main.js')) ?>"></script>
 </body>
 </html>

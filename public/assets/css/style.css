@@ -28,6 +28,20 @@
 /* 2. Reset y base */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* 3D tilt perspective en tarjetas interactivas */
+.area-card,
+.service-card,
+.quote-card,
+.doctoralia-score-card,
+.booking-step {
+    transform-style: preserve-3d;
+}
+
 body { font-family: var(--font-body); color: var(--ink); background: var(--paper); line-height: 1.65; font-size: 1.0625rem; }
 img { max-width: 100%; height: auto; display: block; }
 a { color: var(--moss); text-underline-offset: 3px; }
@@ -276,13 +290,27 @@ p + p { margin-top: 1rem; }
 .principle p { color: var(--ink-soft); font-size: .98rem; }
 
 /* Galería */
-.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 3rem; }
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 3rem;
+}
 .gallery img {
-    width: 100%; height: 100%; max-height: 420px; object-fit: cover;
-    border-radius: var(--radius); background: var(--paper);
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center;
+    border-radius: var(--radius);
+    background: var(--paper);
+    border: 1px solid rgba(207, 220, 215, 0.7);
+    box-shadow: var(--shadow-sm);
     transition: transform 400ms var(--ease-smooth), box-shadow 400ms ease;
 }
-.gallery img:hover { transform: scale(1.025); box-shadow: var(--shadow-md); }
+.gallery img:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-md);
+}
 
 /* 9b. Áreas clínicas y especialidades */
 .areas-grid {
@@ -384,15 +412,49 @@ p + p { margin-top: 1rem; }
     display: block;
 }
 /* Hover en cada paso */
-.steps li:hover .step-node {
+/* Hover y estado activo en cada paso del timeline */
+.steps li:hover .step-node,
+.steps li.is-active .step-node,
+.step-node.is-active {
     border-color: var(--amber);
     background: var(--amber);
-    transform: scale(1.18);
-    box-shadow: 0 0 0 6px rgba(227,169,72,.2);
+    transform: scale(1.15);
+    box-shadow: 0 0 0 6px rgba(227,169,72,.22);
 }
-.steps li:hover .step-node span { color: var(--ink); }
+.steps li:hover .step-node span,
+.steps li.is-active .step-node span,
+.step-node.is-active span { color: var(--ink); }
 .steps li h3 { font-size: 1.05rem; margin-bottom: .4rem; color: var(--moss-dark); }
 .steps li p { color: var(--ink-soft); font-size: .95rem; line-height: 1.55; }
+
+/* Scroll Reveal base para elementos nativos y fallback */
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.65s var(--ease-smooth), transform 0.65s var(--ease-smooth);
+    transition-delay: var(--delay, 0ms);
+    will-change: opacity, transform;
+}
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.96) translateY(16px);
+    transition: opacity 0.75s var(--ease-smooth), transform 0.75s var(--ease-smooth);
+    transition-delay: var(--delay, 0ms);
+    will-change: opacity, transform;
+}
+.reveal-scale.is-visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+/* Brillo 3D de VanillaTilt */
+.js-tilt-glare {
+    border-radius: inherit !important;
+}
 
 /* 11. Testimonios — Reputación Doctoralia y Pacientes */
 .reviews-header {
@@ -1372,7 +1434,35 @@ mark.faq-mark {
 .footer-doctoralia-badge p { font-size: .82rem; color: #b4c7be; margin: .3rem 0 .5rem; line-height: 1.4; }
 .footer-doc-link { color: var(--amber) !important; font-weight: 600; font-size: .84rem; text-decoration: none; }
 .footer-doc-link:hover { text-decoration: underline; }
-.footer-contact-list li { padding: .35rem 0; font-size: .95rem; }
+.footer-contact-list li { padding: .4rem 0; font-size: .95rem; }
+.footer-contact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: .75rem;
+    color: #dbe6e1;
+    text-decoration: none;
+    line-height: 1.45;
+    transition: color 180ms ease;
+}
+.footer-contact-item:hover { color: #fff; }
+.footer-contact-item .footer-item-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--amber);
+}
+.footer-instagram-link strong {
+    color: var(--amber);
+    font-weight: 600;
+}
+.footer-contact-address {
+    color: #b4c7be;
+    display: flex;
+    align-items: flex-start;
+}
+.footer-contact-address .footer-item-icon {
+    margin-top: 3px;
+}
 .footer-legal { border-top: 1px solid #3a4f46; margin-top: 2.8rem; padding-top: 1.4rem; font-size: .9rem; color: #8fa398; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
 .footer-legal p { margin: 0; }
 .footer-legal a { color: #b4c7be; text-decoration: none; }
@@ -1457,4 +1547,81 @@ mark.faq-mark {
     .timeline-progress { transition: none; width: 100%; }
     .cta::before, .cta::after { animation: none; }
     .btn, .principle, .gallery img, .quote { transition: none; }
+}
+
+/* 21. Banner flotante de Cookies */
+.cookie {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: auto;
+    max-width: 440px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.6rem;
+    box-shadow: 0 16px 40px rgba(20, 38, 31, 0.16);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: cookieSlideUp 400ms var(--ease-spring);
+}
+
+.cookie[hidden] {
+    display: none !important;
+}
+
+.cookie p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+.cookie p a {
+    color: var(--moss);
+    font-weight: 500;
+    text-underline-offset: 3px;
+}
+
+.cookie-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.cookie-actions .btn {
+    padding: 0.45rem 1rem;
+    font-size: 0.88rem;
+}
+
+@keyframes cookieSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 580px) {
+    .cookie {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        max-width: none;
+    }
+    .cookie-actions {
+        flex-direction: column;
+    }
+    .cookie-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
 }

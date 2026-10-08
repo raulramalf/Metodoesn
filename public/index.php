@@ -90,7 +90,7 @@ require __DIR__ . '/../src/content.php';
                 <?php endforeach; ?>
             </div>
             <div class="gallery">
-                <img src="<?= e(img('metodo-1.png')) ?>" alt="Metodología ESN en entrenamiento" loading="lazy" width="683" height="1024">
+                <img src="<?= e(img('plan-semanal.jpg')) ?>" alt="Planificación semanal de nutrición y hábitos del Método ESN" loading="lazy" width="800" height="1067">
                 <img src="<?= e(img('metodo-2.png')) ?>" alt="Planificación y composición corporal" loading="lazy" width="683" height="1024">
                 <img src="<?= e(img('clinica.jpeg')) ?>" alt="Consulta médica presencial en Clínica SurgEOM (Madrid)" loading="lazy" width="600" height="400">
             </div>
