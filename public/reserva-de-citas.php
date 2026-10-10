@@ -59,12 +59,8 @@ require __DIR__ . '/../includes/nav.php';
 
             <!-- Código oficial del Widget de Doctoralia incrustado -->
             <div class="booking-widget-content" id="doctoralia-widget-area">
-                <a id="zl-url" class="zl-url" href="<?= e(BOOKING_URL) ?>" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="big_with_calendar" data-zlw-opinion="false" data-zlw-hide-branding="true">
-                    Elena Sánchez Novo - Doctoralia.es
-                </a>
-                <script>
-                    !function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = '//platform.docplanner.com/js/widget/platform.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'zl-widget-s');
-                </script>
+                <a id="zl-url" class="zl-url" href="https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="big_with_calendar" data-zlw-opinion="false" data-zlw-hide-branding="true" data-zlw-saas-only="true" data-zlw-a11y-title="Widget de reserva de citas médicas">Reserve una cita</a>
+                <script>!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
             </div>
 
             <!-- Respaldo / fallback directo por si bloqueadores de publicidad o scripts restringen el widget -->

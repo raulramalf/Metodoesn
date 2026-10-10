@@ -1625,3 +1625,86 @@ mark.faq-mark {
         text-align: center;
     }
 }
+
+/* 22. Widgets oficiales de Doctoralia (Calendario, Opiniones, Certificado) */
+.doctoralia-reviews-embed {
+    margin-top: 2.8rem;
+    background: #ffffff;
+    border: 1.5px solid rgba(44,107,88,.15);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+.reviews-embed-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .9rem 1.6rem;
+    background: var(--mist);
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+    gap: .8rem;
+}
+.reviews-embed-title {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: .95rem;
+    color: var(--ink);
+    font-weight: 500;
+}
+.reviews-embed-link {
+    font-size: .88rem;
+    font-weight: 600;
+    color: var(--moss);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    transition: color 180ms ease;
+}
+.reviews-embed-link:hover {
+    color: var(--moss-dark);
+    text-decoration: underline;
+}
+.reviews-widget-body {
+    padding: 1.8rem 1.4rem;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+}
+
+/* Certificado oficial en Quiénes Somos */
+.about-doctoralia-cert {
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Certificado oficial en Footer */
+.footer-cert-wrap {
+    margin: .6rem 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Ajustes comunes para todos los iframes inyectados por Docplanner */
+.booking-widget-content iframe,
+.reviews-widget-body iframe,
+.about-doctoralia-cert iframe,
+.footer-cert-wrap iframe {
+    max-width: 100% !important;
+    border: none !important;
+}
+
+/* Estilo provisional o enlace fallback de Doctoralia */
+.zl-url {
+    transition: opacity 180ms ease;
+}
+.zl-url:hover {
+    opacity: 0.85;
+}
+
