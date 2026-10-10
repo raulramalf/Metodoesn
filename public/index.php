@@ -206,6 +206,24 @@ require __DIR__ . '/../src/content.php';
                 </figure>
             <?php endforeach; ?>
         </div>
+
+        <!-- Feed Oficial de Opiniones Verificadas en Doctoralia -->
+        <div class="doctoralia-reviews-embed reveal" style="--delay:240ms">
+            <div class="reviews-embed-bar">
+                <div class="reviews-embed-title">
+                    <span class="stars-gold" aria-hidden="true">★★★★★</span>
+                    <span>Opiniones verificadas de pacientes en tiempo real</span>
+                </div>
+                <a href="<?= e(BOOKING_URL) ?>" target="_blank" rel="noopener" class="reviews-embed-link">
+                    <span>Ver todas las reseñas en Doctoralia</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+            </div>
+            <div class="reviews-widget-body">
+                <a class="zl-url" href="https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="big" data-zlw-opinion="true" data-zlw-hide-branding="true" data-zlw-saas-only="true" data-zlw-a11y-title="Widget de opiniones de pacientes en Doctoralia">Reserve una cita</a>
+                <script>!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
+            </div>
+        </div>
     </section>
 
     <!-- CTA FINAL ELEVADO -->

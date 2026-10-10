@@ -11,6 +11,10 @@
                 <span class="stars-gold" aria-hidden="true">★★★★★</span>
                 <strong>5.0 de 5</strong> en Doctoralia
                 <p>Más de 50 opiniones verificadas de pacientes con 100% de recomendación.</p>
+                <div class="footer-cert-wrap">
+                    <a class="zl-url" href="https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="certificate" data-zlw-opinion="false" data-zlw-hide-branding="true" data-zlw-saas-only="true" data-zlw-a11y-title="Certificado de verificación oficial en Doctoralia">Reserve una cita</a>
+                    <script>!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
+                </div>
                 <a href="<?= e(BOOKING_URL) ?>" target="_blank" rel="noopener" class="footer-doc-link">Ver perfil en Doctoralia →</a>
             </div>
         </div>
