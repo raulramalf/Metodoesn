@@ -1,5 +1,6 @@
 <?php
-$pageTitle = 'Aviso Legal';
+require_once __DIR__ . '/../src/functions.php';
+$pageTitle = t('footer_legal', 'Aviso Legal');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 ?>
