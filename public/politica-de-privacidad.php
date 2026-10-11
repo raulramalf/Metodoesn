@@ -1,5 +1,6 @@
 <?php
-$pageTitle = 'Política de Privacidad';
+require_once __DIR__ . '/../src/functions.php';
+$pageTitle = t('footer_privacy', 'Política de Privacidad');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 ?>

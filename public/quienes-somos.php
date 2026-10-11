@@ -1,146 +1,143 @@
 <?php
-$pageTitle = 'Quiénes somos';
-$pageDesc  = 'Elena Sánchez Novo (Col. Nº MAD01639): graduada en Nutrición Humana y Dietética y CAFyD. Un acompañamiento basado en la ciencia, la empatía y la máxima individualización.';
+require_once __DIR__ . '/../src/functions.php';
+$pageTitle = t('about_page_title', 'Quiénes somos · Elena Sánchez Novo');
+$pageDesc  = t('about_sub', 'Elena Sánchez Novo (Col. Nº MAD01639): graduada en Nutrición Humana y Dietética y CAFyD.');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 require __DIR__ . '/../src/content.php';
 ?>
 <main id="main">
 
-    <!-- BIO PRINCIPAL -->
+    <!-- HERO & BIOGRAFÍA DE ELENA SÁNCHEZ NOVO -->
     <section class="wrap section about">
-
-        <!-- Fotos: entrada con scale reveal escalonado -->
+        <!-- Media de Elena: fotos originales como estaban antes -->
         <div class="about-media">
             <img class="reveal-scale"
-                 style="--delay:0ms"
                  src="<?= e(img('elena-1.jpeg')) ?>"
                  alt="<?= e(SITE_OWNER) ?> · Nutricionista y entrenadora personal"
-                 width="480" height="600">
+                 width="480" height="600" fetchpriority="high">
             <img class="reveal-scale"
-                 style="--delay:220ms"
                  src="<?= e(img('elena-2.jpeg')) ?>"
                  alt="Elena Sánchez Novo en consulta"
                  loading="lazy"
                  width="480" height="600">
             
             <!-- Badge colegiada y titulación -->
-            <div class="about-col-badge reveal" style="--delay:300ms">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <span>Colegiada <strong>Nº <?= e(SITE_COLLEGIATE_NUMBER) ?></strong> · CODINMA</span>
+            <div class="about-col-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <div>
+                    <strong><?= e(t('trust_col')) ?></strong>
+                    <span style="font-size:0.84rem; color:var(--ink-soft); display:block;">Nº <?= e(SITE_COLLEGIATE_NUMBER) ?> · Madrid</span>
+                </div>
             </div>
 
             <!-- Certificado Oficial Doctoralia -->
-            <div class="about-doctoralia-cert reveal" style="--delay:360ms">
-                <a class="zl-url" href="https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="certificate" data-zlw-opinion="false" data-zlw-hide-branding="true" data-zlw-saas-only="true" data-zlw-a11y-title="Widget de reserva de citas médicas">Reserve una cita</a>
+            <div class="about-doctoralia-cert">
+                <a class="zl-url" href="https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="certificate" data-zlw-opinion="false" data-zlw-hide-branding="true" data-zlw-saas-only="true" data-zlw-a11y-title="Doctoralia Official Certificate"><?= e(t('footer_view_cert')) ?></a>
                 <script>!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
             </div>
         </div>
 
-        <!-- Texto bio: redactado por Elena en Doctoralia -->
-        <div class="prose">
-            <p class="kicker reveal">Sobre mí</p>
-            <h1 class="reveal" style="--delay:80ms"><?= e(SITE_OWNER) ?></h1>
-            <p class="hero-sub reveal" style="--delay:140ms">Dietista-Nutricionista (Col. Nº <?= e(SITE_COLLEGIATE_NUMBER) ?>) · Graduada en CAFyD</p>
-            
-            <p class="reveal" style="--delay:200ms">
-                Cuidar la alimentación no consiste en seguir una dieta perfecta, sino en encontrar una forma de comer que se adapte a ti, a tu estilo de vida y a tus objetivos. Mi trabajo consiste en ayudarte a conseguirlo de una manera realista, personalizada y basada en la evidencia científica.
-            </p>
-            
-            <p class="reveal" style="--delay:270ms">
-                Soy graduada en <strong>Nutrición Humana y Dietética</strong> y en <strong>Ciencias de la Actividad Física y del Deporte (CAFyD)</strong>, lo que me permite abordar la salud desde una perspectiva integral. Entiendo que la alimentación y el ejercicio no funcionan por separado, sino que forman parte de un mismo proceso para mejorar tu bienestar, tu composición corporal y tu calidad de vida.
-            </p>
-            
-            <p class="reveal" style="--delay:340ms">
-                Acompaño a personas que desean perder grasa, realizar una recomposición corporal, ganar masa muscular, mejorar su rendimiento deportivo, cuidar su salud digestiva, optimizar su salud hormonal o simplemente aprender a alimentarse mejor. Cada tratamiento comienza con una valoración completa para conocer tu situación y diseñar un plan totalmente adaptado a tus necesidades, preferencias y ritmo de vida.
-            </p>
-            
-            <p class="reveal" style="--delay:410ms">
-                Mi forma de trabajar se basa en el <strong>seguimiento continuo, la educación nutricional y la adaptación constante del tratamiento</strong>. No creo en las dietas restrictivas ni en las soluciones rápidas, sino en construir hábitos que puedas mantener a largo plazo y que te permitan disfrutar de la alimentación sin renunciar a tus objetivos.
-            </p>
-            
-            <p class="reveal" style="--delay:480ms">
-                Para mí, cada paciente es diferente. Por eso escuchar, comprender tu situación y trabajar contigo de forma cercana es una parte fundamental del proceso. Mi objetivo no es únicamente ayudarte a conseguir un resultado, sino darte las herramientas necesarias para que puedas mantenerlo en el tiempo con seguridad y confianza.
+        <!-- Contenido Editorial -->
+        <div class="about-text-col">
+            <p class="kicker"><?= e(t('about_kicker')) ?></p>
+            <h1><?= e(SITE_OWNER) ?></h1>
+            <p class="hero-sub"><?= e(t('about_sub')) ?></p>
+
+            <p class="lead" style="margin-bottom:1.4rem;">
+                <?= e(t('about_p1')) ?>
             </p>
 
-            <p class="reveal" style="--delay:540ms">
-                <em>Si has decidido dar el paso para mejorar tu salud, estaré encantada de acompañarte durante ese camino.</em>
+            <p>
+                <?= e(t('about_p2')) ?>
             </p>
-        </div>
-    </section>
 
-    <!-- METODOLOGÍA Y ENFOQUE NUTRICIONAL (ESCRITO POR ELENA) -->
-    <section class="band">
-        <div class="wrap section">
-            <p class="kicker reveal">Metodología clínica</p>
-            <h2 class="reveal" style="--delay:60ms">Mi enfoque de trabajo: un proceso en equipo</h2>
-            <div class="principles">
-                <article class="principle reveal" style="--delay:100ms">
-                    <div class="principle-header">
-                        <span class="principle-num">01</span>
-                        <h3>Comprender antes de pautar</h3>
-                    </div>
-                    <p>Mi forma de trabajar se basa en comprender a la persona antes de diseñar cualquier plan. No creo en dietas estándar ni en restricciones innecesarias, porque cada organismo, cada objetivo y cada estilo de vida son diferentes. La primera consulta comienza con una valoración completa de tu estado de salud, hábitos, alimentación, composición corporal, antecedentes y objetivos.</p>
-                </article>
+            <p>
+                <?= e(t('about_p3')) ?>
+            </p>
 
-                <article class="principle reveal" style="--delay:180ms">
-                    <div class="principle-header">
-                        <span class="principle-num">02</span>
-                        <h3>Acompañamiento en la vida real</h3>
-                    </div>
-                    <p>El verdadero tratamiento no empieza cuando recibes tu plan, sino cuando comienzas a ponerlo en práctica. No entiendo la nutrición como una sucesión de consultas aisladas, sino como un proceso en equipo en el que resolvemos dudas, realizamos ajustes según tu evolución y nos adaptamos a los cambios del día a día.</p>
-                </article>
+            <p>
+                <?= e(t('about_p4')) ?>
+            </p>
 
-                <article class="principle reveal" style="--delay:260ms">
-                    <div class="principle-header">
-                        <span class="principle-num">03</span>
-                        <h3>Cada revisión tiene un propósito</h3>
-                    </div>
-                    <p>Analizamos tu evolución, identificamos dificultades, reforzamos avances y adaptamos el plan siempre que sea necesario. Mi prioridad es que nunca sientas que afrontas el proceso en solitario y que comprendas el porqué de cada pauta para ganar autonomía.</p>
-                </article>
-
-                <article class="principle reveal" style="--delay:340ms">
-                    <div class="principle-header">
-                        <span class="principle-num">04</span>
-                        <h3>Educación nutricional y autonomía</h3>
-                    </div>
-                    <p>No busco que dependas eternamente de un menú, sino darte el conocimiento y la confianza necesarios para que, con el tiempo, seas capaz de tomar las mejores decisiones para tu salud por ti mismo.</p>
-                </article>
+            <div class="actions" style="margin-top:2.2rem;">
+                <a class="btn" href="<?= e(page_url('/reserva-de-citas.php')) ?>">
+                    <span><?= e(t('btn_book_now')) ?></span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+                <a class="btn btn-ghost" href="<?= e(page_url('/servicios.php')) ?>"><?= e(t('btn_explore_services')) ?></a>
             </div>
         </div>
     </section>
 
-    <!-- FORMACIÓN Y TÍTULOS ACADÉMICOS OFICIALES -->
-    <section class="wrap section two-col">
-        <div>
-            <p class="kicker reveal">Rigor académico y colegiación</p>
-            <h2 class="reveal" style="--delay:60ms">Formación oficial</h2>
-            <ul class="checks">
-                <?php foreach ($formacion as $i => $f): ?>
-                    <li class="reveal" style="--delay:<?= ($i * 90) + 80 ?>ms">
-                        <?= e($f) ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
+    <!-- METODOLOGÍA & VALORES CLÍNICOS -->
+    <section class="band">
+        <div class="wrap section">
+            <div class="section-heading text-center">
+                <p class="kicker"><?= e(current_lang() === 'en' ? 'Clinical Philosophy' : (current_lang() === 'de' ? 'Klinische Philosophie' : 'Ética y método')) ?></p>
+                <h2><?= e(current_lang() === 'en' ? 'Our collaborative approach: working as a team' : (current_lang() === 'de' ? 'Mein Ansatz: Ein gemeinsamer Teamprozess' : 'Mi enfoque de trabajo: un proceso en equipo')) ?></h2>
+                <p class="lead lead-centered"><?= e(current_lang() === 'en' ? 'Empathetic guidance and scientific rigor define every clinical step.' : (current_lang() === 'de' ? 'Menschliche Nähe und wissenschaftliche Evidenz definieren jeden Behandlungsschritt.' : 'La cercanía humana y la rigurosidad científica definen cada paso del tratamiento.')) ?></p>
+            </div>
 
-        <div>
-            <p class="kicker reveal">Filosofía</p>
-            <h2 class="reveal" style="--delay:60ms">Una idea central</h2>
-            <blockquote class="pull reveal" style="--delay:160ms">
-                «No entiendo la nutrición como una sucesión de consultas, sino como un proceso en el que paciente y profesional trabajan como un mismo equipo hacia un objetivo común: lograr cambios reales, sostenibles y compatibles con tu forma de vivir.»
-            </blockquote>
+            <div class="bento-grid">
+                <?php for ($i = 0; $i < min(3, count($principios)); $i++): ?>
+                    <article class="bento-item">
+                        <div class="bento-item-header">
+                            <span class="bento-tag"><?= e(current_lang() === 'en' ? 'Step ' . ($i + 1) : (current_lang() === 'de' ? 'Schritt ' . ($i + 1) : 'Paso ' . ($i + 1))) ?></span>
+                            <span class="bento-num"><?= sprintf('%02d', $i + 1) ?></span>
+                        </div>
+                        <h3><?= e($principios[$i][0]) ?></h3>
+                        <p><?= e($principios[$i][1]) ?></p>
+                    </article>
+                <?php endfor; ?>
+            </div>
         </div>
     </section>
 
-    <!-- CTA FINAL -->
+    <!-- FORMACIÓN Y TRAYECTORIA ACADÉMICA -->
     <section class="wrap section">
-        <div class="cta reveal">
-            <h2>¿Preparada para empezar tu proceso?</h2>
-            <p>Cada proceso es único. Si quieres mejorar tu salud, tu composición corporal o tu relación con la alimentación y el movimiento, estaré encantada de acompañarte.</p>
-            <div class="cta-actions">
-                <a class="btn" href="/reserva-de-citas.php">Reserva tu valoración inicial</a>
-                <a class="btn btn-ghost" href="/contacto.php">Habla con Elena</a>
+        <div class="section-heading">
+            <p class="kicker"><?= e(current_lang() === 'en' ? 'Clinical Credentials' : (current_lang() === 'de' ? 'Qualifikation & Evidenz' : 'Rigor y avales')) ?></p>
+            <h2><?= e(t('about_edu_title')) ?></h2>
+            <p class="lead"><?= e(t('about_edu_sub')) ?></p>
+        </div>
+
+        <div class="edu-grid">
+            <?php foreach ($formacion as $item): ?>
+                <div class="edu-card">
+                    <div class="edu-card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    </div>
+                    <p><strong><?= e($item) ?></strong></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+    <!-- ESPACIO FÍSICO DE CONSULTA (CLÍNICA SURGEOM) -->
+    <section class="band">
+        <div class="wrap section">
+            <div class="section-heading text-center">
+                <p class="kicker"><?= e(current_lang() === 'en' ? 'Facilities' : (current_lang() === 'de' ? 'Praxisräume' : 'Instalaciones')) ?></p>
+                <h2><?= e(t('about_clinic_title')) ?></h2>
+                <p class="lead lead-centered">
+                    <?= e(t('about_clinic_sub')) ?>
+                </p>
+            </div>
+
+            <div class="gallery-strip">
+                <figure class="gallery-card">
+                    <img src="<?= e(img('clinica3.jpg')) ?>" alt="Despacho de valoración nutricional y antropométrica" loading="lazy" width="600" height="400">
+                    <figcaption><?= e(current_lang() === 'en' ? 'Consultation room & ISAK anthropometrics' : (current_lang() === 'de' ? 'Beratungsraum & ISAK-Anthropometrie' : 'Despacho de consulta y antropometría ISAK')) ?></figcaption>
+                </figure>
+                <figure class="gallery-card">
+                    <img src="<?= e(img('clinica2.jpeg')) ?>" alt="Recepción y sala de espera Clínica SurgEOM" loading="lazy" width="600" height="400">
+                    <figcaption><?= e(current_lang() === 'en' ? 'Reception & clinic waiting lounge' : (current_lang() === 'de' ? 'Empfang & Wartebereich SurgEOM' : 'Recepción y salas de atención médica')) ?></figcaption>
+                </figure>
+                <figure class="gallery-card">
+                    <img src="<?= e(img('clinicaporfuera.jpg')) ?>" alt="Fachada exterior de Clínica SurgEOM en Madrid" loading="lazy" width="600" height="400">
+                    <figcaption><?= e(current_lang() === 'en' ? 'Clinic facade in Madrid' : (current_lang() === 'de' ? 'Außenansicht Klinik Madrid' : 'Fachada e instalaciones en Madrid')) ?></figcaption>
+                </figure>
             </div>
         </div>
     </section>

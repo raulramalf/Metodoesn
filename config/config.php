@@ -11,6 +11,7 @@ define('SITE_INSTAGRAM_URL', 'https://www.instagram.com/metodo.esn/');
 define('SITE_ADDRESS', 'Clínica SurgEOM - MedicoQuirúrgica y Dermatológica');
 define('SITE_HOURS', 'Lunes a Viernes de 16:00 a 21:00');
 define('BOOKING_URL', 'https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid');
+define('SITE_CANONICAL', 'https://metodoesn.com');
 define('DB_PATH', __DIR__ . '/../data/metodoesn.sqlite');
 
 if (session_status() === PHP_SESSION_NONE) {

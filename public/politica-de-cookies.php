@@ -1,5 +1,6 @@
 <?php
-$pageTitle = 'Política de Cookies';
+require_once __DIR__ . '/../src/functions.php';
+$pageTitle = t('footer_cookies', 'Política de Cookies');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 ?>
