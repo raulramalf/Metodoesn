@@ -10,25 +10,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const header    = document.getElementById('site-header');
 
     if (navToggle && navMenu) {
+        const closeNav = () => {
+            navMenu.classList.remove('is-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('nav-menu-open');
+        };
+
         navToggle.addEventListener('click', () => {
             const isOpen = navMenu.classList.toggle('is-open');
             navToggle.setAttribute('aria-expanded', String(isOpen));
+            document.body.classList.toggle('nav-menu-open', isOpen);
         });
 
         // Cerrar menú al hacer clic en un enlace
         navMenu.querySelectorAll('a').forEach((link) => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('is-open');
-                navToggle.setAttribute('aria-expanded', 'false');
-            });
+            link.addEventListener('click', closeNav);
         });
 
         // Cerrar al pulsar Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && navMenu.classList.contains('is-open')) {
-                navMenu.classList.remove('is-open');
-                navToggle.setAttribute('aria-expanded', 'false');
+                closeNav();
                 navToggle.focus();
+            }
+        });
+
+        // Cerrar al redimensionar a versión de escritorio
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 860 && navMenu.classList.contains('is-open')) {
+                closeNav();
             }
         });
     }
