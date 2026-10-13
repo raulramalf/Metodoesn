@@ -84,7 +84,6 @@ require __DIR__ . '/../src/content.php';
                     <article class="bento-item">
                         <div class="bento-item-header">
                             <span class="bento-tag"><?= e(current_lang() === 'en' ? 'Step ' . ($i + 1) : (current_lang() === 'de' ? 'Schritt ' . ($i + 1) : 'Paso ' . ($i + 1))) ?></span>
-                            <span class="bento-num"><?= sprintf('%02d', $i + 1) ?></span>
                         </div>
                         <h3><?= e($principios[$i][0]) ?></h3>
                         <p><?= e($principios[$i][1]) ?></p>

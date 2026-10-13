@@ -112,8 +112,12 @@ require __DIR__ . '/../includes/nav.php';
                     <p><strong><?= e(SITE_ADDRESS) ?></strong></p>
                     <p style="font-size:0.86rem; color:var(--ink-soft); margin-top:0.4rem;">
                         <strong><?= e(current_lang() === 'en' ? 'Hours:' : (current_lang() === 'de' ? 'Öffnungszeiten:' : 'Horario de atención:')) ?></strong> <?= e(SITE_HOURS) ?>.<br>
-                        <?= e(current_lang() === 'en' ? 'Convenient public transit and parking in Madrid central.' : (current_lang() === 'de' ? 'Gute Anbindung an den ÖPNV und Parkmöglichkeiten.' : 'Próximo a transporte público y fácil aparcamiento.')) ?>
+                        <?= e(current_lang() === 'en' ? 'Convenient public transit (Metro Av. de América) and easy parking.' : (current_lang() === 'de' ? 'Metro Av. de América in 3 Min. fußläufig, Parkmöglichkeiten.' : 'Metro Avenida de América a 3 min a pie. Fácil aparcamiento.')) ?>
                     </p>
+                    <a href="#mapa-ubicacion" class="clinic-map-link">
+                        <span><?= e(current_lang() === 'en' ? 'View map & directions' : (current_lang() === 'de' ? 'Karte & Anfahrt ansehen' : 'Ver mapa interactivo y cómo llegar')) ?></span>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 13l5 5 5-5M12 4v14"/></svg>
+                    </a>
                 </div>
             </div>
 
@@ -180,6 +184,98 @@ require __DIR__ . '/../includes/nav.php';
                         </button>
                     </form>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN INTERACTIVA DE GOOGLE MAPS Y UBICACIÓN CLÍNICA -->
+    <section class="wrap section-compact" id="mapa-ubicacion" style="margin-bottom: 5.5rem;">
+        <div class="contact-map-card">
+            <div class="contact-map-grid">
+                <!-- Información detallada de ubicación y transporte -->
+                <div class="contact-map-info">
+                    <div class="map-badge-pill">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span><?= e(current_lang() === 'en' ? 'In-Person Clinical Practice' : (current_lang() === 'de' ? 'Praxis für persönliche Konsultation' : 'Consulta Presencial en Madrid')) ?></span>
+                    </div>
+                    <h2><?= e(current_lang() === 'en' ? 'How to Reach Clínica SurgEOM' : (current_lang() === 'de' ? 'So finden Sie die Clínica SurgEOM' : 'Cómo llegar a Clínica SurgEOM')) ?></h2>
+                    <p class="map-lead">
+                        <?= e(current_lang() === 'en' 
+                            ? 'Our in-person consultations take place at Clínica SurgEOM, a reference medical and dermatological facility located in the heart of Madrid, right by Avenida de América.' 
+                            : (current_lang() === 'de' 
+                                ? 'Unsere persönlichen Sprechstunden finden in der renommierten Fachklinik SurgEOM direkt am Verkehrsknotenpunkt Avenida de América in Madrid statt.' 
+                                : 'Las consultas presenciales del Método ESN se realizan en Clínica SurgEOM, centro médico-quirúrgico y dermatológico de referencia en Madrid, a escasos metros del intercambiador de Avenida de América.')) ?>
+                    </p>
+
+                    <div class="map-details-list">
+                        <div class="map-detail-item">
+                            <div class="map-detail-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div>
+                                <strong><?= e(current_lang() === 'en' ? 'Exact Address' : (current_lang() === 'de' ? 'Genaue Adresse' : 'Dirección exacta')) ?></strong>
+                                <span>Calle de Coslada, 16 (esquina C/ Agustín Durán, 34)<br>28028 Madrid · Barrio de Salamanca / Guindalera</span>
+                            </div>
+                        </div>
+
+                        <div class="map-detail-item">
+                            <div class="map-detail-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            </div>
+                            <div>
+                                <strong><?= e(current_lang() === 'en' ? 'Consultation Hours' : (current_lang() === 'de' ? 'Sprechzeiten' : 'Horario de consulta')) ?></strong>
+                                <span><?= e(SITE_HOURS) ?> (<?= e(current_lang() === 'en' ? 'by appointment' : (current_lang() === 'de' ? 'nach Terminvereinbarung' : 'con cita previa concertada')) ?>)</span>
+                            </div>
+                        </div>
+
+                        <div class="map-detail-item">
+                            <div class="map-detail-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+                            </div>
+                            <div>
+                                <strong><?= e(current_lang() === 'en' ? 'Public Transit & Parking' : (current_lang() === 'de' ? 'Öffentlicher Nahverkehr & Parken' : 'Transporte público y aparcamiento')) ?></strong>
+                                <span><?= e(current_lang() === 'en' 
+                                    ? 'Metro Avenida de América (Lines 4, 6, 7, 9) 3 min walk · Metro Diego de León & Cartagena · Public parking available at Cartagena St. and Intercambiador.' 
+                                    : (current_lang() === 'de' 
+                                        ? 'Metro Avenida de América (Linien 4, 6, 7, 9) 3 Gehminuten · Metro Diego de León & Cartagena · Öffentliche Parkhäuser vorhanden.' 
+                                        : 'Metro Intercambiador de Avenida de América (Líneas 4, 6, 7 y 9) a 3 min a pie · Metro Diego de León y Cartagena · Parkings públicos en C/ Cartagena y en el propio Intercambiador.')) ?></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="map-actions-row">
+                        <a href="<?= e(SITE_MAPS_URL) ?>" target="_blank" rel="noopener" class="btn btn-sm">
+                            <span><?= e(current_lang() === 'en' ? 'Open in Google Maps' : (current_lang() === 'de' ? 'In Google Maps öffnen' : 'Abrir en Google Maps')) ?></span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                        <a href="<?= e(BOOKING_URL) ?>" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+                            <span><?= e(current_lang() === 'en' ? 'Book in-person visit' : (current_lang() === 'de' ? 'Vor-Ort-Termin buchen' : 'Reservar cita presencial')) ?></span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tarjeta fotográfica del despacho -->
+                <div class="contact-map-image-card">
+                    <img src="<?= e(img('dondestamos.jpg')) ?>" alt="Despacho de consulta Elena Sánchez Novo en Clínica SurgEOM Madrid" loading="lazy" width="600" height="750">
+                    <div class="map-image-badge">
+                        <span><?= e(current_lang() === 'en' ? 'ESN Consultation Office' : (current_lang() === 'de' ? 'ESN Praxisraum' : 'Despacho Médico ESN')) ?></span>
+                        <strong>Avenida de América · Madrid</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marco de Google Maps Interactivo -->
+            <div class="contact-map-embed-wrapper">
+                <iframe 
+                    title="Mapa interactivo de Google Maps de Clínica SurgEOM en Madrid"
+                    src="<?= e(SITE_MAPS_EMBED) ?>"
+                    width="100%" 
+                    height="420" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </div>
     </section>

@@ -7,39 +7,39 @@ $currentLang = current_lang();
 $principios_all = [
     'es' => [
         ["Un método integral basado en ciencia",
-         "Cada plan se construye sobre principios respaldados por la evidencia científica y una visión global de la salud. Entrenamiento, nutrición, descanso y hábitos trabajan de forma conjunta para crear cambios sostenibles, adaptados a tus necesidades y orientados a resultados duraderos."],
+         "Integramos nutrición clínica, entrenamiento de fuerza, descanso y salud digestiva bajo evidencia científica contrastada. Sin modas ni atajos, con un abordaje clínico 360°."],
         ["Planes totalmente personalizados",
-         "No existen dos personas iguales, por eso cada plan se diseña de forma individualizada. A partir de una evaluación completa, se adapta el entrenamiento, la alimentación y los hábitos a tus necesidades, objetivos y estilo de vida, creando un proceso realista, sostenible y pensado para funcionar a largo plazo."],
-        ["Acompañamiento continuo y real",
-         "No caminarás solo durante el proceso. El Método ESN se basa en un acompañamiento cercano y continuo que te ofrece apoyo, claridad y confianza en cada etapa. El plan evoluciona contigo, adaptándose a tus necesidades, circunstancias y progresos para que cada paso resulte realista, sostenible y alineado con tus objetivos."],
-        ["Un proceso que enseña y transforma",
-         "Más allá de alcanzar un objetivo concreto, el Método ESN busca que aprendas a entender tu cuerpo, tus hábitos y tus necesidades. Cada paso tiene un propósito y se acompaña de la información necesaria para que ganes confianza, autonomía y seguridad en tus decisiones. Porque la verdadera transformación no consiste solo en cambiar durante unas semanas, sino en desarrollar herramientas que te acompañen toda la vida."],
-        ["Resultados sostenibles, no temporales",
-         "El Método ESN apuesta por cambios que puedan mantenerse en el tiempo. En lugar de recurrir a restricciones, exigencias poco realistas o resultados rápidos, el proceso se centra en construir hábitos que se adapten a tu vida y te permitan avanzar de forma constante. Porque el verdadero éxito no está en lo que consigues durante unas semanas, sino en aquello que eres capaz de mantener y disfrutar a largo plazo."]
+         "Diseñamos cada pauta a partir de tu punto de partida, analíticas, horarios y contexto real. Tu plan se adapta a tu vida, no tu vida al plan."],
+        ["Acompañamiento continuo y cercano",
+         "Cuentas con contacto directo entre revisiones para resolver dudas y ajustar variables en tiempo real. Un apoyo constante para avanzar con total seguridad y claridad."],
+        ["Educación y autonomía real",
+         "Aprenderás a entender tus señales de saciedad, tu metabolismo y la composición de tus platos. Te damos las herramientas necesarias para tomar decisiones con criterio propio."],
+        ["Resultados sostenibles para siempre",
+         "Descartamos dietas restrictivas y exigencias poco realistas. Construimos hábitos sólidos que puedes mantener y disfrutar toda la vida sin efecto rebote."]
     ],
     'en' => [
         ["Science-backed integrative method",
-         "Every plan is grounded in scientific evidence and a 360° perspective of human health. Exercise, clinical nutrition, restorative sleep, and lifestyle habits synchronize to produce lasting, measurable transformation tailored to your physiology."],
+         "We integrate clinical nutrition, strength training, recovery, and gut health under peer-reviewed evidence. No short-lived trends, just a comprehensive 360° medical approach."],
         ["100% individualized strategies",
-         "No two metabolic profiles or daily lives are identical. Following an in-depth clinical evaluation, we craft your training, nutrition, and daily routines around your individual preferences, work schedule, and long-term health goals."],
-        ["Continuous, real-time guidance",
-         "You will never feel alone on your journey. The ESN Method emphasizes empathetic, continuous clinical support that offers prompt clarity and confidence at every step. Your plan continuously evolves alongside your progress and challenges."],
-        ["Empowerment through education",
-         "Beyond reaching a specific number on the scale, the goal is for you to truly understand your body, metabolism, and nutritional needs. Every recommendation has clear reasoning so you gain lifelong autonomy, food freedom, and confidence."],
-        ["Sustainable, lifelong outcomes",
-         "We firmly avoid extreme restriction, unrealistic crash diets, and temporary fixes. We build consistent habits that integrate into your real life so your results become a permanent lifestyle you genuinely enjoy."]
+         "Every protocol is built around your baseline, bloodwork, schedule, and lifestyle. Your plan adapts to your daily routine, not the other way around."],
+        ["Continuous & close guidance",
+         "Direct messaging between reviews to resolve questions and adjust variables in real time. Continuous clinical support so you progress with confidence."],
+        ["Education & true autonomy",
+         "Learn to understand your metabolic signals, hunger cues, and meal balance. We equip you with the knowledge to make confident, autonomous decisions for life."],
+        ["Sustainable, lifelong results",
+         "We eliminate restrictive crash diets and unrealistic demands. We build resilient habits that you can maintain effortlessly for life without rebound effects."]
     ],
     'de' => [
         ["Wissenschaftlich fundierte ganzheitliche Methode",
-         "Jeder Plan basiert auf wissenschaftlicher Evidenz und einem ganzheitlichen Gesundheitsverständnis. Training, klinische Ernährung, Regeneration und Lebensgewohnheiten greifen ineinander, um nachhaltige, messbare Resultate zu erzielen."],
-        ["Vollständig individualisierte Pläne",
-         "Keine zwei Menschen sind identisch. Nach einer ausführlichen Erstanamnese werden Ernährung, Training und Tagesroutine exakt auf Ihre biologischen Bedürfnisse, Ihren Berufsalltag und Ihre langfristigen Ziele abgestimmt."],
+         "Wir verbinden klinische Ernährung, Krafttraining, Erholung und Darmgesundheit nach neuesten wissenschaftlichen Erkenntnissen. Keine Modediäten, sondern ein 360°-Ansatz."],
+        ["Vollständig personalisierte Pläne",
+         "Jeder Plan basiert auf Ihren individuellen Laborwerten, Ihrem Alltag und Ihren Zielen. Ihr Plan passt sich Ihrem Leben an, nicht umgekehrt."],
         ["Kontinuierliche & persönliche Begleitung",
-         "Sie sind auf Ihrem Weg nie allein. Die ESN-Methode setzt auf engmaschige, einfühlsame Betreuung, die Ihnen in jeder Phase Sicherheit und Klarheit gibt. Ihr Plan passt sich flexibel an unvorhergesehene Alltagssituationen an."],
-        ["Wissen vermitteln & Autonomie stärken",
-         "Über das reine Ziel hinaus lernen Sie, Ihren Körper, Ihren Stoffwechsel und Ihre Signale zu verstehen. Jede Empfehlung wird verständlich begründet, damit Sie nachhaltige Selbstsicherheit und langfristige Entscheidungsfreiheit gewinnen."],
-        ["Dauerhafte Resultate statt Jo-Jo-Effekt",
-         "Wir verzichten konsequent auf extreme Verbote, unrealistische Vorgaben und temporäre Blitzdiäten. Im Fokus steht der Aufbau gesunder Gewohnheiten, die Sie dauerhaft und mit Freude im Alltag leben können."]
+         "Direkter Kontakt zwischen den Terminen für Zwischenfragen und Echtzeit-Anpassungen. Verlässliche Unterstützung für maximale Sicherheit."],
+        ["Wissensvermittlung & echte Autonomie",
+         "Lernen Sie, Körpersignale, Stoffwechsel und Mahlzeitenzusammensetzung zu verstehen. Für fundierte, selbstbestimmte Entscheidungen im Alltag."],
+        ["Nachhaltige Resultate ohne Jo-Jo-Effekt",
+         "Keine Radikaldiäten oder unrealistischen Vorgaben. Wir etablieren Routinen, die Sie dauerhaft und mit Freude im Alltag leben können."]
     ]
 ];
 $principios = $principios_all[$currentLang] ?? $principios_all['es'];
@@ -111,6 +111,76 @@ $testimonios_all = [
             "origen"    => "Paciente verificada en Doctoralia",
             "tema"      => "Hábitos duraderos y salud",
             "estrellas" => 5
+        ],
+        [
+            "cita"      => "Llevaba meses lidiando con hinchazón continua y digestiones pesadas tras dar positivo en SIBO. Elena me pautó un protocolo muy claro, sin pasar hambre y reintroduciendo alimentos progresivamente. He recuperado mi calidad de vida y mi tranquilidad digestiva.",
+            "autor"     => "Patricia R.",
+            "origen"    => "Paciente verificada en Doctoralia",
+            "tema"      => "Salud digestiva y SIBO",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "El enfoque de unir entrenamiento de fuerza y nutrición clínica es impecable. He perdido grasa corporal conservando músculo y energía en mis entrenamientos, todo medido objetivamente con antropometría ISAK. Cero dietas milagro, 100% ciencia.",
+            "autor"     => "Javier M.",
+            "origen"    => "Paciente del Método ESN",
+            "tema"      => "Recomposición corporal y fuerza",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Buscaba ayuda para regular mi ciclo y el SOP sin recurrir a pautas extremas. Elena tiene una visión médica integradora fantástica: me enseñó a comer según mi metabolismo y por fin tengo energía constante todo el día.",
+            "autor"     => "Elena B.",
+            "origen"    => "Paciente verificada en Doctoralia",
+            "tema"      => "Salud hormonal y SOP",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Preparar mis entrenamientos y competiciones con Elena ha marcado un antes y un después. La periodización nutricional, la hidratación y la suplementación basada en evidencia se notan desde la primera semana. Trato inmejorable.",
+            "autor"     => "Carlos V.",
+            "origen"    => "Paciente verificado en Doctoralia",
+            "tema"      => "Rendimiento deportivo",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Quería hacer una transición a dieta vegetariana sin carencias y asegurando suficiente proteína para mis entrenamientos. Elena me organizó los menús al detalle, revisó analíticas y suplementación (B12, vitamina D) con máximo rigor clínico.",
+            "autor"     => "Marta F.",
+            "origen"    => "Paciente verificada en Doctoralia",
+            "tema"      => "Nutrición vegetal y salud",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "En la perimenopausia empecé a notar cambios metabólicos y aumento de grasa abdominal que no respondían a lo de siempre. Con Elena aprendí a enfocar la fuerza y los nutrientes clave sin pasar hambre ni obsesionarme. Un apoyo impagable.",
+            "autor"     => "Carmen G.",
+            "origen"    => "Paciente del Método ESN",
+            "tema"      => "Salud metabólica y menopausia",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Venía de un historial agotador de dietas restrictivas y atracones posteriores. Con Elena no hay culpas ni listas de alimentos prohibidos: aprendí a escuchar mis señales de saciedad y recuperar la calma en la mesa. Mi vida es otra.",
+            "autor"     => "Raquel P.",
+            "origen"    => "Paciente verificada en Doctoralia",
+            "tema"      => "Relación con la comida y bienestar",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Tenía resistencia a la insulina incipiente y triglicéridos elevados. En la revisión médica a los 4 meses, mi médico se sorprendió con los resultados de las analíticas. Elena combina rigor científico con una empatía extraordinaria.",
+            "autor"     => "David S.",
+            "origen"    => "Paciente verificado en Doctoralia",
+            "tema"      => "Salud cardiovascular y analíticas",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Para mis carreras de montaña necesitaba afinar la estrategia intra-entrenamiento porque siempre sufría problemas estomacales. Pautamos geles, sales y comidas previas a medida y terminé mi primera ultra sin ninguna molestia. Insuperable.",
+            "autor"     => "Alberto G.",
+            "origen"    => "Paciente del Método ESN",
+            "tema"      => "Nutrición en deportes de resistencia",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Por mi trabajo viajo constantemente y como fuera 4 días a la semana. Pensaba que sería imposible cuidarme, pero Elena me dio herramientas realistas y versátiles para elegir en restaurantes y aeropuertos sin complicaciones.",
+            "autor"     => "Gonzalo T.",
+            "origen"    => "Paciente verificado en Doctoralia",
+            "tema"      => "Hábitos para estilos de vida ocupados",
+            "estrellas" => 5
         ]
     ],
     'en' => [
@@ -154,6 +224,76 @@ $testimonios_all = [
             "autor"     => "Asunción D.",
             "origen"    => "Verified patient on Doctoralia",
             "tema"      => "Long-lasting habits & nutrition",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "I had been struggling with continuous bloating and gut discomfort following a SIBO diagnosis. Elena set up a clear, non-restrictive protocol with structured reintroductions. I got my digestive comfort and energy back completely.",
+            "autor"     => "Patricia R.",
+            "origen"    => "Verified patient on Doctoralia",
+            "tema"      => "Digestive health & SIBO",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Combining strength training with clinical nutrition is a game changer. I achieved substantial body recomposition while keeping full training energy, tracked accurately with ISAK anthropometry. No crash diets, 100% science.",
+            "autor"     => "Javier M.",
+            "origen"    => "ESN Method Patient",
+            "tema"      => "Body recomposition & strength",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "I needed expert clinical guidance for PCOS and cycle regularity without extreme restrictions. Elena has a wonderful integrative approach: she taught me how to fuel my metabolism and my daily energy is finally steady.",
+            "autor"     => "Elena B.",
+            "origen"    => "Verified patient on Doctoralia",
+            "tema"      => "Hormonal health & PCOS",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Preparing my athletic season with Elena was a turning point. Nutritional periodization, hydration, and evidence-based supplementation translated into tangible performance gains from week one. Top-tier guidance.",
+            "autor"     => "Carlos V.",
+            "origen"    => "Verified patient on Doctoralia",
+            "tema"      => "Sports performance",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "I wanted to transition to a plant-based diet while ensuring optimal protein intake and clinical markers. Elena structured my plan impeccably, tracking bloodwork and evidence-based supplementation with utmost care.",
+            "autor"     => "Marta F.",
+            "origen"    => "Verified patient on Doctoralia",
+            "tema"      => "Plant-based nutrition & health",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "During perimenopause, my metabolic rate changed and standard diets failed. Elena helped me align strength training and targeted nutrition without starvation. Truly invaluable clinical guidance.",
+            "autor"     => "Carmen G.",
+            "origen"    => "ESN Method Patient",
+            "tema"      => "Metabolic health & menopause",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "After years trapped in a cycle of restrictive dieting and binge eating, working with Elena gave me freedom. No forbidden foods, no guilt—just peaceful, intuitive, and scientifically grounded nutrition.",
+            "autor"     => "Raquel P.",
+            "origen"    => "Verified patient on Doctoralia",
+            "tema"      => "Relationship with food & peace of mind",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "I had early insulin resistance and high lipids. Four months in, my physician was astounded by my repeat lab tests. Elena pairs clinical precision with extraordinary empathy.",
+            "autor"     => "David S.",
+            "origen"    => "Verified patient on Doctoralia",
+            "tema"      => "Cardiometabolic health & labs",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "For my trail ultra-marathons, GI distress used to sabotage my races. We fine-tuned my intra-race hydration, electrolytes, and fuels, and I completed my first 50K without a single cramp.",
+            "autor"     => "Alberto G.",
+            "origen"    => "ESN Method Patient",
+            "tema"      => "Endurance sports nutrition",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "As an executive traveling constantly, I thought structured nutrition was out of reach. Elena provided realistic, friction-free frameworks to dine out and manage busy schedules without stress.",
+            "autor"     => "Gonzalo T.",
+            "origen"    => "Verified patient on Doctoralia",
+            "tema"      => "Nutrition for busy professionals",
             "estrellas" => 5
         ]
     ],
@@ -199,10 +339,86 @@ $testimonios_all = [
             "origen"    => "Verifizierte Patientin auf Doctoralia",
             "tema"      => "Nachhaltige Gewohnheiten",
             "estrellas" => 5
+        ],
+        [
+            "cita"      => "Ich litt monatelang unter Blähbauch und Magenbeschwerden nach einem SIBO-Befund. Elena erstellte ein klares, strukturiertes Protokoll ohne Hungern. Meine Lebensqualität und Verdauung haben sich enorm verbessert.",
+            "autor"     => "Patricia R.",
+            "origen"    => "Verifizierte Patientin auf Doctoralia",
+            "tema"      => "Darmgesundheit & SIBO",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Die Kombination aus Krafttraining und klinischer Ernährung ist erstklassig. Ich habe Fett abgebaut und Muskelmasse erhalten, objektiv mit ISAK-Messungen dokumentiert. Keine Crashdiäten, reine Wissenschaft.",
+            "autor"     => "Javier M.",
+            "origen"    => "ESN-Patient",
+            "tema"      => "Körperzusammensetzung & Kraft",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Ich suchte fachliche Unterstützung bei PCOS und Zyklusproblemen ohne Radikaldiäten. Elena erklärt medizinische Zusammenhänge hervorragend und half mir, meinen Stoffwechsel nachhaltig zu stabilisieren.",
+            "autor"     => "Elena B.",
+            "origen"    => "Verifizierte Patientin auf Doctoralia",
+            "tema"      => "Hormongesundheit & PCOS",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Die Wettkampfvorbereitung mit Elena hat einen riesigen Unterschied gemacht. Periodisierte Sporternährung und evidenzbasierte Supplementierung brachten sofort spürbare Leistungssteigerungen. Absolut professionell.",
+            "autor"     => "Carlos V.",
+            "origen"    => "Verifizierter Patient auf Doctoralia",
+            "tema"      => "Sportliche Leistung",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Ich wollte mich pflanzenbasiert ernähren, ohne Defizite und mit ausreichend Protein fürs Training. Elena hat alles wissenschaftlich fundiert geplant und meine Blutwerte genau im Blick behalten.",
+            "autor"     => "Marta F.",
+            "origen"    => "Verifizierte Patientin auf Doctoralia",
+            "tema"      => "Pflanzliche Ernährung & Gesundheit",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "In den Wechseljahren veränderte sich mein Stoffwechsel. Dank Elena konnte ich Krafttraining und gezielte Ernährung verbinden, ohne zu hungern. Eine unschätzbare Begleitung.",
+            "autor"     => "Carmen G.",
+            "origen"    => "ESN-Patientin",
+            "tema"      => "Stoffwechsel & Wechseljahre",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Nach jahrelangen Diäten und Essanfällen habe ich durch Elena gelernt, wieder auf meinen Körper zu hören. Kein schlechtes Gewissen, pure innere Ruhe beim Essen.",
+            "autor"     => "Raquel P.",
+            "origen"    => "Verifizierte Patientin auf Doctoralia",
+            "tema"      => "Entspanntes Essverhalten",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Ich hatte beginnende Insulinresistenz und auffällige Laborwerte. Nach vier Monaten war meine Ärztin über meine neuen Blutwerte erstaunt. Elena verbindet Kompetenz mit großer Empathie.",
+            "autor"     => "David S.",
+            "origen"    => "Verifizierter Patient auf Doctoralia",
+            "tema"      => "Stoffwechselgesundheit & Labor",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Für meine Ultratrail-Läufe brauchte ich eine maßgeschneiderte Verpflegungsstrategie. Wir haben Gels, Salze und Mahlzeiten perfekt abgestimmt – mein erster 50K lief komplett beschwerdefrei.",
+            "autor"     => "Alberto G.",
+            "origen"    => "ESN-Patient",
+            "tema"      => "Ausdauersport & Ernährung",
+            "estrellas" => 5
+        ],
+        [
+            "cita"      => "Als Führungskraft mit vielen Geschäftsreisen schien mir gesunde Ernährung fast unmöglich. Elena gab mir alltagstaugliche Werkzeuge an die Hand, um auch in Restaurants stressfrei die richtige Wahl zu treffen.",
+            "autor"     => "Gonzalo T.",
+            "origen"    => "Verifizierter Patient auf Doctoralia",
+            "tema"      => "Ernährung bei vollem Terminkalender",
+            "estrellas" => 5
         ]
     ]
 ];
-$testimonios = $testimonios_all[$currentLang] ?? $testimonios_all['es'];
+
+// Selección dinámica y aleatoria del banco de testimonios
+$testimonios_raw = $testimonios_all[$currentLang] ?? $testimonios_all['es'];
+// Barajar aleatoriamente en cada visita para que nunca empiece con las mismas
+shuffle($testimonios_raw);
+// Tomar una selección activa de 10 opiniones variadas para el carrusel de esta visita
+$testimonios = array_slice($testimonios_raw, 0, 10);
 
 // Estadísticas de reputación clínica
 $statsReputacion = [
