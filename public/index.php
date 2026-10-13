@@ -8,7 +8,7 @@ require __DIR__ . '/../src/content.php';
 ?>
 <main id="main">
 
-    <!-- 1. HERO SECTION BOUTIQUE -->
+    <!-- 1. HERO SECTION EDITORIAL DE ÉLITE -->
     <section class="hero" id="hero">
         <div class="hero-glow" aria-hidden="true"></div>
         <div class="wrap hero-grid">
@@ -20,8 +20,12 @@ require __DIR__ . '/../src/content.php';
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
 
-                <p class="kicker">Elena Sánchez Novo · Col. Nº <?= e(SITE_COLLEGIATE_NUMBER) ?> · CAFyD & Nutrición</p>
-                <h1><?= e(SITE_NAME) ?></h1>
+                <div class="hero-kicker-pill">
+                    <span class="kicker-dot" aria-hidden="true"></span>
+                    <span>Elena Sánchez Novo · Col. Nº <?= e(SITE_COLLEGIATE_NUMBER) ?> · CAFyD & Nutrición Clínica</span>
+                </div>
+
+                <h1 class="hero-title"><?= e(SITE_NAME) ?></h1>
                 <p class="hero-sub"><?= e(SITE_TAGLINE) ?></p>
                 <h2 class="hero-lead"><?= e(t('hero_lead')) ?></h2>
                 <p class="hero-desc">
@@ -36,36 +40,24 @@ require __DIR__ . '/../src/content.php';
                     <a class="btn btn-ghost" href="#fundamentos"><?= e(t('btn_explore_services')) ?></a>
                 </div>
 
-                <div class="hero-guarantees">
-                    <div class="guarantee-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><?= e(current_lang() === 'en' ? 'Scientific Evidence' : (current_lang() === 'de' ? 'Wissenschaftliche Evidenz' : 'Evidencia científica')) ?></span>
-                    </div>
-                    <div class="guarantee-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><?= e(current_lang() === 'en' ? 'In-Person (Madrid) & Online' : (current_lang() === 'de' ? 'Vor Ort (Madrid) & Online' : 'Presencial (Madrid) y Online')) ?></span>
-                    </div>
-                    <div class="guarantee-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><?= e(current_lang() === 'en' ? '100% Individualized' : (current_lang() === 'de' ? '100% Individualisiert' : '100% individualizado')) ?></span>
-                    </div>
-                </div>
             </div>
 
-            <!-- Media del Hero con Composición Visual Clara -->
+            <!-- Media del Hero con Composición Visual Orgánica y Multicapa -->
             <div class="hero-media-wrapper">
+                <div class="hero-media-backdrop" aria-hidden="true"></div>
                 <div class="hero-media-card">
                     <img src="<?= e(img('hero-1.png')) ?>" alt="Elena Sánchez Novo · Método ESN" width="682" height="1024" fetchpriority="high">
                 </div>
                 <img class="hero-sub-photo" src="<?= e(img('hero-2.png')) ?>" alt="Entrenamiento y salud en consulta clínica" width="600" height="400" loading="lazy">
-                
-                <div class="hero-floating-card" aria-hidden="true">
-                    <div class="floating-icon-wrap">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+
+                <!-- Tarjeta flotante inferior: Atención directa -->
+                <div class="hero-floating-card hero-floating-bottom" aria-hidden="true">
+                    <div class="floating-icon-wrap floating-icon-badge">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
                     <div class="floating-text-wrap">
-                        <strong>5.0 Doctoralia</strong>
-                        <span>50+ <?= e(current_lang() === 'en' ? 'verified ratings' : (current_lang() === 'de' ? 'Bewertungen' : 'opiniones')) ?></span>
+                        <strong>Atención Directa</strong>
+                        <span>Presencial en Madrid & Online</span>
                     </div>
                 </div>
             </div>
@@ -76,19 +68,27 @@ require __DIR__ . '/../src/content.php';
     <section class="trust-strip" aria-label="Acreditaciones profesionales">
         <div class="wrap trust-strip-inner">
             <div class="trust-pill">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span class="trust-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                </span>
                 <span><?= e(t('trust_col')) ?></span>
             </div>
             <div class="trust-pill">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                <span class="trust-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </span>
                 <span>Antropometría Oficial ISAK</span>
             </div>
             <div class="trust-pill">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+                <span class="trust-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+                </span>
                 <span><?= e(t('trust_univ')) ?></span>
             </div>
             <div class="trust-pill">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="trust-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
                 <span>Clínica SurgEOM (Madrid) & Online</span>
             </div>
         </div>
@@ -106,33 +106,41 @@ require __DIR__ . '/../src/content.php';
 
         <div class="compare-grid">
             <div class="compare-box compare-box-old">
-                <div class="compare-badge compare-badge-old">
-                    <span>✕ <?= e(t('compare_bad_tag')) ?></span>
+                <div class="compare-box-header">
+                    <span class="compare-tag-old"><?= e(current_lang() === 'en' ? 'TRADITIONAL NUTRITION' : (current_lang() === 'de' ? 'TRADITIONELLE ERNÄHRUNG' : 'NUTRICIÓN TRADICIONAL')) ?></span>
+                    <span class="compare-status-circle cross" aria-hidden="true">✕</span>
                 </div>
                 <h3><?= e(t('compare_bad_title')) ?></h3>
                 <ul class="compare-list">
                     <li>
-                        <span class="compare-icon-cross" aria-hidden="true">✕</span>
+                        <span class="compare-icon-cross" aria-hidden="true">⊖</span>
                         <div><?= e(t('compare_bad_1')) ?></div>
                     </li>
                     <li>
-                        <span class="compare-icon-cross" aria-hidden="true">✕</span>
+                        <span class="compare-icon-cross" aria-hidden="true">⊖</span>
                         <div><?= e(t('compare_bad_2')) ?></div>
                     </li>
                     <li>
-                        <span class="compare-icon-cross" aria-hidden="true">✕</span>
+                        <span class="compare-icon-cross" aria-hidden="true">⊖</span>
                         <div><?= e(t('compare_bad_3')) ?></div>
                     </li>
                     <li>
-                        <span class="compare-icon-cross" aria-hidden="true">✕</span>
+                        <span class="compare-icon-cross" aria-hidden="true">⊖</span>
                         <div><?= e(t('compare_bad_4')) ?></div>
                     </li>
                 </ul>
+                <p class="compare-footer-old">
+                    «<?= e(current_lang() === 'en' ? 'Typical outcome: persistent fatigue, recurring inflammation, and psychological frustration.' : (current_lang() === 'de' ? 'Typisches Ergebnis: anhaltende Müdigkeit, wiederkehrende Entzündungen und Frustration.' : 'Resultado habitual: fatiga persistente, inflamación recurrente y frustración psicológica.')) ?>»
+                </p>
             </div>
 
             <div class="compare-box compare-box-esn">
-                <div class="compare-badge compare-badge-esn">
-                    <span>✓ <?= e(t('compare_good_tag')) ?></span>
+                <div class="compare-box-header">
+                    <span class="compare-tag-esn">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                        <?= e(current_lang() === 'en' ? 'ESN PRECISION FORMULA' : (current_lang() === 'de' ? 'ESN PRÄZISIONSFORMEL' : 'FÓRMULA DE PRECISIÓN ESN')) ?>
+                    </span>
+                    <span class="compare-status-circle check" aria-hidden="true">✓</span>
                 </div>
                 <h3><?= e(t('compare_good_title')) ?></h3>
                 <ul class="compare-list">
@@ -153,6 +161,10 @@ require __DIR__ . '/../src/content.php';
                         <div><?= e(t('compare_good_4')) ?></div>
                     </li>
                 </ul>
+                <div class="compare-footer-esn">
+                    <span><?= e(current_lang() === 'en' ? 'Sustainable cellular transformation · Steady vitality all day' : (current_lang() === 'de' ? 'Nachhaltige Zellgesundheit · Ganztägige Energie' : 'Transformación sostenible · Energía constante todo el día')) ?></span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </div>
             </div>
         </div>
     </section>
@@ -167,11 +179,10 @@ require __DIR__ . '/../src/content.php';
             </div>
 
             <div class="bento-grid">
-                <!-- Tarjeta 01 Hero Bento -->
+                <!-- Tarjeta Hero Bento -->
                 <article class="bento-item bento-item-hero">
                     <div class="bento-item-header">
                         <span class="bento-tag"><?= e(current_lang() === 'en' ? 'Core Pillar' : (current_lang() === 'de' ? 'Hauptsäule' : 'Pilar Central')) ?></span>
-                        <span class="bento-num">01</span>
                     </div>
                     <h3><?= e($principios[0][0]) ?></h3>
                     <p><?= e($principios[0][1]) ?></p>
@@ -187,7 +198,6 @@ require __DIR__ . '/../src/content.php';
                     <article class="bento-item">
                         <div class="bento-item-header">
                             <span class="bento-tag"><?= e(current_lang() === 'en' ? 'Principle ' . ($i + 1) : (current_lang() === 'de' ? 'Prinzip ' . ($i + 1) : 'Pilar ' . ($i + 1))) ?></span>
-                            <span class="bento-num"><?= sprintf('%02d', $i + 1) ?></span>
                         </div>
                         <h3><?= e($principios[$i][0]) ?></h3>
                         <p><?= e($principios[$i][1]) ?></p>
@@ -345,23 +355,48 @@ require __DIR__ . '/../src/content.php';
             </div>
         </div>
 
-        <div class="quotes-grid" id="quotes-container">
-            <?php foreach ($testimonios as $i => $item): ?>
-                <figure class="quote-card">
-                    <div class="quote-top">
-                        <div class="quote-stars" aria-hidden="true">★★★★★</div>
-                        <span class="quote-topic"><?= e($item['tema']) ?></span>
+        <!-- Carrusel interactivo automático de opiniones -->
+        <div class="quotes-carousel-wrapper" id="quotes-carousel" role="region" aria-roledescription="carousel" aria-label="<?= e(t('testi_title')) ?>">
+            <div class="quotes-carousel-top-bar">
+                <div class="quotes-carousel-status">
+                    <span class="quotes-live-dot" aria-hidden="true"></span>
+                    <span class="quotes-status-text"><?= e(current_lang() === 'en' ? 'Rotating verified reviews' : (current_lang() === 'de' ? 'Rotierende verifizierte Bewertungen' : 'Opiniones verificadas en rotación')) ?></span>
+                </div>
+                <div class="quotes-carousel-controls">
+                    <button type="button" class="quotes-nav-btn prev" id="quotes-prev" aria-label="<?= e(current_lang() === 'en' ? 'Previous review' : (current_lang() === 'de' ? 'Vorherige Bewertung' : 'Opinión anterior')) ?>">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    </button>
+                    <div class="quotes-counter" id="quotes-counter" aria-live="polite">
+                        <span class="quotes-current">1</span> / <span class="quotes-total"><?= count($testimonios) ?></span>
                     </div>
-                    <blockquote><p>«<?= e($item['cita']) ?>»</p></blockquote>
-                    <figcaption class="quote-author">
-                        <strong><?= e($item['autor']) ?></strong>
-                        <span class="quote-verified">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                            <?= e($item['origen']) ?>
-                        </span>
-                    </figcaption>
-                </figure>
-            <?php endforeach; ?>
+                    <button type="button" class="quotes-nav-btn next" id="quotes-next" aria-label="<?= e(current_lang() === 'en' ? 'Next review' : (current_lang() === 'de' ? 'Nächste Bewertung' : 'Siguiente opinión')) ?>">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="quotes-carousel-viewport" id="quotes-viewport">
+                <div class="quotes-carousel-track" id="quotes-track">
+                    <?php foreach ($testimonios as $i => $item): ?>
+                        <figure class="quote-card quote-slide" data-index="<?= $i ?>">
+                            <div class="quote-top">
+                                <div class="quote-stars" aria-hidden="true">★★★★★</div>
+                                <span class="quote-topic"><?= e($item['tema']) ?></span>
+                            </div>
+                            <blockquote><p>«<?= e($item['cita']) ?>»</p></blockquote>
+                            <figcaption class="quote-author">
+                                <strong><?= e($item['autor']) ?></strong>
+                                <span class="quote-verified">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <?= e($item['origen']) ?>
+                                </span>
+                            </figcaption>
+                        </figure>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <div class="quotes-carousel-indicators" id="quotes-indicators" role="tablist" aria-label="<?= e(current_lang() === 'en' ? 'Review indicators' : (current_lang() === 'de' ? 'Bewertungsindikatoren' : 'Indicadores de opiniones')) ?>"></div>
         </div>
 
         <!-- Feed Oficial de Doctoralia -->

@@ -39,7 +39,7 @@ require __DIR__ . '/../src/content.php';
                         </svg>
                     </div>
                     <h3><?= e(current_lang() === 'en' ? 'Adapted Strength Training' : (current_lang() === 'de' ? 'Personalisiertes Krafttraining' : 'Entrenamiento de Fuerza Adaptado')) ?></h3>
-                    <p><?= e(current_lang() === 'en' ? 'Customized strength, conditioning, and joint-friendly body recomposition plans. Scaled for full gym, home, or outdoor setups.' : (current_lang() === 'de' ? 'Maßgeschneidertes Kraft- und Haltungstraining für Muskelaufbau und Fettabbau. Geeignet für Fitnessstudio, Heimtraining oder Outdoor.' : 'Programas de fuerza, acondicionamiento y recomposición corporal individualizados para tu punto de partida, lesiones previas y tiempo disponible.')) ?></p>
+                    <p><?= e(current_lang() === 'en' ? 'Custom strength and body recomposition plans tailored to your metabolism, injury history, and real schedule. Scaled for gym, home, or outdoor setups.' : (current_lang() === 'de' ? 'Individuelle Kraft- und Muskelaufbaupläne abgestimmt auf Stoffwechsel, Vorerkrankungen und Ihren Zeitplan. Im Studio, zu Hause oder im Freien.' : 'Programas personalizados de fuerza y masa muscular adaptados a tu salud metabólica, lesiones previas y horarios reales. En gimnasio, casa o exterior.')) ?></p>
                 </article>
 
                 <article class="pillar-card">
@@ -50,7 +50,7 @@ require __DIR__ . '/../src/content.php';
                         </svg>
                     </div>
                     <h3><?= e(current_lang() === 'en' ? 'Flexible Clinical Nutrition' : (current_lang() === 'de' ? 'Flexible Klinische Ernährung' : 'Nutrición Clínica y Flexible')) ?></h3>
-                    <p><?= e(current_lang() === 'en' ? 'Evidence-based meal strategies with zero starvation or food guilt. We balance gut digestion, hormonal health, and real vitality.' : (current_lang() === 'de' ? 'Wissenschaftlich fundierte Ernährung ohne Hungern oder Verbote. Zur Optimierung von Darmflora, Hormonen und täglichem Energielevel.' : 'Planes de alimentación estructurados desde la evidencia científica, sin pasar hambre ni prohibir alimentos. Abordamos digestión, salud hormonal y energía.')) ?></p>
+                    <p><?= e(current_lang() === 'en' ? 'Evidence-based nutrition without forbidden foods or hunger. We optimize your gut health, hormonal balance, and daily vitality.' : (current_lang() === 'de' ? 'Evidenzbasierte Ernährung ohne Verbote und ohne Hungern. Zur Optimierung von Darmgesundheit, Hormonbalance und Energielevel.' : 'Pautas respaldadas por evidencia científica, sin alimentos prohibidos ni pasar hambre. Maximizamos tu salud digestiva, balance hormonal y vitalidad diaria.')) ?></p>
                 </article>
 
                 <article class="pillar-card">
@@ -63,7 +63,7 @@ require __DIR__ . '/../src/content.php';
                         </svg>
                     </div>
                     <h3><?= e(current_lang() === 'en' ? 'Continuous Direct Follow-Up' : (current_lang() === 'de' ? 'Engmaschige Begleitung' : 'Acompañamiento Continuo')) ?></h3>
-                    <p><?= e(current_lang() === 'en' ? 'Ongoing check-ins and direct communication. We adjust variables continuously so you feel confidence and clinical support.' : (current_lang() === 'de' ? 'Regelmäßige Erfolgskontrolle und steter Ansprechpartner. Wir passen Variablen an, damit Sie Sicherheit auf Ihrem Weg spüren.' : 'Seguimiento estrecho durante todo el proceso. Evaluamos avances, ajustamos variables y resolvemos dudas en cada etapa.')) ?></p>
+                    <p><?= e(current_lang() === 'en' ? 'Direct communication and regular reviews to evaluate progress, fine-tune variables, and resolve questions at any time. Empathetic guidance.' : (current_lang() === 'de' ? 'Direkter Kontakt und regelmäßige Analysen, um Fortschritte zu messen und Anpassungen vorzunehmen. Zuverlässige und nahbare Begleitung.' : 'Contacto directo y revisiones periódicas para evaluar progresos, afinar variables y resolver dudas en cualquier momento. Acompañamiento real y cercano.')) ?></p>
                 </article>
             </div>
         </div>
@@ -85,24 +85,24 @@ require __DIR__ . '/../src/content.php';
                     <strong style="color:var(--moss);"><?= e(t('services_presential')) ?></strong>
                 </div>
                 <h3><?= e(t('services_presential')) ?></h3>
-                <p><?= e(current_lang() === 'en' ? 'Direct consultation at Clínica SurgEOM (Madrid). Ideal for patients who value instrumental anthropometry and in-person care.' : (current_lang() === 'de' ? 'Persönliche Sprechstunde in der Praxis Clínica SurgEOM (Madrid). Ideal für apparative Körpervermessung und persönlichen Kontakt.' : 'Atención directa en nuestro despacho en Clínica SurgEOM (Madrid). Ideal para quienes prefieren la valoración física instrumental.')) ?></p>
+                <p><?= e(current_lang() === 'en' ? 'Private consultation at Clínica SurgEOM (Madrid). Ideal for patients who value instrumental anthropometry and in-person care with Elena.' : (current_lang() === 'de' ? 'Persönliche Sprechstunde in der Clínica SurgEOM (Madrid). Ideal für apparative Körpervermessung und direkten Kontakt mit Elena.' : 'Consulta privada en Clínica SurgEOM (Madrid). Ideal para quienes buscan valoración física instrumental y contacto presencial con Elena.')) ?></p>
                 
                 <ul class="mode-features">
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><strong><?= e(current_lang() === 'en' ? 'Official ISAK Anthropometry:' : (current_lang() === 'de' ? 'Offizielle ISAK-Anthropometrie:' : 'Medición Antropométrica Oficial ISAK:')) ?></strong> <?= e(current_lang() === 'en' ? 'Precise quantification of fat and muscle tissue.' : (current_lang() === 'de' ? 'Präzise Erfassung von Fett- und Muskelgewebe.' : 'Cuantificación exacta de masa muscular y grasa.')) ?></span>
+                        <span><strong><?= e(current_lang() === 'en' ? 'Official ISAK Anthropometry:' : (current_lang() === 'de' ? 'Offizielle ISAK-Anthropometrie:' : 'Medición Antropométrica Oficial ISAK:')) ?></strong> <?= e(current_lang() === 'en' ? 'Precise quantification of fat and muscle tissue.' : (current_lang() === 'de' ? 'Präzise Erfassung von Fett- und Muskelgewebe.' : 'Cuantificación exacta de masa muscular y grasa corporal.')) ?></span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><?= e(current_lang() === 'en' ? 'Full 60-minute in-depth clinical interview.' : (current_lang() === 'de' ? '60-minütige ausführliche Erstanamnese.' : 'Entrevista clínica presencial de 60 minutos.')) ?></span>
+                        <span><?= e(current_lang() === 'en' ? 'Full 60-minute in-depth clinical interview.' : (current_lang() === 'de' ? '60-minütige ausführliche Erstanamnese.' : 'Entrevista clínica y valoración integral de 60 minutos.')) ?></span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><?= e(current_lang() === 'en' ? 'Personalized plan delivered on private digital platform.' : (current_lang() === 'de' ? 'Bereitstellung des Plans über die private Plattform.' : 'Pauta nutricional y de entrenamiento entregada en plataforma privada.')) ?></span>
+                        <span><?= e(current_lang() === 'en' ? 'Personalized plan delivered on private digital platform.' : (current_lang() === 'de' ? 'Bereitstellung des Plans über die private Plattform.' : 'Plan de nutrición y pauta de fuerza en plataforma digital privada.')) ?></span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><?= e(current_lang() === 'en' ? 'Continuous direct channel between check-ins.' : (current_lang() === 'de' ? 'Direkter Kontaktkanal für Zwischenfragen.' : 'Canal directo entre consultas para dudas y revisiones.')) ?></span>
+                        <span><?= e(current_lang() === 'en' ? 'Continuous direct channel between check-ins.' : (current_lang() === 'de' ? 'Direkter Kontaktkanal für Zwischenfragen.' : 'Canal directo de comunicación entre consultas para dudas y revisiones.')) ?></span>
                     </li>
                 </ul>
 
@@ -119,24 +119,24 @@ require __DIR__ . '/../src/content.php';
                     <strong style="color:var(--ink-soft);"><?= e(t('services_online')) ?></strong>
                 </div>
                 <h3><?= e(t('services_online')) ?></h3>
-                <p><?= e(current_lang() === 'en' ? 'The same level of clinical customization and continuous tracking for patients worldwide without travel.' : (current_lang() === 'de' ? 'Gleiche Qualität und engmaschige Betreuung weltweit bequem von zu Hause aus.' : 'El mismo nivel de personalización y seguimiento para pacientes de toda España o el extranjero sin desplazamientos.')) ?></p>
+                <p><?= e(current_lang() === 'en' ? 'The exact same clinical rigor, empathy, and continuous guidance for patients worldwide without travel.' : (current_lang() === 'de' ? 'Gleiche wissenschaftliche Präzision, Empathie und engmaschige Betreuung weltweit bequem von zu Hause aus.' : 'El mismo rigor clínico, empatía y seguimiento estrecho para pacientes de cualquier lugar del mundo sin desplazamientos.')) ?></p>
 
                 <ul class="mode-features">
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><?= e(current_lang() === 'en' ? '60-minute HD video call consultation with Elena.' : (current_lang() === 'de' ? '60-minütige HD-Videosprechstunde mit Elena.' : 'Sesión por videollamada HD de 60 minutos con Elena.')) ?></span>
+                        <span><?= e(current_lang() === 'en' ? '60-minute HD video call consultation with Elena.' : (current_lang() === 'de' ? '60-minütige HD-Videosprechstunde mit Elena.' : 'Videoconsulta individualizada HD de 60 minutos con Elena.')) ?></span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><?= e(current_lang() === 'en' ? 'Analysis of blood tests, daily habits, and health history.' : (current_lang() === 'de' ? 'Auswertung von Blutwerten, Ernährungsprotokollen und Symptomen.' : 'Análisis de analíticas, hábitos, síntomas y registro fotográfico guiado.')) ?></span>
+                        <span><?= e(current_lang() === 'en' ? 'Analysis of blood tests, daily habits, and health history.' : (current_lang() === 'de' ? 'Auswertung von Blutwerten, Ernährungsprotokollen und Symptomen.' : 'Análisis exhaustivo de analíticas médicas, historial y estilo de vida.')) ?></span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><?= e(current_lang() === 'en' ? 'Custom flexible menus & training routine with exercise videos.' : (current_lang() === 'de' ? 'Ernährungsplan & Trainingsplan mit Technik-Lehrvideos.' : 'Entrega de menús flexibles y rutina de ejercicios con vídeos de técnica.')) ?></span>
+                        <span><?= e(current_lang() === 'en' ? 'Custom flexible menus & training routine with exercise videos.' : (current_lang() === 'de' ? 'Ernährungsplan & Trainingsplan mit Technik-Lehrvideos.' : 'Menús flexibles y plan de fuerza con vídeos guiados de técnica.')) ?></span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                        <span><?= e(current_lang() === 'en' ? 'Continuous direct messaging and check-ins.' : (current_lang() === 'de' ? 'Laufende Begleitung und schnelle Klärung aller Fragen.' : 'Seguimiento continuo y resolución ágil de dudas.')) ?></span>
+                        <span><?= e(current_lang() === 'en' ? 'Continuous direct messaging and check-ins.' : (current_lang() === 'de' ? 'Laufende Begleitung und schnelle Klärung aller Fragen.' : 'Canal continuo de resolución ágil de dudas y revisiones regulares.')) ?></span>
                     </li>
                 </ul>
 

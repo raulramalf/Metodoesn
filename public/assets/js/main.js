@@ -164,24 +164,179 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ─── 4. FILTROS DE TESTIMONIOS (HOME) ────────────────────────────────────
-    const filterBtns = document.querySelectorAll('.filter-pill-btn');
-    const quoteCards = document.querySelectorAll('#quotes-container .quote-card');
+    // ─── 4. CARRUSEL INTERACTIVO AUTOMÁTICO DE TESTIMONIOS (HOME) ───────────
+    const quotesCarousel = document.getElementById('quotes-carousel');
+    if (quotesCarousel) {
+        const track       = document.getElementById('quotes-track');
+        const slides      = track ? Array.from(track.querySelectorAll('.quote-slide')) : [];
+        const prevBtn     = document.getElementById('quotes-prev');
+        const nextBtn     = document.getElementById('quotes-next');
+        const counterCurr = quotesCarousel.querySelector('.quotes-current');
+        const counterTot  = quotesCarousel.querySelector('.quotes-total');
+        const indicators  = document.getElementById('quotes-indicators');
+        const viewport    = document.getElementById('quotes-viewport');
 
-    if (filterBtns.length && quoteCards.length) {
-        filterBtns.forEach((btn) => {
-            btn.addEventListener('click', () => {
-                const cat = btn.dataset.filter;
-                filterBtns.forEach((b) => b.classList.remove('is-active'));
-                btn.classList.add('is-active');
+        if (track && slides.length > 0) {
+            let currentIndex = 0;
+            let autoTimer = null;
+            const AUTO_DELAY = 5500; // 5.5s para lectura cómoda de cada reseña
 
-                quoteCards.forEach((card) => {
-                    const cardCat = card.dataset.category;
-                    const matches = cat === 'all' || cardCat === cat;
-                    card.classList.toggle('is-hidden', !matches);
+            // Calcular cuántas tarjetas son visibles a la vez según el ancho
+            const getVisibleCount = () => {
+                if (window.innerWidth <= 640) return 1;
+                if (window.innerWidth <= 960) return 2;
+                return 3;
+            };
+
+            const getMaxIndex = () => {
+                return Math.max(0, slides.length - getVisibleCount());
+            };
+
+            // Crear dots / indicadores
+            const renderIndicators = () => {
+                if (!indicators) return;
+                indicators.innerHTML = '';
+                const max = getMaxIndex();
+                for (let i = 0; i <= max; i++) {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = `quotes-indicator-dot${i === currentIndex ? ' is-active' : ''}`;
+                    dot.setAttribute('role', 'tab');
+                    dot.setAttribute('aria-label', `Ir a opinión ${i + 1}`);
+                    dot.setAttribute('aria-selected', String(i === currentIndex));
+                    dot.addEventListener('click', () => {
+                        goToIndex(i);
+                        startAutoplay();
+                    });
+                    indicators.appendChild(dot);
+                }
+            };
+
+            // Mover el carrusel al índice dado
+            const goToIndex = (target) => {
+                const max = getMaxIndex();
+                if (target < 0) {
+                    currentIndex = max; // Ciclo hacia el final
+                } else if (target > max) {
+                    currentIndex = 0;   // Ciclo al inicio
+                } else {
+                    currentIndex = target;
+                }
+
+                // Cálculo de desplazamiento
+                const firstSlide = slides[0];
+                const trackStyles = window.getComputedStyle(track);
+                const gap = parseFloat(trackStyles.gap) || 24;
+                const slideWidth = firstSlide.getBoundingClientRect().width;
+                const offset = currentIndex * (slideWidth + gap);
+
+                track.style.transform = `translateX(-${offset}px)`;
+
+                // Actualizar contador y accesibilidad
+                if (counterCurr) {
+                    counterCurr.textContent = String(currentIndex + 1);
+                }
+                if (counterTot) {
+                    counterTot.textContent = String(slides.length);
+                }
+
+                // Actualizar dots
+                if (indicators) {
+                    const dots = indicators.querySelectorAll('.quotes-indicator-dot');
+                    dots.forEach((dot, idx) => {
+                        const isActive = idx === currentIndex;
+                        dot.classList.toggle('is-active', isActive);
+                        dot.setAttribute('aria-selected', String(isActive));
+                    });
+                }
+            };
+
+            // Siguiente y Anterior
+            const nextSlide = () => goToIndex(currentIndex + 1);
+            const prevSlide = () => goToIndex(currentIndex - 1);
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    nextSlide();
+                    startAutoplay();
                 });
+            }
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    prevSlide();
+                    startAutoplay();
+                });
+            }
+
+            // Autoplay cíclico
+            const startAutoplay = () => {
+                stopAutoplay();
+                autoTimer = setInterval(nextSlide, AUTO_DELAY);
+            };
+
+            const stopAutoplay = () => {
+                if (autoTimer) {
+                    clearInterval(autoTimer);
+                    autoTimer = null;
+                }
+            };
+
+            // Pausa inteligente al interactuar (hover, foco, toque)
+            quotesCarousel.addEventListener('mouseenter', stopAutoplay);
+            quotesCarousel.addEventListener('mouseleave', startAutoplay);
+            quotesCarousel.addEventListener('focusin', stopAutoplay);
+            quotesCarousel.addEventListener('focusout', startAutoplay);
+
+            // Soporte para gestos táctiles (Swipe en móvil)
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            if (viewport) {
+                viewport.addEventListener('touchstart', (e) => {
+                    stopAutoplay();
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+
+                viewport.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    const diff = touchStartX - touchEndX;
+                    if (Math.abs(diff) > 40) {
+                        if (diff > 0) {
+                            nextSlide(); // Deslizar hacia la izquierda = avanzar
+                        } else {
+                            prevSlide(); // Deslizar hacia la derecha = retroceder
+                        }
+                    }
+                    startAutoplay();
+                }, { passive: true });
+            }
+
+            // Teclado (accesibilidad)
+            quotesCarousel.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    startAutoplay();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    startAutoplay();
+                }
             });
-        });
+
+            // Reajustar en redimensionamiento
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    renderIndicators();
+                    goToIndex(Math.min(currentIndex, getMaxIndex()));
+                }, 150);
+            });
+
+            // Inicialización
+            renderIndicators();
+            goToIndex(0);
+            startAutoplay();
+        }
     }
 
     // ─── 6. ACORDEÓN ACCESIBLE UNIVERSAL (HOME & DUDAS) ──────────────────────
