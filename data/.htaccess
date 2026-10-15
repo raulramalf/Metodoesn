@@ -1,0 +1,8 @@
+# Defensa en profundidad: si por error DocumentRoot apuntara a la raíz del proyecto, data/ sigue denegado.
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Deny from all
+</IfModule>

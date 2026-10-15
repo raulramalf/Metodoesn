@@ -1,0 +1,25 @@
+# Método ESN — https://metodoesn.com
+User-agent: *
+Allow: /
+# Parámetros que no generan contenido nuevo (el idioma ?lang= SÍ se rastrea: lo declara hreflang)
+Disallow: /*?*utm_
+Disallow: /*?*fbclid=
+Disallow: /*?*gclid=
+Disallow: /data/
+Disallow: /src/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /bin/
+Disallow: /tests/
+# Necesarios para renderizar (NO bloquear CSS/JS/imágenes)
+Allow: /assets/
+
+# Rastreadores de entrenamiento de IA (decisión editorial; contenido YMYL de autor)
+User-agent: GPTBot
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+
+Sitemap: https://metodoesn.com/sitemap.xml

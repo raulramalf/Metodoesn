@@ -1,0 +1,4 @@
+# Raíz del proyecto: si el DocumentRoot estuviera mal configurado, todo queda denegado salvo public/.
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>

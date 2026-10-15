@@ -1,0 +1,40 @@
+# Método ESN — Apache (DocumentRoot = public/)
+Options -Indexes -MultiViews
+ServerSignature Off
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# Forzar HTTPS + dominio canónico sin www
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://metodoesn.com%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^www\.metodoesn\.com$ [NC]
+RewriteRule ^ https://metodoesn.com%{REQUEST_URI} [L,R=301]
+# /index.php -> / (una sola URL canónica para la home, conservando ?lang=)
+RewriteCond %{THE_REQUEST} \s/index\.php[\s?]
+RewriteRule ^index\.php$ / [R=301,L]
+# sitemap dinámico multilingüe
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+# Bloquear dotfiles y artefactos sensibles
+RewriteRule (^|/)\.(?!well-known/) - [F,L]
+</IfModule>
+
+# Cabeceras estáticas de respaldo (la CSP con nonce la emite PHP en src/security.php)
+<IfModule mod_headers.c>
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" "expr=%{HTTPS} == 'on' || %{HTTP:X-Forwarded-Proto} == 'https'"
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+Header always unset X-Powered-By
+<FilesMatch "\.(css|js|png|jpe?g|webp|avif|svg|woff2?)$">
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+</IfModule>
+
+# Nunca servir ficheros de datos/código aunque se copiaran por error bajo public/
+<FilesMatch "\.(sqlite3?|db|key|env|log|sh|bak|sql|ini|md|lock|json)$">
+  Require all denied
+</FilesMatch>
+
+# Solo PHP de la whitelist ejecutable; cabeceras PHP seguras vía php.ini: expose_php=Off, session.cookie_httponly=1

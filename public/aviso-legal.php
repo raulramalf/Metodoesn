@@ -4,7 +4,7 @@ $pageTitle = t('footer_legal', 'Aviso Legal');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 ?>
-<main id="main">
+<main id="main" tabindex="-1">
     <article class="wrap section prose-wide">
         <p class="kicker">Información Legal</p>
         <h1>Aviso Legal</h1>

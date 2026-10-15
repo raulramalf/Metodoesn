@@ -1,12 +1,12 @@
 <?php
 require_once __DIR__ . '/../src/functions.php';
-$pageTitle = t('services_page_title', 'Servicios · Nutrición y Entrenamiento');
-$pageDesc  = t('services_lead', 'Entrenamiento, nutrición clínica y acompañamiento forman parte de un mismo proceso individualizado.');
+$pageTitle = t('seo_services_title');
+$pageDesc  = t('seo_services_desc');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 require __DIR__ . '/../src/content.php';
 ?>
-<main id="main">
+<main id="main" tabindex="-1">
 
     <!-- CABECERA DE SERVICIOS -->
     <section class="wrap section">

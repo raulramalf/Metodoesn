@@ -4,7 +4,7 @@
  * Soporta Español ('es'), Inglés ('en') y Alemán ('de')
  */
 
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE && PHP_SAPI !== 'cli') {
     session_start();
 }
 
@@ -56,7 +56,9 @@ function current_lang(): string {
     if (isset($_GET['lang']) && in_array($_GET['lang'], $supported, true)) {
         $lang = $_GET['lang'];
         $_SESSION['site_lang'] = $lang;
-        @setcookie('site_lang', $lang, time() + (86400 * 30), '/');
+        if (PHP_SAPI !== 'cli' && !headers_sent()) {
+            setcookie('site_lang', $lang, ['expires' => time() + 86400 * 30, 'path' => '/', 'secure' => !empty($_SERVER['HTTPS']), 'httponly' => true, 'samesite' => 'Lax']);
+        }
         return $lang;
     }
 
@@ -147,6 +149,18 @@ function translations(): array {
 
             // Hero Index
             'hero_kicker' => 'Salud · Nutrición · Rendimiento',
+            'seo_home_title' => 'Nutricionista clínica en Madrid y online | Método ESN',
+            'seo_home_desc' => 'Dietista-nutricionista colegiada en Madrid y online: SIBO, colon irritable, SOP y nutrición deportiva con entrenamiento de fuerza. Pide tu cita.',
+            'seo_services_title' => 'Nutrición digestiva, hormonal y deportiva en Madrid | Método ESN',
+            'seo_services_desc' => 'Consulta presencial en Clínica SurgEOM (Salamanca) u online: SIBO, disbiosis, SOP, resistencia a la insulina, composición corporal y rendimiento.',
+            'seo_about_title' => 'Elena Sánchez Novo, dietista-nutricionista MAD01639 | Método ESN',
+            'seo_about_desc' => 'Dietista-nutricionista (Col. MAD01639) y graduada en CAFyD, antropometrista ISAK. Nutrición clínica y entrenamiento de fuerza basados en evidencia.',
+            'seo_faq_title' => 'Preguntas frecuentes sobre nutrición clínica | Método ESN',
+            'seo_faq_desc' => 'Primera consulta, SIBO, pérdida de grasa, suplementos y consulta online: respuestas claras de una dietista-nutricionista colegiada en Madrid.',
+            'seo_contact_title' => 'Contacto y cómo llegar a Clínica SurgEOM, Madrid | Método ESN',
+            'seo_contact_desc' => 'Escribe o llama a Elena Sánchez Novo. Consulta en C/ Coslada 16 (28028 Madrid), de lunes a viernes de 16:00 a 21:00, o videoconsulta.',
+            'seo_booking_title' => 'Reserva tu cita de nutrición en Madrid u online | Método ESN',
+            'seo_booking_desc' => 'Agenda oficial en Doctoralia: elige día y hora para tu consulta presencial en Madrid o por videollamada con Elena Sánchez Novo.',
             'hero_title' => 'Cuidar tu salud no es vivir a dieta, es aprender a comer y entrenar para toda la vida.',
             'hero_sub' => 'Un método integrador en Madrid y Online guiado por Elena Sánchez Novo (Col. Nº MAD01639).',
             'hero_lead' => 'Diseñamos tu estrategia de nutrición clínica y entrenamiento con respaldo científico, cercanía humana y máxima individualización.',
@@ -299,6 +313,18 @@ function translations(): array {
 
             // Hero Index
             'hero_kicker' => 'Health · Nutrition · Performance',
+            'seo_home_title' => 'Clinical Dietitian in Madrid & Online | Método ESN',
+            'seo_home_desc' => 'Registered dietitian-nutritionist in Madrid and online: SIBO, IBS, PCOS and sports nutrition combined with strength training. Book your appointment.',
+            'seo_services_title' => 'Digestive, Hormonal & Sports Nutrition in Madrid | Método ESN',
+            'seo_services_desc' => 'In-person at Clínica SurgEOM (Salamanca district) or online: SIBO, dysbiosis, PCOS, insulin resistance, body composition and performance.',
+            'seo_about_title' => 'Elena Sánchez Novo, Registered Dietitian MAD01639 | Método ESN',
+            'seo_about_desc' => 'Registered dietitian-nutritionist (Lic. MAD01639), sports science graduate and ISAK anthropometrist. Evidence-based nutrition and strength training.',
+            'seo_faq_title' => 'Clinical Nutrition FAQ | Método ESN',
+            'seo_faq_desc' => 'First visit, SIBO, fat loss, supplements and online consultations: clear answers from a registered dietitian-nutritionist in Madrid.',
+            'seo_contact_title' => 'Contact & Directions to Clínica SurgEOM, Madrid | Método ESN',
+            'seo_contact_desc' => 'Write or call Elena Sánchez Novo. Consultations at C/ Coslada 16 (28028 Madrid), Monday to Friday 16:00-21:00, or by video call.',
+            'seo_booking_title' => 'Book a Nutrition Appointment in Madrid or Online | Método ESN',
+            'seo_booking_desc' => 'Official Doctoralia calendar: pick a date and time for your in-person visit in Madrid or video consultation with Elena Sánchez Novo.',
             'hero_title' => 'Caring for your health is not living on a diet—it is learning to eat and train for life.',
             'hero_sub' => 'An integrative methodology in Madrid and Online guided by Elena Sánchez Novo (Lic. No. MAD01639).',
             'hero_lead' => 'We design your clinical nutrition and personal training plan with scientific backing, empathetic care, and complete individualization.',
@@ -451,6 +477,18 @@ function translations(): array {
 
             // Hero Index
             'hero_kicker' => 'Gesundheit · Ernährung · Leistung',
+            'seo_home_title' => 'Klinische Ernährungsberatung Madrid & Online | Método ESN',
+            'seo_home_desc' => 'Registrierte Ernährungsberaterin in Madrid und online: SIBO, Reizdarm, PCOS und Sporternährung mit Krafttraining. Jetzt Termin buchen.',
+            'seo_services_title' => 'Darm-, Hormon- & Sporternährung in Madrid | Método ESN',
+            'seo_services_desc' => 'Vor Ort in der Clínica SurgEOM (Salamanca) oder online: SIBO, Dysbiose, PCOS, Insulinresistenz, Körperzusammensetzung und Leistung.',
+            'seo_about_title' => 'Elena Sánchez Novo, Ernährungsberaterin MAD01639 | Método ESN',
+            'seo_about_desc' => 'Diätassistentin-Ernährungswissenschaftlerin (Reg.-Nr. MAD01639), Sportwissenschaftlerin, ISAK-Anthropometristin. Evidenzbasiert.',
+            'seo_faq_title' => 'FAQ zur klinischen Ernährungsberatung | Método ESN',
+            'seo_faq_desc' => 'Ersttermin, SIBO, Fettabbau, Supplemente und Online-Beratung: klare Antworten einer registrierten Ernährungsberaterin in Madrid.',
+            'seo_contact_title' => 'Kontakt & Anfahrt zur Clínica SurgEOM, Madrid | Método ESN',
+            'seo_contact_desc' => 'Schreiben oder rufen Sie Elena Sánchez Novo an. Sprechstunde in der C/ Coslada 16 (28028 Madrid), Mo-Fr 16-21 Uhr, oder per Video.',
+            'seo_booking_title' => 'Termin für Ernährungsberatung in Madrid oder Online | Método ESN',
+            'seo_booking_desc' => 'Offizieller Doctoralia-Kalender: Wählen Sie Datum und Uhrzeit für Ihre Vor-Ort-Beratung in Madrid oder per Videosprechstunde.',
             'hero_title' => 'Gesundheit bedeutet nicht Diät zu halten, sondern zu lernen, ein Leben lang richtig zu essen und zu trainieren.',
             'hero_sub' => 'Eine ganzheitliche Methode in Madrid und Online, geleitet von Elena Sánchez Novo (Reg.-Nr. MAD01639).',
             'hero_lead' => 'Wir entwickeln Ihre klinische Ernährungs- und Trainingsstrategie mit wissenschaftlicher Evidenz, menschlicher Nähe und maximaler Individualisierung.',

@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__ . '/../src/functions.php';
-$pageTitle = t('booking_page_title', 'Reserva de citas · Agenda en vivo');
-$pageDesc  = t('booking_lead', 'Reserva tu cita con Elena Sánchez Novo a través de nuestra agenda oficial en Doctoralia.');
+$pageTitle = t('seo_booking_title');
+$pageDesc  = t('seo_booking_desc');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 ?>
-<main id="main">
+<main id="main" tabindex="-1">
 
     <!-- CABECERA DE RESERVA -->
     <section class="wrap section" style="padding-bottom: 2rem;">
@@ -59,7 +59,7 @@ require __DIR__ . '/../includes/nav.php';
 
             <div class="booking-widget-inner" id="doctoralia-widget-area">
                 <a id="zl-url" class="zl-url" href="https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="big_with_calendar" data-zlw-opinion="false" data-zlw-hide-branding="true" data-zlw-saas-only="true" data-zlw-a11y-title="Doctoralia Calendar">Reserve una cita</a>
-                <script>!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
+                <script nonce="<?= e(csp_nonce()) ?>">!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
             </div>
 
             <div class="booking-fallback-bar">
@@ -71,7 +71,7 @@ require __DIR__ . '/../includes/nav.php';
         <!-- TARJETA DE ASISTENCIA PREVIA -->
         <div style="margin-top: 3rem; background: var(--mist); border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
             <div>
-                <h3 style="margin-bottom: 0.3rem;"><?= e(current_lang() === 'en' ? 'Not sure which service to choose?' : (current_lang() === 'de' ? 'Unsicher, welches Format zu Ihnen passt?' : '¿Tienes dudas sobre qué servicio elegir?')) ?></h3>
+                <h2 style="margin-bottom: 0.3rem; font-size: 1.35rem;"><?= e(current_lang() === 'en' ? 'Not sure which service to choose?' : (current_lang() === 'de' ? 'Unsicher, welches Format zu Ihnen passt?' : '¿Tienes dudas sobre qué servicio elegir?')) ?></h2>
                 <p style="color: var(--ink-soft); font-size: 0.95rem; margin: 0;"><?= e(current_lang() === 'en' ? 'Message or call us directly and we will advise you with zero obligation.' : (current_lang() === 'de' ? 'Schreiben oder rufen Sie uns an – wir beraten Sie unverbindlich.' : 'Escríbenos directamente o llámanos y te orientaremos sin ningún compromiso.')) ?></p>
             </div>
             <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">

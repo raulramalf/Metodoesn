@@ -30,6 +30,8 @@
     --line-light: rgba(163, 137, 136, 0.14);
 
     --gold: #c98829;
+    --gold-text: #8f5a0c;      /* oro para TEXTO sobre claro: 5.78:1 sobre #fff */
+    --focus-ring: #533231;     /* 11.2:1 sobre blanco */
     --gold-light: #e5a84b;
     --gold-glow: rgba(201, 136, 41, 0.15);
 
@@ -513,18 +515,6 @@ p + p {
     transform: translateY(0) scale(1);
 }
 
-/* Soporte de hover suave en pantallas de escritorio */
-@media (hover: hover) {
-    .lang-dropdown:hover .lang-dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0) scale(1);
-    }
-    .lang-dropdown:hover .lang-chevron-icon {
-        transform: rotate(180deg);
-    }
-}
-
 .lang-menu-item {
     display: flex;
     align-items: center;
@@ -958,7 +948,7 @@ p + p {
 .compare-tag-old {
     font-size: 0.74rem;
     font-weight: 700;
-    color: #8b7d7d;
+    color: #6f5b5a;
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
@@ -1070,7 +1060,7 @@ p + p {
     margin-top: 2rem;
     font-size: 0.76rem;
     font-style: italic;
-    color: #9c9090;
+    color: #6f5b5a;
     line-height: 1.45;
 }
 .compare-footer-esn {
@@ -2187,7 +2177,7 @@ p + p {
     padding: 1.4rem;
     margin-top: 1.8rem;
 }
-.clinic-location-card h4 {
+.clinic-location-card :is(h2, h4) {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -2536,7 +2526,7 @@ p + p {
     padding: 1.4rem;
     margin-top: 1.8rem;
 }
-.clinic-location-card h4 {
+.clinic-location-card :is(h2, h4) {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -3564,3 +3554,69 @@ p + p {
 }
 
 
+
+
+/* ============================================================
+   ACCESIBILIDAD v3.1 — WCAG 2.2 AA/AAA (focus, contraste, movimiento)
+   ============================================================ */
+:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px #ffffff;          /* halo: el anillo sigue siendo visible sobre fondos oscuros */
+    border-radius: var(--radius-sm);
+}
+.site-footer :focus-visible, .cookie-banner :focus-visible, .band-dark :focus-visible {
+    outline-color: #ffffff;
+    box-shadow: 0 0 0 6px var(--focus-ring);
+}
+:target { scroll-margin-top: 6rem; }          /* 2.4.11: el foco no queda oculto bajo la cabecera fija */
+main:focus { outline: none; }
+
+.sr-only {
+    position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip { transform: translateY(-120%); left: 0; transition: transform 150ms ease; }
+.skip:focus, .skip:focus-visible { transform: translateY(0); }
+
+/* Contraste: --logo-color (#a38988) solo 3.24:1 sobre blanco -> no apto para texto */
+.hero-sub { color: var(--moss); }
+.bento-num, .tab-num { color: var(--gold-text); }
+.search-field::placeholder, .form-control::placeholder { color: #6f5b5a; opacity: 1; }   /* 5.98:1 */
+.form-control.invalid, .form-control[aria-invalid="true"] { border-color: #a4262c; box-shadow: 0 0 0 1px #a4262c; }
+.field-error { color: #a4262c; font-size: 0.88rem; margin-top: 0.35rem; }                  /* 6.4:1 */
+
+/* Selector de idioma como lista de enlaces */
+.lang-dropdown-menu { list-style: none; margin: 0; }
+.lang-dropdown-menu li { list-style: none; }
+
+/* Objetivo táctil mínimo 24x24 (2.5.8) y 44x44 en controles principales */
+.quotes-nav-btn, .quotes-pause-btn, .nav-toggle, .lang-dropdown-trigger { min-width: 44px; min-height: 44px; }
+/* Punto visual de 8px dentro de un objetivo táctil de 24px (WCAG 2.5.8) */
+.quotes-indicator-dot { box-sizing: content-box; padding: 8px; background-clip: content-box; background-color: rgba(163, 137, 136, 0.55); }
+.quotes-indicator-dot.is-active { background-color: var(--moss); }
+.quotes-pause-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent; border: 1px solid var(--line); border-radius: var(--radius-pill);
+    color: var(--ink); cursor: pointer;
+}
+.quotes-pause-btn:hover { background: var(--paper-soft); }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+@media (forced-colors: active) {
+    :focus-visible { outline: 3px solid Highlight; box-shadow: none; }
+}
+
+/* El menú de idioma debe ser enfocable en cuanto se abre (visibility sin retardo al abrir) */
+.lang-dropdown-menu { transition: opacity 180ms ease, transform 180ms ease, visibility 0s linear 180ms; }
+.lang-dropdown.is-open .lang-dropdown-menu { transition-delay: 0s; }
+
+.score-number { color: var(--gold-text); }
+.site-footer .zl-url, .site-footer .zl-url:visited { color: #f3dedc; text-decoration: underline; }   /* 11.9:1 sobre #241e1e */
+/* Enlaces dentro de texto: distinguibles sin depender del color (1.4.1) */
+main p a:not([class]), main li a:not([class]), .prose-wide a:not(.btn) { text-decoration: underline; text-underline-offset: 3px; }
+.cookie-banner p a { text-decoration: underline; text-underline-offset: 3px; }
+.quotes-pause-btn [hidden] { display: none; }

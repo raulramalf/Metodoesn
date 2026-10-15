@@ -1,113 +1,118 @@
 /**
- * MÉTODO ESN — SCRIPT MAESTRO DE INTERACCIÓN (v3.0)
- * Microinteracciones · Accesibilidad · Rendimiento
+ * MÉTODO ESN — SCRIPT MAESTRO DE INTERACCIÓN (v3.1)
+ * Microinteracciones · Accesibilidad WCAG 2.2 · Rendimiento
  */
 
+const LANG = (document.documentElement.lang || 'es').slice(0, 2);
+const I18N = {
+    es: { slide: 'Opinión', of: 'de', go: 'Ir a la opinión', sending: 'Enviando mensaje...', required: 'Este campo es obligatorio.', email: 'Introduce un email válido.', consent: 'Debes aceptar la política de privacidad.', errors: 'Revisa los campos marcados.' },
+    en: { slide: 'Review', of: 'of', go: 'Go to review', sending: 'Sending message...', required: 'This field is required.', email: 'Please enter a valid email address.', consent: 'You must accept the privacy policy.', errors: 'Please review the highlighted fields.' },
+    de: { slide: 'Bewertung', of: 'von', go: 'Zur Bewertung', sending: 'Nachricht wird gesendet...', required: 'Dieses Feld ist erforderlich.', email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.', consent: 'Bitte akzeptieren Sie die Datenschutzerklärung.', errors: 'Bitte prüfen Sie die markierten Felder.' },
+};
+const tr = (k) => (I18N[LANG] || I18N.es)[k];
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])';
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
 document.addEventListener('DOMContentLoaded', () => {
-    // ─── 1. NAVBAR & MENÚ MÓVIL ──────────────────────────────────────────────
+    // ─── 1. NAVBAR & MENÚ MÓVIL (con atrapamiento de foco) ───────────────────
     const navToggle = document.getElementById('nav-toggle');
     const navMenu   = document.getElementById('nav-menu');
     const header    = document.getElementById('site-header');
+    const mobileMQ  = window.matchMedia('(max-width: 860px)');
 
     if (navToggle && navMenu) {
-        const closeNav = () => {
-            navMenu.classList.remove('is-open');
-            navToggle.setAttribute('aria-expanded', 'false');
-            document.body.classList.remove('nav-menu-open');
-        };
-
-        navToggle.addEventListener('click', () => {
-            const isOpen = navMenu.classList.toggle('is-open');
-            navToggle.setAttribute('aria-expanded', String(isOpen));
-            document.body.classList.toggle('nav-menu-open', isOpen);
-        });
-
-        // Cerrar menú al hacer clic en un enlace
-        navMenu.querySelectorAll('a').forEach((link) => {
-            link.addEventListener('click', closeNav);
-        });
-
-        // Cerrar al pulsar Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navMenu.classList.contains('is-open')) {
-                closeNav();
+        const isOpen = () => navMenu.classList.contains('is-open');
+        const setOpen = (open, returnFocus = false) => {
+            navMenu.classList.toggle('is-open', open);
+            navToggle.setAttribute('aria-expanded', String(open));
+            document.body.classList.toggle('nav-menu-open', open);
+            // Fondo inerte mientras el drawer está abierto (el header contiene el propio drawer)
+            document.querySelectorAll('main, footer, .cookie-banner, .skip').forEach((el) => {
+                if (open && mobileMQ.matches) el.setAttribute('inert', ''); else el.removeAttribute('inert');
+            });
+            if (open && mobileMQ.matches) {
+                const first = navMenu.querySelector(FOCUSABLE);
+                if (first) first.focus();
+            } else if (returnFocus) {
                 navToggle.focus();
             }
+        };
+
+        navToggle.addEventListener('click', () => setOpen(!isOpen()));
+        navMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+
+        document.addEventListener('keydown', (e) => {
+            if (!isOpen() || !mobileMQ.matches) return;
+            if (e.key === 'Escape') {
+                setOpen(false, true);
+                return;
+            }
+            if (e.key !== 'Tab') return;
+            // Ciclo de foco: botón de menú + elementos del drawer
+            const items = [navToggle, ...navMenu.querySelectorAll(FOCUSABLE)].filter((el) => el.offsetParent !== null);
+            const first = items[0];
+            const last  = items[items.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         });
 
-        // Cerrar al redimensionar a versión de escritorio
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 860 && navMenu.classList.contains('is-open')) {
-                closeNav();
-            }
-        });
+        mobileMQ.addEventListener('change', (ev) => { if (!ev.matches && isOpen()) setOpen(false); });
     }
 
-    // Header sombra al hacer scroll
     if (header) {
-        const handleScroll = () => {
-            if (window.scrollY > 20) {
-                header.classList.add('is-scrolled');
-            } else {
-                header.classList.remove('is-scrolled');
-            }
-        };
+        const handleScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 20);
         window.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll();
     }
 
-    // ─── 1b. SELECTOR DE IDIOMAS DESPLEGABLE ─────────────────────────────────
-    const langDropdowns = document.querySelectorAll('.lang-dropdown');
-    if (langDropdowns.length > 0) {
-        langDropdowns.forEach((dropdown) => {
-            const trigger = dropdown.querySelector('.lang-dropdown-trigger');
-            if (!trigger) return;
+    // ─── 1b. SELECTOR DE IDIOMA (disclosure + navegación con flechas) ────────
+    const langDropdowns = Array.from(document.querySelectorAll('.lang-dropdown'));
+    const closeLang = (d, focusTrigger = false) => {
+        const trg = d.querySelector('.lang-dropdown-trigger');
+        d.classList.remove('is-open');
+        if (trg) { trg.setAttribute('aria-expanded', 'false'); if (focusTrigger) trg.focus(); }
+    };
+    langDropdowns.forEach((dropdown) => {
+        const trigger = dropdown.querySelector('.lang-dropdown-trigger');
+        const items = () => Array.from(dropdown.querySelectorAll('.lang-menu-item'));
+        if (!trigger) return;
 
-            trigger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const willOpen = !dropdown.classList.contains('is-open');
-
-                // Cerrar los demás
-                langDropdowns.forEach((d) => {
-                    d.classList.remove('is-open');
-                    const t = d.querySelector('.lang-dropdown-trigger');
-                    if (t) t.setAttribute('aria-expanded', 'false');
-                });
-
-                if (willOpen) {
-                    dropdown.classList.add('is-open');
-                    trigger.setAttribute('aria-expanded', 'true');
-                }
-            });
-        });
-
-        // Cerrar al hacer clic en cualquier parte fuera
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.lang-dropdown')) {
-                langDropdowns.forEach((d) => {
-                    d.classList.remove('is-open');
-                    const t = d.querySelector('.lang-dropdown-trigger');
-                    if (t) t.setAttribute('aria-expanded', 'false');
-                });
+        const open = (focusIndex = null) => {
+            langDropdowns.forEach((d) => d !== dropdown && closeLang(d));
+            dropdown.classList.add('is-open');
+            trigger.setAttribute('aria-expanded', 'true');
+            if (focusIndex !== null) {
+                const list = items();
+                (focusIndex === 'last' ? list[list.length - 1] : list[focusIndex])?.focus();
             }
-        });
+        };
 
-        // Cerrar con Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                langDropdowns.forEach((d) => {
-                    if (d.classList.contains('is-open')) {
-                        d.classList.remove('is-open');
-                        const t = d.querySelector('.lang-dropdown-trigger');
-                        if (t) {
-                            t.setAttribute('aria-expanded', 'false');
-                            t.focus();
-                        }
-                    }
-                });
-            }
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.contains('is-open') ? closeLang(dropdown) : open();
         });
-    }
+        trigger.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') { e.preventDefault(); open(0); }
+            else if (e.key === 'ArrowUp') { e.preventDefault(); open('last'); }
+        });
+        dropdown.addEventListener('keydown', (e) => {
+            if (e.target === trigger || !dropdown.classList.contains('is-open')) return;   // las flechas del botón las gestiona su propio listener
+            const list = items();
+            const i = list.indexOf(document.activeElement);
+            if (e.key === 'Escape') { e.stopPropagation(); closeLang(dropdown, true); }
+            else if (e.key === 'ArrowDown') { e.preventDefault(); list[(i + 1) % list.length].focus(); }
+            else if (e.key === 'ArrowUp') { e.preventDefault(); list[(i - 1 + list.length) % list.length].focus(); }
+            else if (e.key === 'Home') { e.preventDefault(); list[0].focus(); }
+            else if (e.key === 'End') { e.preventDefault(); list[list.length - 1].focus(); }
+            else if (e.key === 'Tab') { closeLang(dropdown); }
+        });
+        dropdown.addEventListener('focusout', (e) => {
+            if (e.relatedTarget && !dropdown.contains(e.relatedTarget)) closeLang(dropdown);
+        });
+    });
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.lang-dropdown')) langDropdowns.forEach((d) => closeLang(d));
+    });
 
     // ─── 2. COOKIES BANNER ───────────────────────────────────────────────────
     const COOKIE_KEY = 'esn_cookies_pref';
@@ -143,18 +148,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (roadmapBox) {
         const tabs   = roadmapBox.querySelectorAll('.roadmap-tab-btn');
         const panels = roadmapBox.querySelectorAll('.roadmap-panel-item');
-
         tabs.forEach((tab) => {
             tab.addEventListener('click', () => {
                 const phase = tab.dataset.phase;
                 if (!phase) return;
-
                 tabs.forEach((t) => {
                     const isActive = t === tab;
                     t.classList.toggle('is-active', isActive);
                     t.setAttribute('aria-selected', String(isActive));
                 });
-
                 panels.forEach((panel) => {
                     const isTarget = panel.id === `panel-${phase}`;
                     panel.classList.toggle('is-active', isTarget);
@@ -164,287 +166,267 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ─── 4. CARRUSEL INTERACTIVO AUTOMÁTICO DE TESTIMONIOS (HOME) ───────────
+    // ─── 4. CARRUSEL DE OPINIONES (WAI-ARIA Carousel Pattern) ────────────────
     const quotesCarousel = document.getElementById('quotes-carousel');
     if (quotesCarousel) {
-        const track       = document.getElementById('quotes-track');
-        const slides      = track ? Array.from(track.querySelectorAll('.quote-slide')) : [];
-        const prevBtn     = document.getElementById('quotes-prev');
-        const nextBtn     = document.getElementById('quotes-next');
-        const counterCurr = quotesCarousel.querySelector('.quotes-current');
-        const counterTot  = quotesCarousel.querySelector('.quotes-total');
-        const indicators  = document.getElementById('quotes-indicators');
-        const viewport    = document.getElementById('quotes-viewport');
+        const track      = document.getElementById('quotes-track');
+        const slides     = track ? Array.from(track.querySelectorAll('.quote-slide')) : [];
+        const prevBtn    = document.getElementById('quotes-prev');
+        const nextBtn    = document.getElementById('quotes-next');
+        const pauseBtn   = document.getElementById('quotes-pause');
+        const status     = document.getElementById('quotes-status');
+        const counterCur = quotesCarousel.querySelector('.quotes-current');
+        const indicators = document.getElementById('quotes-indicators');
+        const viewport   = document.getElementById('quotes-viewport');
 
         if (track && slides.length > 0) {
             let currentIndex = 0;
             let autoTimer = null;
-            const AUTO_DELAY = 5500; // 5.5s para lectura cómoda de cada reseña
+            let userPaused = prefersReducedMotion.matches;   // 2.2.2: sin autoplay si el usuario reduce movimiento
+            const AUTO_DELAY = 7000;
 
-            // Calcular cuántas tarjetas son visibles a la vez según el ancho
-            const getVisibleCount = () => {
-                if (window.innerWidth <= 640) return 1;
-                if (window.innerWidth <= 960) return 2;
-                return 3;
-            };
+            const getVisibleCount = () => (window.innerWidth <= 640 ? 1 : window.innerWidth <= 960 ? 2 : 3);
+            const getMaxIndex = () => Math.max(0, slides.length - getVisibleCount());
 
-            const getMaxIndex = () => {
-                return Math.max(0, slides.length - getVisibleCount());
-            };
-
-            // Crear dots / indicadores
             const renderIndicators = () => {
                 if (!indicators) return;
                 indicators.innerHTML = '';
-                const max = getMaxIndex();
-                for (let i = 0; i <= max; i++) {
+                for (let i = 0; i <= getMaxIndex(); i++) {
                     const dot = document.createElement('button');
                     dot.type = 'button';
-                    dot.className = `quotes-indicator-dot${i === currentIndex ? ' is-active' : ''}`;
-                    dot.setAttribute('role', 'tab');
-                    dot.setAttribute('aria-label', `Ir a opinión ${i + 1}`);
-                    dot.setAttribute('aria-selected', String(i === currentIndex));
-                    dot.addEventListener('click', () => {
-                        goToIndex(i);
-                        startAutoplay();
-                    });
+                    dot.className = 'quotes-indicator-dot';
+                    dot.setAttribute('aria-label', `${tr('go')} ${i + 1}`);
+                    dot.addEventListener('click', () => { goToIndex(i, true); });
                     indicators.appendChild(dot);
                 }
             };
 
-            // Mover el carrusel al índice dado
-            const goToIndex = (target) => {
+            const goToIndex = (target, announce = false) => {
                 const max = getMaxIndex();
-                if (target < 0) {
-                    currentIndex = max; // Ciclo hacia el final
-                } else if (target > max) {
-                    currentIndex = 0;   // Ciclo al inicio
-                } else {
-                    currentIndex = target;
-                }
+                currentIndex = target < 0 ? max : target > max ? 0 : target;
 
-                // Cálculo de desplazamiento
-                const firstSlide = slides[0];
-                const trackStyles = window.getComputedStyle(track);
-                const gap = parseFloat(trackStyles.gap) || 24;
-                const slideWidth = firstSlide.getBoundingClientRect().width;
-                const offset = currentIndex * (slideWidth + gap);
-
+                const gap = parseFloat(getComputedStyle(track).gap) || 24;
+                const offset = currentIndex * (slides[0].getBoundingClientRect().width + gap);
                 track.style.transform = `translateX(-${offset}px)`;
 
-                // Actualizar contador y accesibilidad
-                if (counterCurr) {
-                    counterCurr.textContent = String(currentIndex + 1);
-                }
-                if (counterTot) {
-                    counterTot.textContent = String(slides.length);
-                }
-
-                // Actualizar dots
-                if (indicators) {
-                    const dots = indicators.querySelectorAll('.quotes-indicator-dot');
-                    dots.forEach((dot, idx) => {
-                        const isActive = idx === currentIndex;
-                        dot.classList.toggle('is-active', isActive);
-                        dot.setAttribute('aria-selected', String(isActive));
-                    });
+                const vis = getVisibleCount();
+                slides.forEach((sl, idx) => {
+                    const visible = idx >= currentIndex && idx < currentIndex + vis;
+                    sl.setAttribute('aria-hidden', String(!visible));
+                    sl.toggleAttribute('inert', !visible);
+                });
+                if (counterCur) counterCur.textContent = String(currentIndex + 1);
+                indicators?.querySelectorAll('.quotes-indicator-dot').forEach((dot, idx) => {
+                    dot.classList.toggle('is-active', idx === currentIndex);
+                    if (idx === currentIndex) dot.setAttribute('aria-current', 'true'); else dot.removeAttribute('aria-current');
+                });
+                // Anuncio explícito solo en cambios iniciados por el usuario (nunca en autoplay)
+                if (announce && status) {
+                    status.textContent = `${tr('slide')} ${currentIndex + 1} ${tr('of')} ${slides.length}`;
                 }
             };
 
-            // Siguiente y Anterior
-            const nextSlide = () => goToIndex(currentIndex + 1);
-            const prevSlide = () => goToIndex(currentIndex - 1);
-
-            if (nextBtn) {
-                nextBtn.addEventListener('click', () => {
-                    nextSlide();
-                    startAutoplay();
-                });
-            }
-            if (prevBtn) {
-                prevBtn.addEventListener('click', () => {
-                    prevSlide();
-                    startAutoplay();
-                });
-            }
-
-            // Autoplay cíclico
+            // aria-live="polite" solo cuando NO hay rotación automática (evita interrupciones constantes)
+            const syncLive = () => track.setAttribute('aria-live', autoTimer ? 'off' : 'polite');
+            const stopAutoplay = () => { clearInterval(autoTimer); autoTimer = null; syncLive(); };
             const startAutoplay = () => {
                 stopAutoplay();
-                autoTimer = setInterval(nextSlide, AUTO_DELAY);
+                if (userPaused || prefersReducedMotion.matches || document.hidden) return;
+                autoTimer = setInterval(() => goToIndex(currentIndex + 1), AUTO_DELAY);
+                syncLive();
             };
 
-            const stopAutoplay = () => {
-                if (autoTimer) {
-                    clearInterval(autoTimer);
-                    autoTimer = null;
+            const setPaused = (paused) => {
+                userPaused = paused;
+                if (pauseBtn) {
+                    pauseBtn.setAttribute('aria-pressed', String(paused));
+                    pauseBtn.setAttribute('aria-label', paused ? pauseBtn.dataset.labelPlay : pauseBtn.dataset.labelPause);
+                    pauseBtn.querySelector('.icon-pause')?.toggleAttribute('hidden', paused);
+                    pauseBtn.querySelector('.icon-play')?.toggleAttribute('hidden', !paused);
                 }
+                paused ? stopAutoplay() : startAutoplay();
             };
 
-            // Pausa inteligente al interactuar (hover, foco, toque)
+            nextBtn?.addEventListener('click', () => { goToIndex(currentIndex + 1, true); });
+            prevBtn?.addEventListener('click', () => { goToIndex(currentIndex - 1, true); });
+            pauseBtn?.addEventListener('click', () => setPaused(!userPaused));
+
+            // Pausa por hover/foco; solo reanuda si el usuario no pausó explícitamente
             quotesCarousel.addEventListener('mouseenter', stopAutoplay);
             quotesCarousel.addEventListener('mouseleave', startAutoplay);
             quotesCarousel.addEventListener('focusin', stopAutoplay);
-            quotesCarousel.addEventListener('focusout', startAutoplay);
+            quotesCarousel.addEventListener('focusout', (e) => {
+                if (!quotesCarousel.contains(e.relatedTarget)) startAutoplay();
+            });
+            document.addEventListener('visibilitychange', () => (document.hidden ? stopAutoplay() : startAutoplay()));
+            prefersReducedMotion.addEventListener?.('change', (e) => setPaused(e.matches));
 
-            // Soporte para gestos táctiles (Swipe en móvil)
+            // Gestos táctiles
             let touchStartX = 0;
-            let touchEndX = 0;
+            viewport?.addEventListener('touchstart', (e) => { stopAutoplay(); touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+            viewport?.addEventListener('touchend', (e) => {
+                const diff = touchStartX - e.changedTouches[0].screenX;
+                if (Math.abs(diff) > 40) goToIndex(currentIndex + (diff > 0 ? 1 : -1), true);
+                startAutoplay();
+            }, { passive: true });
 
-            if (viewport) {
-                viewport.addEventListener('touchstart', (e) => {
-                    stopAutoplay();
-                    touchStartX = e.changedTouches[0].screenX;
-                }, { passive: true });
-
-                viewport.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    const diff = touchStartX - touchEndX;
-                    if (Math.abs(diff) > 40) {
-                        if (diff > 0) {
-                            nextSlide(); // Deslizar hacia la izquierda = avanzar
-                        } else {
-                            prevSlide(); // Deslizar hacia la derecha = retroceder
-                        }
-                    }
-                    startAutoplay();
-                }, { passive: true });
-            }
-
-            // Teclado (accesibilidad)
+            // Teclado: flechas, Home/End (solo con el foco dentro del carrusel y fuera de campos de texto)
             quotesCarousel.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight') {
-                    nextSlide();
-                    startAutoplay();
-                } else if (e.key === 'ArrowLeft') {
-                    prevSlide();
-                    startAutoplay();
-                }
+                if (e.key === 'ArrowRight') { e.preventDefault(); goToIndex(currentIndex + 1, true); }
+                else if (e.key === 'ArrowLeft') { e.preventDefault(); goToIndex(currentIndex - 1, true); }
+                else if (e.key === 'Home') { e.preventDefault(); goToIndex(0, true); }
+                else if (e.key === 'End') { e.preventDefault(); goToIndex(getMaxIndex(), true); }
             });
 
-            // Reajustar en redimensionamiento
             let resizeTimer;
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(() => {
-                    renderIndicators();
-                    goToIndex(Math.min(currentIndex, getMaxIndex()));
-                }, 150);
+                resizeTimer = setTimeout(() => { renderIndicators(); goToIndex(Math.min(currentIndex, getMaxIndex())); }, 150);
             });
 
-            // Inicialización
             renderIndicators();
+            setPaused(userPaused);
             goToIndex(0);
-            startAutoplay();
         }
     }
 
-    // ─── 6. ACORDEÓN ACCESIBLE UNIVERSAL (HOME & DUDAS) ──────────────────────
+    // ─── 6. ACORDEÓN ACCESIBLE (HOME & DUDAS) ────────────────────────────────
     const bindAccordions = (containerId) => {
         const container = document.getElementById(containerId);
         if (!container) return;
-
         const cards = container.querySelectorAll('.faq-card');
         cards.forEach((card) => {
             const trigger = card.querySelector('.faq-trigger');
             if (!trigger) return;
-
             trigger.addEventListener('click', () => {
-                const isOpen = card.classList.contains('is-open');
-
-                // Si queremos que se cierre el resto en ese contenedor:
+                const wasOpen = card.classList.contains('is-open');
                 cards.forEach((other) => {
                     if (other !== card) {
                         other.classList.remove('is-open');
-                        const otherBtn = other.querySelector('.faq-trigger');
-                        if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+                        other.querySelector('.faq-trigger')?.setAttribute('aria-expanded', 'false');
                     }
                 });
-
-                card.classList.toggle('is-open', !isOpen);
-                trigger.setAttribute('aria-expanded', String(!isOpen));
+                card.classList.toggle('is-open', !wasOpen);
+                trigger.setAttribute('aria-expanded', String(!wasOpen));
+            });
+            // Navegación opcional entre cabeceras (patrón Accordion APG)
+            trigger.addEventListener('keydown', (e) => {
+                const all = Array.from(cards).filter((c) => !c.hidden).map((c) => c.querySelector('.faq-trigger'));
+                const i = all.indexOf(trigger);
+                const go = (n) => { e.preventDefault(); all[(n + all.length) % all.length]?.focus(); };
+                if (e.key === 'ArrowDown') go(i + 1);
+                else if (e.key === 'ArrowUp') go(i - 1);
+                else if (e.key === 'Home') go(0);
+                else if (e.key === 'End') go(all.length - 1);
             });
         });
     };
-
     bindAccordions('faq-accordion');
     bindAccordions('faq-full-list');
 
-    // ─── 7. BUSCADOR EN VIVO DE DUDAS (DUDAS.PHP) ─────────────────────────────
+    // ─── 7. BUSCADOR EN VIVO DE DUDAS (anuncio con role="status") ────────────
     const faqSearchInput = document.getElementById('faq-search-input');
     const faqFullList    = document.getElementById('faq-full-list');
     const faqCountEl     = document.getElementById('faq-search-count');
     const faqNoResults   = document.getElementById('faq-no-results');
 
     if (faqSearchInput && faqFullList) {
-        const faqCards = faqFullList.querySelectorAll('.faq-card');
+        const faqCards = Array.from(faqFullList.querySelectorAll('.faq-card'));
+        // Búsqueda insensible a mayúsculas y tildes ("digestion" encuentra "digestión")
+        const norm = (str) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+        const index = faqCards.map((c) => norm(c.dataset.query || c.textContent));
+        let debounce;
 
-        faqSearchInput.addEventListener('input', (e) => {
-            const query = e.target.value.trim().toLowerCase();
+        const run = () => {
+            const query = norm(faqSearchInput.value.trim());
             let matches = 0;
-
-            faqCards.forEach((card) => {
-                const content = card.dataset.query || card.textContent.toLowerCase();
-                const fits = !query || content.includes(query);
-                card.style.display = fits ? '' : 'none';
+            faqCards.forEach((card, i) => {
+                const fits = !query || index[i].includes(query);
+                card.hidden = !fits;
                 if (fits) matches++;
             });
-
-            if (faqNoResults) {
-                faqNoResults.style.display = matches === 0 ? 'block' : 'none';
-            }
-
+            if (faqNoResults) faqNoResults.hidden = matches !== 0;
             if (faqCountEl) {
-                faqCountEl.textContent = query
-                    ? `${matches} pregunta${matches !== 1 ? 's' : ''} encontrada${matches !== 1 ? 's' : ''}`
-                    : '';
+                if (!query) faqCountEl.textContent = '';
+                else if (matches === 0) faqCountEl.textContent = faqCountEl.dataset.none || '';
+                else if (matches === 1) faqCountEl.textContent = faqCountEl.dataset.one || '';
+                else faqCountEl.textContent = (faqCountEl.dataset.many || '{n}').replace('{n}', String(matches));
             }
-        });
+        };
+        // Debounce: el lector de pantalla anuncia el resultado final, no cada pulsación
+        faqSearchInput.addEventListener('input', () => { clearTimeout(debounce); debounce = setTimeout(run, 300); });
+        faqSearchInput.addEventListener('search', run);
     }
 
-    // ─── 8. VALIDACIÓN DEL FORMULARIO DE CONTACTO ─────────────────────────────
+    // ─── 8. VALIDACIÓN ACCESIBLE DEL FORMULARIO DE CONTACTO ──────────────────
     const contactForm = document.getElementById('form-contacto');
     if (contactForm) {
         const submitBtn = document.getElementById('btn-submit');
+        const summary = document.createElement('div');
+        summary.className = 'form-alert-error';
+        summary.setAttribute('role', 'alert');
+        summary.tabIndex = -1;
+        summary.hidden = true;
+        contactForm.prepend(summary);
 
-        contactForm.addEventListener('submit', (e) => {
-            let valid = true;
-            let firstInvalid = null;
-
-            contactForm.querySelectorAll('[required]').forEach((el) => {
-                let bad = false;
-                if (el.type === 'checkbox') {
-                    bad = !el.checked;
-                } else if (el.type === 'email') {
-                    bad = !el.value.trim() || !el.value.includes('@') || !el.value.includes('.');
-                } else {
-                    bad = !el.value.trim();
+        const errorFor = (el) => {
+            if (el.type === 'checkbox') return el.checked ? '' : tr('consent');
+            const v = el.value.trim();
+            if (!v) return tr('required');
+            if (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return tr('email');
+            return '';
+        };
+        const setError = (el, message) => {
+            const group = el.closest('.form-group') || el.parentElement;
+            let err = group.querySelector('.field-error');
+            if (message) {
+                if (!err) {
+                    err = document.createElement('p');
+                    err.className = 'field-error';
+                    err.id = `${el.id}-error`;
+                    group.appendChild(err);
                 }
-
-                el.classList.toggle('invalid', bad);
-                if (bad) {
-                    valid = false;
-                    if (!firstInvalid) firstInvalid = el;
-                }
-            });
-
-            if (!valid) {
-                e.preventDefault();
-                if (firstInvalid) firstInvalid.focus();
-            } else if (submitBtn) {
-                submitBtn.disabled = true;
-                const textSpan = submitBtn.querySelector('.btn-text');
-                if (textSpan) textSpan.textContent = 'Enviando mensaje...';
+                err.textContent = message;
+                el.setAttribute('aria-invalid', 'true');
+                el.setAttribute('aria-describedby', [...new Set([...(el.getAttribute('aria-describedby') || '').split(' ').filter(Boolean), err.id])].join(' '));
+                el.classList.add('invalid');
+            } else {
+                err?.remove();
+                el.removeAttribute('aria-invalid');
+                el.setAttribute('aria-describedby', (el.getAttribute('aria-describedby') || '').split(' ').filter((x) => x && x !== `${el.id}-error`).join(' '));
+                if (!el.getAttribute('aria-describedby')) el.removeAttribute('aria-describedby');
+                el.classList.remove('invalid');
             }
+        };
+
+        const fields = Array.from(contactForm.querySelectorAll('[required]'));
+        fields.forEach((el) => {
+            el.addEventListener('blur', () => { if (el.value || el.type === 'checkbox') setError(el, errorFor(el)); });   // validación en vivo
+            el.addEventListener('input', () => { if (el.getAttribute('aria-invalid') === 'true') setError(el, errorFor(el)); });
+            el.addEventListener('change', () => { if (el.type === 'checkbox') setError(el, errorFor(el)); });
         });
 
-        // Limpiar error al escribir
-        contactForm.querySelectorAll('input, textarea').forEach((el) => {
-            el.addEventListener('input', () => {
-                if (el.classList.contains('invalid')) {
-                    el.classList.remove('invalid');
-                }
+        contactForm.addEventListener('submit', (e) => {
+            let firstInvalid = null;
+            const messages = [];
+            fields.forEach((el) => {
+                const msg = errorFor(el);
+                setError(el, msg);
+                if (msg) { messages.push(msg); firstInvalid ??= el; }
             });
+            if (firstInvalid) {
+                e.preventDefault();
+                summary.hidden = false;
+                summary.textContent = tr('errors');
+                firstInvalid.focus();
+            } else if (submitBtn) {
+                summary.hidden = true;
+                submitBtn.setAttribute('aria-disabled', 'true');
+                // Evita doble envío sin sacar el botón del orden de tabulación
+                submitBtn.addEventListener('click', (ev) => ev.preventDefault(), { once: false });
+                const textSpan = submitBtn.querySelector('.btn-text');
+                if (textSpan) textSpan.textContent = tr('sending');
+            }
         });
     }
 });

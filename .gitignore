@@ -3,3 +3,12 @@ data/*.sqlite
 .DS_Store
 vendor/
 node_modules/
+data/*.sqlite-wal
+data/*.sqlite-shm
+data/*.sqlite-journal
+data/app.key
+vendor/
+node_modules/
+.phpunit.cache/
+test-results/
+playwright-report/

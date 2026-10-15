@@ -1,12 +1,12 @@
 <?php
 require_once __DIR__ . '/../src/functions.php';
-$pageTitle = t('about_page_title', 'Quiénes somos · Elena Sánchez Novo');
-$pageDesc  = t('about_sub', 'Elena Sánchez Novo (Col. Nº MAD01639): graduada en Nutrición Humana y Dietética y CAFyD.');
+$pageTitle = t('seo_about_title');
+$pageDesc  = t('seo_about_desc');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 require __DIR__ . '/../src/content.php';
 ?>
-<main id="main">
+<main id="main" tabindex="-1">
 
     <!-- HERO & BIOGRAFÍA DE ELENA SÁNCHEZ NOVO -->
     <section class="wrap section about">
@@ -34,7 +34,7 @@ require __DIR__ . '/../src/content.php';
             <!-- Certificado Oficial Doctoralia -->
             <div class="about-doctoralia-cert">
                 <a class="zl-url" href="https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="certificate" data-zlw-opinion="false" data-zlw-hide-branding="true" data-zlw-saas-only="true" data-zlw-a11y-title="Doctoralia Official Certificate"><?= e(t('footer_view_cert')) ?></a>
-                <script>!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
+                <script nonce="<?= e(csp_nonce()) ?>">!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
             </div>
         </div>
 

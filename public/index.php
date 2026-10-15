@@ -1,12 +1,12 @@
 <?php
 require_once __DIR__ . '/../src/functions.php';
-$pageTitle = t('hero_title', 'Entrenamiento · Salud · Nutrición Clínica');
-$pageDesc  = t('hero_lead', 'El Método ESN por Elena Sánchez Novo une nutrición clínica, entrenamiento de fuerza y acompañamiento continuo basado en evidencia científica.');
+$pageTitle = t('seo_home_title');
+$pageDesc  = t('seo_home_desc');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 require __DIR__ . '/../src/content.php';
 ?>
-<main id="main">
+<main id="main" tabindex="-1">
 
     <!-- 1. HERO SECTION EDITORIAL DE ÉLITE -->
     <section class="hero" id="hero">
@@ -356,7 +356,7 @@ require __DIR__ . '/../src/content.php';
         </div>
 
         <!-- Carrusel interactivo automático de opiniones -->
-        <div class="quotes-carousel-wrapper" id="quotes-carousel" role="region" aria-roledescription="carousel" aria-label="<?= e(t('testi_title')) ?>">
+        <div class="quotes-carousel-wrapper" id="quotes-carousel" role="region" aria-roledescription="<?= e(current_lang() === 'de' ? 'Karussell' : (current_lang() === 'en' ? 'carousel' : 'carrusel')) ?>" aria-label="<?= e(t('testi_title')) ?>" data-i18n-prev="<?= e(current_lang() === 'en' ? 'Review' : (current_lang() === 'de' ? 'Bewertung' : 'Opinión')) ?>">
             <div class="quotes-carousel-top-bar">
                 <div class="quotes-carousel-status">
                     <span class="quotes-live-dot" aria-hidden="true"></span>
@@ -366,37 +366,42 @@ require __DIR__ . '/../src/content.php';
                     <button type="button" class="quotes-nav-btn prev" id="quotes-prev" aria-label="<?= e(current_lang() === 'en' ? 'Previous review' : (current_lang() === 'de' ? 'Vorherige Bewertung' : 'Opinión anterior')) ?>">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
                     </button>
-                    <div class="quotes-counter" id="quotes-counter" aria-live="polite">
+                    <div class="quotes-counter" id="quotes-counter">
                         <span class="quotes-current">1</span> / <span class="quotes-total"><?= count($testimonios) ?></span>
                     </div>
+                    <button type="button" class="quotes-pause-btn" id="quotes-pause" aria-pressed="false" data-label-pause="<?= e(current_lang() === 'en' ? 'Pause automatic rotation' : (current_lang() === 'de' ? 'Automatischen Wechsel anhalten' : 'Pausar rotación automática')) ?>" data-label-play="<?= e(current_lang() === 'en' ? 'Resume automatic rotation' : (current_lang() === 'de' ? 'Automatischen Wechsel fortsetzen' : 'Reanudar rotación automática')) ?>">
+                        <svg class="icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                        <svg class="icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
+                    </button>
                     <button type="button" class="quotes-nav-btn next" id="quotes-next" aria-label="<?= e(current_lang() === 'en' ? 'Next review' : (current_lang() === 'de' ? 'Nächste Bewertung' : 'Siguiente opinión')) ?>">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </button>
                 </div>
             </div>
 
+            <p class="sr-only" id="quotes-status" role="status" aria-live="polite" aria-atomic="true"></p>
             <div class="quotes-carousel-viewport" id="quotes-viewport">
-                <div class="quotes-carousel-track" id="quotes-track">
+                <div class="quotes-carousel-track" id="quotes-track" aria-live="off">
                     <?php foreach ($testimonios as $i => $item): ?>
-                        <figure class="quote-card quote-slide" data-index="<?= $i ?>">
+                        <div class="quote-card quote-slide" data-index="<?= $i ?>" role="group" aria-roledescription="<?= e(current_lang() === 'en' ? 'slide' : (current_lang() === 'de' ? 'Folie' : 'diapositiva')) ?>" aria-label="<?= $i + 1 ?> / <?= count($testimonios) ?>">
                             <div class="quote-top">
                                 <div class="quote-stars" aria-hidden="true">★★★★★</div>
                                 <span class="quote-topic"><?= e($item['tema']) ?></span>
                             </div>
                             <blockquote><p>«<?= e($item['cita']) ?>»</p></blockquote>
-                            <figcaption class="quote-author">
+                            <div class="quote-author">
                                 <strong><?= e($item['autor']) ?></strong>
                                 <span class="quote-verified">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                                     <?= e($item['origen']) ?>
                                 </span>
-                            </figcaption>
-                        </figure>
+                            </div>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div>
 
-            <div class="quotes-carousel-indicators" id="quotes-indicators" role="tablist" aria-label="<?= e(current_lang() === 'en' ? 'Review indicators' : (current_lang() === 'de' ? 'Bewertungsindikatoren' : 'Indicadores de opiniones')) ?>"></div>
+            <div class="quotes-carousel-indicators" id="quotes-indicators" role="group" aria-label="<?= e(current_lang() === 'en' ? 'Review indicators' : (current_lang() === 'de' ? 'Bewertungsindikatoren' : 'Indicadores de opiniones')) ?>"></div>
         </div>
 
         <!-- Feed Oficial de Doctoralia -->
@@ -413,7 +418,7 @@ require __DIR__ . '/../src/content.php';
             </div>
             <div class="reviews-widget-body">
                 <a class="zl-url" href="https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="big" data-zlw-opinion="true" data-zlw-hide-branding="true" data-zlw-saas-only="true" data-zlw-a11y-title="Doctoralia widget">Doctoralia Reviews</a>
-                <script>!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
+                <script nonce="<?= e(csp_nonce()) ?>">!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
             </div>
         </div>
     </section>

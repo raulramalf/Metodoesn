@@ -2,53 +2,103 @@
 require __DIR__ . '/../src/functions.php';
 require __DIR__ . '/../src/Database.php';
 
-$pageTitle = t('contact_page_title', 'Contacto · Consulta con Elena Sánchez Novo');
-$pageDesc  = t('contact_lead', 'Ponte en contacto con el Método ESN. Te escuchamos y resolvemos tus dudas.');
+$pageTitle = t('seo_contact_title');
+$pageDesc  = t('seo_contact_desc');
 
 $errors = [];
 $ok = false;
 $old = ['nombre' => '', 'email' => '', 'mensaje' => ''];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    foreach ($old as $k => $_) {
-        $old[$k] = trim($_POST[$k] ?? '');
-    }
+$L = current_lang();
+$M = [
+    'csrf'    => ['es' => 'La sesión ha caducado. Recarga la página e inténtalo de nuevo.', 'en' => 'Session expired. Please reload and try again.', 'de' => 'Sitzung abgelaufen. Bitte neu laden.'],
+    'email'   => ['es' => 'Introduce un email válido.', 'en' => 'Please enter a valid email address.', 'de' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'],
+    'short'   => ['es' => 'Escribe un mensaje de al menos 5 caracteres.', 'en' => 'Please write a message with at least 5 characters.', 'de' => 'Ihre Nachricht sollte mindestens 5 Zeichen enthalten.'],
+    'long'    => ['es' => 'El nombre o el mensaje son demasiado largos.', 'en' => 'The name or message is too long.', 'de' => 'Der Name oder die Nachricht ist zu lang.'],
+    'consent' => ['es' => 'Debes aceptar la información sobre protección de datos.', 'en' => 'You must agree to the privacy policy.', 'de' => 'Bitte bestätigen Sie die Datenschutzerklärung.'],
+    'chars'   => ['es' => 'El texto contiene caracteres no permitidos.', 'en' => 'The text contains disallowed characters.', 'de' => 'Der Text enthält unzulässige Zeichen.'],
+    'rate'    => ['es' => 'Has alcanzado el límite de envíos. Inténtalo de nuevo en unos minutos o llámanos por teléfono.', 'en' => 'You have reached the submission limit. Please try again in a few minutes or call us.', 'de' => 'Sendelimit erreicht. Bitte versuchen Sie es in einigen Minuten erneut oder rufen Sie uns an.'],
+    'fast'    => ['es' => 'Envío demasiado rápido. Inténtalo de nuevo.', 'en' => 'Submitted too quickly. Please try again.', 'de' => 'Zu schnell gesendet. Bitte erneut versuchen.'],
+    'server'  => ['es' => 'No hemos podido guardar tu mensaje. Inténtalo de nuevo o llámanos.', 'en' => 'We could not save your message. Please try again or call us.', 'de' => 'Nachricht konnte nicht gespeichert werden. Bitte erneut versuchen.'],
+];
+$msg = fn(string $k): string => $M[$k][$L] ?? $M[$k]['es'];
 
-    // Honeypot anti-spam
+/** Token de tiempo firmado (HMAC) para detectar envíos instantáneos de bots. */
+function form_time_token(): string {
+    $ts = (string)time();
+    return $ts . '.' . hash_hmac('sha256', 'form|' . $ts, Database::appKey());
+}
+function form_time_age(?string $tok): ?int {
+    if (!is_string($tok) || !preg_match('/^(\d{9,11})\.([0-9a-f]{64})$/', $tok, $m)) return null;
+    if (!hash_equals(hash_hmac('sha256', 'form|' . $m[1], Database::appKey()), $m[2])) return null;
+    return time() - (int)$m[1];
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Honeypot: un humano nunca lo rellena. Respuesta mínima, sin pistas.
     if (!empty($_POST['web'])) {
         http_response_code(400);
         exit;
     }
-    if (!csrf_check($_POST['csrf'] ?? null)) {
-        $errors[] = current_lang() === 'en' ? 'Session expired. Please reload and try again.' : (current_lang() === 'de' ? 'Sitzung abgelaufen. Bitte neu laden.' : 'La sesión ha caducado. Recarga la página e inténtalo de nuevo.');
+
+    $raw = ['nombre' => $_POST['nombre'] ?? '', 'email' => $_POST['email'] ?? '', 'mensaje' => $_POST['mensaje'] ?? ''];
+    $badChars = false;
+    foreach ($raw as $k => $v) {
+        if (!is_string($v)) { $badChars = true; $old[$k] = ''; continue; }   // nombre[]=x, etc.
+        $clean = sanitize_text($v, $k === 'mensaje');
+        if ($clean === null) { $badChars = true; $old[$k] = ''; continue; }
+        $old[$k] = $clean;
     }
-    if (!filter_var($old['email'], FILTER_VALIDATE_EMAIL)) {
-        $errors[] = current_lang() === 'en' ? 'Please enter a valid email address.' : (current_lang() === 'de' ? 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' : 'Introduce un email válido.');
+    if ($badChars || has_mixed_script_word($old['nombre'])) {
+        $errors[] = $msg('chars');
+    }
+    if (!csrf_check($_POST['csrf'] ?? null)) {
+        $errors[] = $msg('csrf');
+    }
+    $age = form_time_age($_POST['ft'] ?? null);
+    if ($age === null || $age < FORM_MIN_SECONDS || $age > CSRF_TTL) {
+        $errors[] = $msg('fast');
+    }
+    // FILTER_VALIDATE_EMAIL (sin FLAG_EMAIL_UNICODE) solo admite ASCII: bloquea homoglifos en el dominio.
+    if (!filter_var($old['email'], FILTER_VALIDATE_EMAIL) || mb_strlen($old['email']) > 254) {
+        $errors[] = $msg('email');
     }
     if (mb_strlen($old['mensaje']) < 5) {
-        $errors[] = current_lang() === 'en' ? 'Please write a message with at least 5 characters.' : (current_lang() === 'de' ? 'Ihre Nachricht sollte mindestens 5 Zeichen enthalten.' : 'Escribe un mensaje de al menos 5 caracteres.');
+        $errors[] = $msg('short');
     }
     if (mb_strlen($old['mensaje']) > 3000 || mb_strlen($old['nombre']) > 120) {
-        $errors[] = current_lang() === 'en' ? 'The name or message is too long.' : (current_lang() === 'de' ? 'Der Name oder die Nachricht ist zu lang.' : 'El nombre o el mensaje son demasiado largos.');
+        $errors[] = $msg('long');
     }
-    if (empty($_POST['privacidad'])) {
-        $errors[] = current_lang() === 'en' ? 'You must agree to the privacy policy.' : (current_lang() === 'de' ? 'Bitte bestätigen Sie die Datenschutzerklärung.' : 'Debes aceptar la información sobre protección de datos.');
+    if (($_POST['privacidad'] ?? '') !== '1') {
+        $errors[] = $msg('consent');
     }
 
+    // El rate limit se consume solo si el resto de validaciones pasan (los errores del usuario no le penalizan).
     if (!$errors) {
-        $stmt = Database::get()->prepare(
-            'INSERT INTO contactos (nombre, email, mensaje, ip) VALUES (:nombre, :email, :mensaje, :ip)'
-        );
-        $stmt->execute($old + ['ip' => $_SERVER['REMOTE_ADDR'] ?? '']);
-        $ok = true;
-        $old = ['nombre' => '', 'email' => '', 'mensaje' => ''];
+        $ip = client_ip();
+        try {
+            if (!Database::rateLimitHit(Database::bucketFor($ip))) {
+                http_response_code(429);
+                header('Retry-After: ' . RATE_LIMIT_WINDOW);
+                $errors[] = $msg('rate');
+            } else {
+                Database::saveContact($old['nombre'], $old['email'], $old['mensaje'], $ip, $L);
+                csrf_rotate();
+                $ok = true;
+                $old = ['nombre' => '', 'email' => '', 'mensaje' => ''];
+            }
+        } catch (Throwable $ex) {
+            error_log('[contacto] ' . $ex->getMessage());
+            http_response_code(500);
+            $errors[] = $msg('server');
+        }
     }
 }
 
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 ?>
-<main id="main">
+<main id="main" tabindex="-1">
 
     <!-- CABECERA DE CONTACTO -->
     <section class="wrap section">
@@ -105,10 +155,10 @@ require __DIR__ . '/../includes/nav.php';
 
                 <!-- Tarjeta de consulta física en Clínica SurgEOM -->
                 <div class="clinic-location-card">
-                    <h4>
+                    <h2>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                         <span><?= e(t('trust_clinic')) ?></span>
-                    </h4>
+                    </h2>
                     <p><strong><?= e(SITE_ADDRESS) ?></strong></p>
                     <p style="font-size:0.86rem; color:var(--ink-soft); margin-top:0.4rem;">
                         <strong><?= e(current_lang() === 'en' ? 'Hours:' : (current_lang() === 'de' ? 'Öffnungszeiten:' : 'Horario de atención:')) ?></strong> <?= e(SITE_HOURS) ?>.<br>
@@ -130,7 +180,7 @@ require __DIR__ . '/../includes/nav.php';
                     </p>
 
                     <?php if ($ok): ?>
-                        <div class="form-alert-success" role="alert">
+                        <div class="form-alert-success" role="status">
                             <strong><?= e(current_lang() === 'en' ? 'Message sent successfully!' : (current_lang() === 'de' ? 'Nachricht erfolgreich gesendet!' : '¡Mensaje recibido con éxito!')) ?></strong><br>
                             <?= e(current_lang() === 'en' ? 'Thank you for reaching out. We will respond promptly.' : (current_lang() === 'de' ? 'Vielen Dank. Wir antworten Ihnen zeitnah.' : 'Muchas gracias por escribirnos. Te responderemos lo antes posible.')) ?>
                         </div>
@@ -149,32 +199,33 @@ require __DIR__ . '/../includes/nav.php';
 
                     <form method="POST" action="<?= e(page_url('/contacto.php')) ?>" id="form-contacto" novalidate>
                         <input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>">
+                        <input type="hidden" name="ft" value="<?= e(form_time_token()) ?>">
                         
                         <!-- Honeypot -->
-                        <div style="position: absolute; left: -9999px;">
+                        <div style="position: absolute; left: -9999px;" aria-hidden="true">
                             <label for="campo-web">No rellenar</label>
-                            <input type="text" id="campo-web" name="web" tabindex="-1" autocomplete="off">
+                            <input type="text" id="campo-web" name="web" tabindex="-1" autocomplete="off" data-lpignore="true">
                         </div>
 
                         <div class="form-group">
                             <label for="nombre"><?= e(t('contact_name')) ?> *</label>
-                            <input type="text" id="nombre" name="nombre" class="form-control" value="<?= e($old['nombre']) ?>" required placeholder="<?= e(current_lang() === 'en' ? 'e.g. Sarah Miller' : (current_lang() === 'de' ? 'z. B. Julia Schneider' : 'Ej. Laura Gómez')) ?>">
+                            <input type="text" id="nombre" name="nombre" class="form-control" value="<?= e($old['nombre']) ?>" required maxlength="120" autocomplete="name" placeholder="<?= e(current_lang() === 'en' ? 'e.g. Sarah Miller' : (current_lang() === 'de' ? 'z. B. Julia Schneider' : 'Ej. Laura Gómez')) ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="email"><?= e(t('contact_email')) ?> *</label>
-                            <input type="email" id="email" name="email" class="form-control" value="<?= e($old['email']) ?>" required placeholder="nombre@correo.com">
+                            <input type="email" id="email" name="email" class="form-control" value="<?= e($old['email']) ?>" required maxlength="254" autocomplete="email" inputmode="email" spellcheck="false" placeholder="nombre@correo.com">
                         </div>
 
                         <div class="form-group">
                             <label for="mensaje"><?= e(current_lang() === 'en' ? 'How can we help you? *' : (current_lang() === 'de' ? 'Wie können wir Ihnen helfen? *' : '¿En qué podemos ayudarte? *')) ?></label>
-                            <textarea id="mensaje" name="mensaje" class="form-control" rows="5" required placeholder="<?= e(t('contact_message')) ?>"><?= e($old['mensaje']) ?></textarea>
+                            <textarea id="mensaje" name="mensaje" class="form-control" rows="5" required maxlength="3000" minlength="5" placeholder="<?= e(t('contact_message')) ?>"><?= e($old['mensaje']) ?></textarea>
                         </div>
 
                         <div class="form-group">
                             <label class="form-checkbox">
-                                <input type="checkbox" name="privacidad" value="1" required>
-                                <span><?= e(current_lang() === 'en' ? 'I have read and accept the privacy policy regarding the processing of my health inquiry.' : (current_lang() === 'de' ? 'Ich habe die Datenschutzerklärung zur Kenntnis genommen und stimme zu.' : 'He leído y acepto la política de privacidad sobre el tratamiento de mis datos personales.')) ?> <a href="<?= e(page_url('/politica-de-privacidad.php')) ?>" target="_blank">(<?= e(t('footer_privacy')) ?>)</a></span>
+                                <input type="checkbox" name="privacidad" value="1" required aria-describedby="consent-info">
+                                <span id="consent-info"><?= e(current_lang() === 'en' ? 'I have read the privacy policy and explicitly consent to the processing of my data, including any health information I include, to answer my enquiry.' : (current_lang() === 'de' ? 'Ich habe die Datenschutzerklärung gelesen und willige ausdrücklich in die Verarbeitung meiner Daten, einschließlich etwaiger Gesundheitsdaten, zur Beantwortung meiner Anfrage ein.' : 'He leído la política de privacidad y consiento expresamente el tratamiento de mis datos, incluidos los datos de salud que aporte, para atender mi consulta.')) ?> <a href="<?= e(page_url('/politica-de-privacidad.php')) ?>" target="_blank" rel="noopener">(<?= e(t('footer_privacy')) ?>)</a></span>
                             </label>
                         </div>
 

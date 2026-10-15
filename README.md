@@ -324,3 +324,8 @@ sudo chmod -R 775 data/
 - **Titular del proyecto**: Elena Sánchez Novo.
 - **Colegiada**: MAD01639.
 - **Derechos**: © Todos los derechos reservados.
+
+## Seguridad, accesibilidad, SEO y QA
+Ver [`docs/AUDITORIA-SEGURIDAD-A11Y-QA.md`](docs/AUDITORIA-SEGURIDAD-A11Y-QA.md) y [`docs/PLAN-SEO.md`](docs/PLAN-SEO.md).
+Despliegue Nginx: `docs/deploy/nginx.conf` · Apache: `public/.htaccess`.
+Tests: `composer install && vendor/bin/phpunit` · `npm install && npx playwright test`.
