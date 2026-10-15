@@ -3636,3 +3636,4 @@ main p a:not([class]), main li a:not([class]), .prose-wide a:not(.btn) { text-de
 .footer-specialties ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; padding: 1.2rem 0; border-top: 1px solid rgba(255,255,255,0.08); }
 .footer-specialties a { color: rgba(255,255,255,0.8); font-size: 0.88rem; text-decoration: underline; text-underline-offset: 3px; }
 .landing-crumbs a, .landing-trust a, .landing-related a { text-decoration: underline; text-underline-offset: 3px; }
+.map-facade { display:grid; place-items:center; gap:1rem; min-height:420px; text-align:center; padding:2rem; background:var(--paper-soft); }

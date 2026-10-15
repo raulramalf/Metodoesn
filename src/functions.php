@@ -13,7 +13,12 @@ function asset(string $path): string {
     return '/assets/' . ltrim($path, '/');
 }
 
+/** Devuelve la variante .webp si existe junto al original (PNG/JPG pesados); el original en otro caso. */
 function img(string $name): string {
+    $webp = preg_replace('/\.(png|jpe?g)$/i', '.webp', $name);
+    if ($webp !== $name && is_file(__DIR__ . '/../public/assets/img/' . $webp)) {
+        return asset('img/' . $webp);
+    }
     return asset('img/' . $name);
 }
 

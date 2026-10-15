@@ -358,6 +358,17 @@ document.addEventListener('DOMContentLoaded', () => {
         faqSearchInput.addEventListener('search', run);
     }
 
+    // ─── 7b. MAPA BAJO DEMANDA (privacidad + rendimiento) ────────────────────
+    const mapFacade = document.getElementById('map-facade');
+    document.getElementById('map-load')?.addEventListener('click', () => {
+        const iframe = document.createElement('iframe');
+        iframe.src = mapFacade.dataset.src;
+        iframe.title = mapFacade.dataset.title;
+        iframe.width = '100%'; iframe.height = '420'; iframe.style.border = '0';
+        iframe.loading = 'lazy'; iframe.referrerPolicy = 'no-referrer-when-downgrade';
+        mapFacade.replaceChildren(iframe);
+    });
+
     // ─── 8. VALIDACIÓN ACCESIBLE DEL FORMULARIO DE CONTACTO ──────────────────
     const contactForm = document.getElementById('form-contacto');
     if (contactForm) {

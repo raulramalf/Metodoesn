@@ -317,16 +317,10 @@ require __DIR__ . '/../includes/nav.php';
 
             <!-- Marco de Google Maps Interactivo -->
             <div class="contact-map-embed-wrapper">
-                <iframe 
-                    title="Mapa interactivo de Google Maps de Clínica SurgEOM en Madrid"
-                    src="<?= e(SITE_MAPS_EMBED) ?>"
-                    width="100%" 
-                    height="420" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                <div class="map-facade" id="map-facade" data-src="<?= e(SITE_MAPS_EMBED) ?>" data-title="Mapa interactivo de Google Maps de Clínica SurgEOM en Madrid">
+                    <p><?= e($L === 'en' ? 'The map loads from Google only when you ask for it (privacy and speed).' : ($L === 'de' ? 'Die Karte wird erst auf Wunsch von Google geladen (Datenschutz & Geschwindigkeit).' : 'El mapa se carga desde Google solo cuando lo pides (privacidad y velocidad).')) ?></p>
+                    <button type="button" class="btn btn-sm" id="map-load"><?= e($L === 'en' ? 'Load interactive map' : ($L === 'de' ? 'Interaktive Karte laden' : 'Cargar mapa interactivo')) ?></button>
+                </div>
             </div>
         </div>
     </section>
