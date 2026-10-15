@@ -3,7 +3,8 @@ use PHPUnit\Framework\TestCase;
 
 final class SecurityAndSeoTest extends TestCase
 {
-    protected function setUp(): void { $_GET = []; $_SESSION = []; $_COOKIE = []; }
+    protected function setUp(): void { $_GET = []; $_SESSION = []; $_COOKIE = []; force_lang(''); }
+    protected function tearDown(): void { force_lang(''); }
 
     public function testNonceIsStablePerRequestAndUrlSafe(): void
     {
@@ -74,5 +75,32 @@ final class SecurityAndSeoTest extends TestCase
         $this->assertSame(1, substr_count($tag, '</script>'));          // el payload no puede cerrar el script
         $this->assertJson(preg_replace('/^<script[^>]*>|<\/script>$/', '', $tag));
         $this->assertStringContainsString(SITE_COLLEGIATE_NUMBER, $tag);
+    }
+
+    public function testLandingPagesAreSpanishOnlyWithSelfCanonicalAndMedicalJsonLd(): void
+    {
+        $script = 'nutricionista-sibo-madrid.php';
+        $this->assertArrayHasKey($script, seo_pages());
+        $this->assertSame(['es'], seo_page_langs($script));
+        $links = seo_hreflang_links($script);
+        $this->assertStringNotContainsString('hreflang="en"', $links);
+        $this->assertStringContainsString('x-default', $links);
+        $types = array_map(fn($n) => $n['@type'], seo_jsonld($script, 'es')['@graph']);
+        $this->assertContains('FAQPage', $types);
+        $this->assertContains(['MedicalWebPage', 'WebPage'], $types);
+        foreach (landings() as $l) {
+            $this->assertLessThanOrEqual(66, mb_strlen($l['title']));
+            $this->assertLessThanOrEqual(160, mb_strlen($l['desc']));
+            $this->assertGreaterThanOrEqual(3, count($l['faqs']));
+        }
+    }
+
+    public function testForcedLanguageDoesNotTouchSessionAndRedirectsSwitcherToHome(): void
+    {
+        $_GET['lang'] = 'de';
+        force_lang('es');
+        $this->assertSame('es', current_lang());
+        $this->assertArrayNotHasKey('site_lang', $_SESSION);
+        $this->assertSame('/?lang=en', lang_url('en'));
     }
 }

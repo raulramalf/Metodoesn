@@ -50,8 +50,16 @@ function flag_svg(string $lang, int $width = 18, int $height = 13): string {
 /**
  * Obtener idioma actual (prioridad: GET -> SESSION -> COOKIE -> 'es')
  */
+/** Fija el idioma de la petición sin tocar sesión/cookie (páginas disponibles solo en un idioma). */
+function force_lang(?string $lang = null): ?string {
+    static $forced = null;
+    if ($lang !== null) $forced = ($lang === '') ? null : $lang;   // '' = limpiar (tests)
+    return $forced;
+}
+
 function current_lang(): string {
     $supported = array_keys(supported_languages());
+    if (force_lang() !== null) return force_lang();
 
     if (isset($_GET['lang']) && in_array($_GET['lang'], $supported, true)) {
         $lang = $_GET['lang'];
@@ -78,6 +86,9 @@ function current_lang(): string {
  * Generar enlace para conmutar idioma en la URL actual
  */
 function lang_url(string $targetLang): string {
+    if (force_lang() !== null) {   // página monolingüe: el selector lleva a la home del idioma elegido
+        return $targetLang === 'es' ? '/?lang=es' : '/?lang=' . $targetLang;
+    }
     $uri = $_SERVER['REQUEST_URI'] ?? '/';
     $parts = parse_url($uri);
     $path = $parts['path'] ?? '/';

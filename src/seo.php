@@ -1,11 +1,12 @@
 <?php
+require_once __DIR__ . '/landings.php';
 /**
  * SEO técnico: URLs canónicas, hreflang, Open Graph y JSON-LD (schema.org).
  */
 
 function seo_pages(): array {
-    // script => [prioridad, changefreq, indexable]
-    return [
+    // script => [prioridad, changefreq, indexable, idiomas disponibles]
+    return array_map(fn($p) => $p + [3 => ['es', 'en', 'de']], [
         'index.php'                 => [1.0, 'weekly',  true],
         'servicios.php'             => [0.9, 'monthly', true],
         'quienes-somos.php'         => [0.8, 'monthly', true],
@@ -15,7 +16,18 @@ function seo_pages(): array {
         'aviso-legal.php'           => [0.2, 'yearly',  true],
         'politica-de-privacidad.php'=> [0.2, 'yearly',  true],
         'politica-de-cookies.php'   => [0.2, 'yearly',  true],
-    ];
+    ]) + seo_landing_pages();
+}
+
+/** Landings de servicio (solo español): slug.php => [prio, freq, indexable, ['es']]. */
+function seo_landing_pages(): array {
+    $out = [];
+    foreach (array_keys(landings()) as $slug) $out[$slug . '.php'] = [0.9, 'monthly', true, ['es']];
+    return $out;
+}
+
+function seo_page_langs(string $script): array {
+    return seo_pages()[$script][3] ?? ['es', 'en', 'de'];
 }
 
 /** URL absoluta de una página en un idioma. Español = sin parámetro; la home es la raíz. */
@@ -36,7 +48,11 @@ function seo_current_script(): string {
 
 function seo_hreflang_links(string $script): string {
     $out = '';
-    foreach (array_keys(supported_languages()) as $l) {
+    $langs = seo_page_langs($script);
+    if (count($langs) === 1) {   // página monolingüe: sin alternativas, solo x-default autorreferenciado
+        return '<link rel="alternate" hreflang="x-default" href="' . e(seo_url($script, 'es')) . '">';
+    }
+    foreach ($langs as $l) {
         $out .= '<link rel="alternate" hreflang="' . $l . '" href="' . e(seo_url($script, $l)) . '">' . "\n    ";
     }
     $out .= '<link rel="alternate" hreflang="x-default" href="' . e(seo_url($script, 'es')) . '">';
@@ -140,6 +156,21 @@ function seo_jsonld(string $script, string $lang, array $faqs = [], array $revie
             ['@type' => 'ListItem', 'position' => 1, 'name' => SITE_NAME, 'item' => seo_url('index.php', $lang)],
             ['@type' => 'ListItem', 'position' => 2, 'name' => $GLOBALS['pageTitle'] ?? $script, 'item' => seo_url($script, $lang)],
         ]];
+    }
+    $landing = landing_by_script($script);
+    if ($landing) {
+        $graph[] = [
+            '@type' => ['MedicalWebPage', 'WebPage'], '@id' => seo_url($script, 'es') . '#page',
+            'url' => seo_url($script, 'es'), 'name' => $landing['title'], 'description' => $landing['desc'], 'inLanguage' => 'es',
+            'about' => ['@type' => 'MedicalCondition', 'name' => $landing['condition']],
+            'lastReviewed' => $landing['reviewed'], 'reviewedBy' => ['@id' => "$base/#elena"],
+            'author' => ['@id' => "$base/#elena"], 'publisher' => ['@id' => "$base/#clinica"],
+            'mainEntity' => ['@id' => seo_url($script, 'es') . '#faq'],
+        ];
+        $graph[] = [
+            '@type' => 'FAQPage', '@id' => seo_url($script, 'es') . '#faq', 'inLanguage' => 'es',
+            'mainEntity' => array_map(fn($f) => ['@type' => 'Question', 'name' => $f[0], 'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f[1]]], $landing['faqs']),
+        ];
     }
     if ($script === 'dudas.php' && $faqs) {
         $graph[] = [

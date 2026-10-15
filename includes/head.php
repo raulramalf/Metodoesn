@@ -3,6 +3,7 @@ require_once __DIR__ . '/../src/functions.php';
 require_once __DIR__ . '/../src/seo.php';
 
 $seoScript = seo_current_script();
+if (count(seo_page_langs($seoScript)) === 1) force_lang(seo_page_langs($seoScript)[0]);   // landings solo en español
 $seoLang   = current_lang();
 $seoTitle  = trim((string)($pageTitle ?? (SITE_NAME . ' · ' . SITE_OWNER)));
 if (stripos($seoTitle, SITE_NAME) === false) $seoTitle .= ' · ' . SITE_NAME;

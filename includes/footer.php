@@ -75,6 +75,16 @@
         </div>
     </div>
 
+    <?php if (current_lang() === 'es'): ?>
+    <nav class="wrap footer-specialties" aria-label="Especialidades">
+        <ul>
+            <?php foreach (landings() as $slug => $l): ?>
+                <li><a href="/<?= e($slug) ?>.php"><?= e($l['h1']) ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
+    <?php endif; ?>
+
     <div class="wrap footer-legal-bar">
         <p>© <?= date('Y') ?> <?= e(SITE_NAME) ?> · Elena Sánchez Novo. <?= e(t('footer_rights')) ?></p>
         <div class="footer-legal-links">
@@ -94,6 +104,6 @@
     </div>
 </div>
 
-<script src="<?= e(asset('js/main.js')) ?>"></script>
+<script src="<?= e(asset('js/main.js')) ?>" defer></script>
 </body>
 </html>

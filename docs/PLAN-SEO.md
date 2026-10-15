@@ -124,3 +124,9 @@ Medir con PageSpeed Insights (campo, móvil) y CrUX en Search Console; objetivo:
 **Mes 1–2:** 5 landings (SIBO, colon irritable, SOP, deportivo, online) con FAQ y reseñas por tema · auto-alojar fuentes · facade de Maps/Doctoralia · rutas `/en/` `/de/` · CSP en modo *report-only* → estricta.
 **Mes 3–6:** Hub `/salud/` con 1 artículo/semana (los 10 propuestos) revisados y fechados · PR/enlaces (CODINMA, prensa de salud, SurgEOM) · 20+ reseñas Google · revisión trimestral de keywords en Search Console.
 **KPIs:** impresiones y posición media por landing, clics a Doctoralia/teléfono (eventos), reservas atribuidas, reseñas nuevas, CWV en campo.
+
+---
+## Estado de implementación (actualización)
+**Hecho en código:** 5 landings de servicio (`nutricionista-sibo-madrid`, `-colon-irritable-madrid`, `-sop-madrid`, `-deportivo-madrid`, `consulta-nutricion-online`) con H1 de intención local, FAQ, aviso médico, fecha de revisión, JSON-LD `MedicalWebPage`+`FAQPage`+`BreadcrumbList`, enlaces internos (home, footer, relacionadas) y entrada en `sitemap.xml`. Contenido en `src/landings.php`; plantilla en `src/landing_page.php`. `main.js` con `defer`.
+**Decisiones:** las landings son **solo en español** (canónica propia, sin hreflang falso; el selector de idioma lleva a la home del idioma). El hub `/salud/` y los 10 artículos **no se han creado**: exigen bibliografía PubMed/DOI real y revisión clínica de Elena; publicar texto sin fuentes verificadas en YMYL perjudicaría el E-E-A-T. ⚠ Los textos de las landings son un borrador prudente que **debe revisar Elena** antes de publicar.
+**Pendiente (requiere acciones fuera del código):** Search Console, ficha de Google Business Profile, directorios/NAP, reseñas, conversión a WebP/auto-alojar fuentes, facade del mapa.

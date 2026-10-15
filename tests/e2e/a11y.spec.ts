@@ -2,10 +2,11 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 const pages = ['/', '/servicios.php', '/quienes-somos.php', '/dudas.php', '/contacto.php', '/reserva-de-citas.php', '/politica-de-privacidad.php'];
+const landings = ['/nutricionista-sibo-madrid.php', '/nutricionista-colon-irritable-madrid.php', '/nutricionista-sop-madrid.php', '/nutricionista-deportivo-madrid.php', '/consulta-nutricion-online.php'];
 const langs = ['', '?lang=en', '?lang=de'];
 
-for (const p of pages) {
-  for (const l of langs) {
+for (const p of [...pages, ...landings]) {
+  for (const l of landings.includes(p) ? [''] : langs) {
     test(`axe WCAG 2.2 AA · ${p}${l}`, async ({ page }, info) => {
       await page.goto(p + l);
       await page.waitForLoadState('networkidle').catch(() => {});

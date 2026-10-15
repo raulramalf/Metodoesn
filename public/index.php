@@ -245,6 +245,7 @@ require __DIR__ . '/../src/content.php';
                     <span>FODMAP</span>
                     <span>IBS</span>
                 </div>
+                <?php if (current_lang() === 'es'): ?><a class="area-more" href="/nutricionista-sibo-madrid.php">Saber más →</a><?php endif; ?>
             </div>
 
             <div class="area-box">
@@ -258,6 +259,7 @@ require __DIR__ . '/../src/content.php';
                     <span>Fertility</span>
                     <span>Hormones</span>
                 </div>
+                <?php if (current_lang() === 'es'): ?><a class="area-more" href="/nutricionista-sop-madrid.php">Saber más →</a><?php endif; ?>
             </div>
 
             <div class="area-box">
@@ -284,6 +286,7 @@ require __DIR__ . '/../src/content.php';
                     <span>Supplements</span>
                     <span>Recovery</span>
                 </div>
+                <?php if (current_lang() === 'es'): ?><a class="area-more" href="/nutricionista-deportivo-madrid.php">Saber más →</a><?php endif; ?>
             </div>
         </div>
     </section>
