@@ -76,8 +76,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // El rate limit se consume solo si el resto de validaciones pasan (los errores del usuario no le penalizan).
     if (!$errors) {
         $ip = client_ip();
+        $bucket = null;
         try {
-            if (!Database::rateLimitHit(Database::bucketFor($ip))) {
+            $bucket = Database::bucketFor($ip);
+            if (!Database::rateLimitHit($bucket)) {
                 http_response_code(429);
                 header('Retry-After: ' . RATE_LIMIT_WINDOW);
                 $errors[] = $msg('rate');
@@ -89,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } catch (Throwable $ex) {
             error_log('[contacto] ' . $ex->getMessage());
+            if ($bucket !== null) { try { Database::rateLimitRefund($bucket); } catch (Throwable $e2) {} }   // un fallo del servidor no penaliza al usuario
             http_response_code(500);
             $errors[] = $msg('server');
         }

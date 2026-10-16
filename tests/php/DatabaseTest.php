@@ -128,4 +128,13 @@ final class DatabaseTest extends TestCase
         $this->assertSame('0600', substr(sprintf('%o', fileperms(KEY_PATH)), -4));
         $this->assertSame(32, strlen(Database::appKey()));
     }
+
+    public function testRefundFreesOneAttempt(): void
+    {
+        $b = Database::bucketFor('198.51.100.50'); $now = time();
+        for ($i = 0; $i < 3; $i++) Database::rateLimitHit($b, 3, 900, $now);
+        $this->assertFalse(Database::rateLimitHit($b, 3, 900, $now));
+        Database::rateLimitRefund($b);
+        $this->assertTrue(Database::rateLimitHit($b, 3, 900, $now));
+    }
 }

@@ -137,6 +137,11 @@ class Database {
         }
     }
 
+    /** Devuelve un intento al cubo (p. ej. si el guardado falló por un error del servidor, no del usuario). */
+    public static function rateLimitRefund(string $bucket): void {
+        self::get()->prepare('DELETE FROM rate_limits WHERE id = (SELECT MAX(id) FROM rate_limits WHERE bucket = :b)')->execute([':b' => $bucket]);
+    }
+
     /** Guarda un contacto con trazabilidad de consentimiento (RGPD art. 7.1). Devuelve el id. */
     public static function saveContact(string $nombre, string $email, string $mensaje, string $ip, string $lang): int {
         $st = self::get()->prepare(
