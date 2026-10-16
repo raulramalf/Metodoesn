@@ -1,4 +1,17 @@
-# Raíz del proyecto: si el DocumentRoot estuviera mal configurado, todo queda denegado salvo public/.
-<IfModule mod_authz_core.c>
-  Require all denied
+# Método ESN — raíz del repositorio desplegada directamente (Hostinger Git → public_html).
+# Sirve únicamente public/ y bloquea el resto del proyecto. (LiteSpeed/Apache con mod_rewrite)
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# 1) Carpetas y ficheros privados: nunca accesibles por web
+RewriteRule ^(src|includes|config|data|tests|docs|bin|vendor|node_modules|deploy|\.git|\.github|\.claude)(/|$) - [F,L,NC]
+RewriteRule ^(composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|playwright\.config\.ts|tsconfig\.json|README\.md|\.gitignore)$ - [F,L,NC]
+RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
+# 2) Todo lo demás se sirve desde public/ (las reglas de public/.htaccess siguen aplicando)
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
