@@ -34,7 +34,7 @@ require __DIR__ . '/../src/content.php';
             <!-- Certificado Oficial Doctoralia -->
             <div class="about-doctoralia-cert">
                 <a class="zl-url" href="https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="certificate" data-zlw-opinion="false" data-zlw-hide-branding="true" data-zlw-saas-only="true" data-zlw-a11y-title="Doctoralia Official Certificate"><?= e(t('footer_view_cert')) ?></a>
-                <script>!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
+                <script type="text/plain" data-consent="thirdparty">!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
             </div>
         </div>
 
@@ -74,16 +74,16 @@ require __DIR__ . '/../src/content.php';
     <section class="band">
         <div class="wrap section">
             <div class="section-heading text-center">
-                <p class="kicker"><?= e(current_lang() === 'en' ? 'Clinical Philosophy' : (current_lang() === 'de' ? 'Klinische Philosophie' : 'Ética y método')) ?></p>
-                <h2><?= e(current_lang() === 'en' ? 'Our collaborative approach: working as a team' : (current_lang() === 'de' ? 'Mein Ansatz: Ein gemeinsamer Teamprozess' : 'Mi enfoque de trabajo: un proceso en equipo')) ?></h2>
-                <p class="lead lead-centered"><?= e(current_lang() === 'en' ? 'Empathetic guidance and scientific rigor define every clinical step.' : (current_lang() === 'de' ? 'Menschliche Nähe und wissenschaftliche Evidenz definieren jeden Behandlungsschritt.' : 'La cercanía humana y la rigurosidad científica definen cada paso del tratamiento.')) ?></p>
+                <p class="kicker"><?= e(t('quienes_somos_063')) ?></p>
+                <h2><?= e(t('quienes_somos_064')) ?></h2>
+                <p class="lead lead-centered"><?= e(t('quienes_somos_065')) ?></p>
             </div>
 
             <div class="bento-grid">
                 <?php for ($i = 0; $i < min(3, count($principios)); $i++): ?>
                     <article class="bento-item">
                         <div class="bento-item-header">
-                            <span class="bento-tag"><?= e(current_lang() === 'en' ? 'Step ' . ($i + 1) : (current_lang() === 'de' ? 'Schritt ' . ($i + 1) : 'Paso ' . ($i + 1))) ?></span>
+                            <span class="bento-tag"><?= e(sprintf(t('label_step'), $i + 1)) ?></span>
                         </div>
                         <h3><?= e($principios[$i][0]) ?></h3>
                         <p><?= e($principios[$i][1]) ?></p>
@@ -96,7 +96,7 @@ require __DIR__ . '/../src/content.php';
     <!-- FORMACIÓN Y TRAYECTORIA ACADÉMICA -->
     <section class="wrap section">
         <div class="section-heading">
-            <p class="kicker"><?= e(current_lang() === 'en' ? 'Clinical Credentials' : (current_lang() === 'de' ? 'Qualifikation & Evidenz' : 'Rigor y avales')) ?></p>
+            <p class="kicker"><?= e(t('quienes_somos_066')) ?></p>
             <h2><?= e(t('about_edu_title')) ?></h2>
             <p class="lead"><?= e(t('about_edu_sub')) ?></p>
         </div>
@@ -117,7 +117,7 @@ require __DIR__ . '/../src/content.php';
     <section class="band">
         <div class="wrap section">
             <div class="section-heading text-center">
-                <p class="kicker"><?= e(current_lang() === 'en' ? 'Facilities' : (current_lang() === 'de' ? 'Praxisräume' : 'Instalaciones')) ?></p>
+                <p class="kicker"><?= e(t('quienes_somos_067')) ?></p>
                 <h2><?= e(t('about_clinic_title')) ?></h2>
                 <p class="lead lead-centered">
                     <?= e(t('about_clinic_sub')) ?>
@@ -127,15 +127,15 @@ require __DIR__ . '/../src/content.php';
             <div class="gallery-strip">
                 <figure class="gallery-card">
                     <img src="<?= e(img('clinica3.jpg')) ?>" alt="Despacho de valoración nutricional y antropométrica" loading="lazy" width="600" height="400">
-                    <figcaption><?= e(current_lang() === 'en' ? 'Consultation room & ISAK anthropometrics' : (current_lang() === 'de' ? 'Beratungsraum & ISAK-Anthropometrie' : 'Despacho de consulta y antropometría ISAK')) ?></figcaption>
+                    <figcaption><?= e(t('quienes_somos_068')) ?></figcaption>
                 </figure>
                 <figure class="gallery-card">
                     <img src="<?= e(img('clinica2.jpeg')) ?>" alt="Recepción y sala de espera Clínica SurgEOM" loading="lazy" width="600" height="400">
-                    <figcaption><?= e(current_lang() === 'en' ? 'Reception & clinic waiting lounge' : (current_lang() === 'de' ? 'Empfang & Wartebereich SurgEOM' : 'Recepción y salas de atención médica')) ?></figcaption>
+                    <figcaption><?= e(t('quienes_somos_069')) ?></figcaption>
                 </figure>
                 <figure class="gallery-card">
-                    <img src="<?= e(img('clinicaporfuera.jpg')) ?>" alt="Fachada exterior de Clínica SurgEOM en Madrid" loading="lazy" width="600" height="400">
-                    <figcaption><?= e(current_lang() === 'en' ? 'Clinic facade in Madrid' : (current_lang() === 'de' ? 'Außenansicht Klinik Madrid' : 'Fachada e instalaciones en Madrid')) ?></figcaption>
+                    <img src="<?= e(img('clinicaporfuera.webp')) ?>" alt="Fachada exterior de Clínica SurgEOM en Madrid" loading="lazy" width="600" height="400">
+                    <figcaption><?= e(t('quienes_somos_070')) ?></figcaption>
                 </figure>
             </div>
         </div>
