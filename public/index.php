@@ -16,7 +16,7 @@ require __DIR__ . '/../src/content.php';
                 <!-- Badge de reputación en Doctoralia -->
                 <a href="<?= e($statsReputacion['url']) ?>" target="_blank" rel="noopener" class="hero-badge" id="hero-badge">
                     <span class="stars" aria-hidden="true">★★★★★</span>
-                    <span><strong><?= e($statsReputacion['puntuacion']) ?></strong> en Doctoralia · <?= e($statsReputacion['opiniones']) ?> <?= e(current_lang() === 'en' ? 'verified reviews' : (current_lang() === 'de' ? 'Bewertungen' : 'opiniones')) ?></span>
+                    <span><strong><?= e($statsReputacion['puntuacion']) ?></strong> en Doctoralia · <?= e($statsReputacion['opiniones']) ?> <?= e(t('index_033')) ?></span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
 
@@ -46,9 +46,9 @@ require __DIR__ . '/../src/content.php';
             <div class="hero-media-wrapper">
                 <div class="hero-media-backdrop" aria-hidden="true"></div>
                 <div class="hero-media-card">
-                    <img src="<?= e(img('hero-1.png')) ?>" alt="Elena Sánchez Novo · Método ESN" width="682" height="1024" fetchpriority="high">
+                    <img src="<?= e(img('hero-1.webp')) ?>" alt="Elena Sánchez Novo · Método ESN" width="682" height="1024" fetchpriority="high">
                 </div>
-                <img class="hero-sub-photo" src="<?= e(img('hero-2.png')) ?>" alt="Entrenamiento y salud en consulta clínica" width="600" height="400" loading="lazy">
+                <img class="hero-sub-photo" src="<?= e(img('hero-2.webp')) ?>" alt="Entrenamiento y salud en consulta clínica" width="600" height="400" loading="lazy">
 
                 <!-- Tarjeta flotante inferior: Atención directa -->
                 <div class="hero-floating-card hero-floating-bottom" aria-hidden="true">
@@ -107,7 +107,7 @@ require __DIR__ . '/../src/content.php';
         <div class="compare-grid">
             <div class="compare-box compare-box-old">
                 <div class="compare-box-header">
-                    <span class="compare-tag-old"><?= e(current_lang() === 'en' ? 'TRADITIONAL NUTRITION' : (current_lang() === 'de' ? 'TRADITIONELLE ERNÄHRUNG' : 'NUTRICIÓN TRADICIONAL')) ?></span>
+                    <span class="compare-tag-old"><?= e(t('index_034')) ?></span>
                     <span class="compare-status-circle cross" aria-hidden="true">✕</span>
                 </div>
                 <h3><?= e(t('compare_bad_title')) ?></h3>
@@ -130,7 +130,7 @@ require __DIR__ . '/../src/content.php';
                     </li>
                 </ul>
                 <p class="compare-footer-old">
-                    «<?= e(current_lang() === 'en' ? 'Typical outcome: persistent fatigue, recurring inflammation, and psychological frustration.' : (current_lang() === 'de' ? 'Typisches Ergebnis: anhaltende Müdigkeit, wiederkehrende Entzündungen und Frustration.' : 'Resultado habitual: fatiga persistente, inflamación recurrente y frustración psicológica.')) ?>»
+                    «<?= e(t('index_035')) ?>»
                 </p>
             </div>
 
@@ -138,7 +138,7 @@ require __DIR__ . '/../src/content.php';
                 <div class="compare-box-header">
                     <span class="compare-tag-esn">
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <?= e(current_lang() === 'en' ? 'ESN PRECISION FORMULA' : (current_lang() === 'de' ? 'ESN PRÄZISIONSFORMEL' : 'FÓRMULA DE PRECISIÓN ESN')) ?>
+                        <?= e(t('index_036')) ?>
                     </span>
                     <span class="compare-status-circle check" aria-hidden="true">✓</span>
                 </div>
@@ -162,7 +162,7 @@ require __DIR__ . '/../src/content.php';
                     </li>
                 </ul>
                 <div class="compare-footer-esn">
-                    <span><?= e(current_lang() === 'en' ? 'Sustainable cellular transformation · Steady vitality all day' : (current_lang() === 'de' ? 'Nachhaltige Zellgesundheit · Ganztägige Energie' : 'Transformación sostenible · Energía constante todo el día')) ?></span>
+                    <span><?= e(t('index_037')) ?></span>
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                 </div>
             </div>
@@ -182,22 +182,22 @@ require __DIR__ . '/../src/content.php';
                 <!-- Tarjeta Hero Bento -->
                 <article class="bento-item bento-item-hero">
                     <div class="bento-item-header">
-                        <span class="bento-tag"><?= e(current_lang() === 'en' ? 'Core Pillar' : (current_lang() === 'de' ? 'Hauptsäule' : 'Pilar Central')) ?></span>
+                        <span class="bento-tag"><?= e(t('index_038')) ?></span>
                     </div>
                     <h3><?= e($principios[0][0]) ?></h3>
                     <p><?= e($principios[0][1]) ?></p>
                     <div class="bento-pills">
-                        <span class="bento-pill-item"><?= e(current_lang() === 'en' ? 'Clinical physiology' : (current_lang() === 'de' ? 'Klinische Physiologie' : 'Fisiología clínica')) ?></span>
-                        <span class="bento-pill-item"><?= e(current_lang() === 'en' ? 'Strength training' : (current_lang() === 'de' ? 'Krafttraining' : 'Entrenamiento de fuerza')) ?></span>
-                        <span class="bento-pill-item"><?= e(current_lang() === 'en' ? 'Gut health & microbiome' : (current_lang() === 'de' ? 'Darmgesundheit & Mikrobiom' : 'Salud digestiva & microbiota')) ?></span>
-                        <span class="bento-pill-item"><?= e(current_lang() === 'en' ? 'Active metabolism' : (current_lang() === 'de' ? 'Aktiver Stoffwechsel' : 'Metabolismo activo')) ?></span>
+                        <span class="bento-pill-item"><?= e(t('index_039')) ?></span>
+                        <span class="bento-pill-item"><?= e(t('index_040')) ?></span>
+                        <span class="bento-pill-item"><?= e(t('index_041')) ?></span>
+                        <span class="bento-pill-item"><?= e(t('index_042')) ?></span>
                     </div>
                 </article>
 
                 <?php for ($i = 1; $i < count($principios); $i++): ?>
                     <article class="bento-item">
                         <div class="bento-item-header">
-                            <span class="bento-tag"><?= e(current_lang() === 'en' ? 'Principle ' . ($i + 1) : (current_lang() === 'de' ? 'Prinzip ' . ($i + 1) : 'Pilar ' . ($i + 1))) ?></span>
+                            <span class="bento-tag"><?= e(sprintf(t('label_principle'), $i + 1)) ?></span>
                         </div>
                         <h3><?= e($principios[$i][0]) ?></h3>
                         <p><?= e($principios[$i][1]) ?></p>
@@ -208,16 +208,16 @@ require __DIR__ . '/../src/content.php';
             <!-- Galería de Evidencia Real -->
             <div class="gallery-strip">
                 <figure class="gallery-card">
-                    <img src="<?= e(img('plan-semanal.jpg')) ?>" alt="Planificación personalizada Método ESN" loading="lazy" width="800" height="1067">
-                    <figcaption><?= e(current_lang() === 'en' ? 'Personalized strategy & flexible structure' : (current_lang() === 'de' ? 'Individuelle Strategie & flexible Struktur' : 'Pauta personalizada y estructura flexible')) ?></figcaption>
+                    <img src="<?= e(img('plan-semanal.webp')) ?>" alt="Planificación personalizada Método ESN" loading="lazy" width="800" height="1067">
+                    <figcaption><?= e(t('index_043')) ?></figcaption>
                 </figure>
                 <figure class="gallery-card">
-                    <img src="<?= e(img('metodo-2.png')) ?>" alt="Composición corporal y salud con Método ESN" loading="lazy" width="683" height="1024">
-                    <figcaption><?= e(current_lang() === 'en' ? 'Body composition & clinical evaluation' : (current_lang() === 'de' ? 'Körperzusammensetzung & Diagnostik' : 'Composición corporal y valoración clínica')) ?></figcaption>
+                    <img src="<?= e(img('metodo-2.webp')) ?>" alt="Composición corporal y salud con Método ESN" loading="lazy" width="683" height="1024">
+                    <figcaption><?= e(t('index_044')) ?></figcaption>
                 </figure>
                 <figure class="gallery-card">
                     <img src="<?= e(img('clinica.jpeg')) ?>" alt="Despacho de consulta presencial en Clínica SurgEOM (Madrid)" loading="lazy" width="600" height="400">
-                    <figcaption><?= e(current_lang() === 'en' ? 'In-person clinic at SurgEOM Madrid' : (current_lang() === 'de' ? 'Vor-Ort-Praxis SurgEOM Madrid' : 'Consulta presencial en Clínica SurgEOM (Madrid)')) ?></figcaption>
+                    <figcaption><?= e(t('index_045')) ?></figcaption>
                 </figure>
             </div>
         </div>
@@ -238,8 +238,8 @@ require __DIR__ . '/../src/content.php';
                 <div class="area-icon-wrap" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
                 </div>
-                <h3><?= e(current_lang() === 'en' ? 'Digestive Health & Microbiome' : (current_lang() === 'de' ? 'Darmgesundheit & Mikrobiom' : 'Salud Digestiva & Microbiota')) ?></h3>
-                <p><?= e(current_lang() === 'en' ? 'Clinical relief for bloating, food intolerances, SIBO, IBS, and structured low-FODMAP protocols.' : (current_lang() === 'de' ? 'Behandlung von Blähbauch, Unverträglichkeiten, SIBO, Reizdarm und strukturierte FODMAP-Protokolle.' : 'Manejo de hinchazón, intolerancias, SIBO, colon irritable (SII) y protocolos FODMAP estructurados paso a paso.')) ?></p>
+                <h3><?= e(t('index_046')) ?></h3>
+                <p><?= e(t('index_047')) ?></p>
                 <div class="area-tags">
                     <span>SIBO</span>
                     <span>FODMAP</span>
@@ -251,8 +251,8 @@ require __DIR__ . '/../src/content.php';
                 <div class="area-icon-wrap" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 </div>
-                <h3><?= e(current_lang() === 'en' ? "Women's Hormonal Health" : (current_lang() === 'de' ? 'Weibliche Hormongesundheit' : 'Salud Hormonal de la Mujer')) ?></h3>
-                <p><?= e(current_lang() === 'en' ? 'Evidence-based guidance in PCOS, hypothalamic amenorrhea, cycle regularity, fertility, and postpartum.' : (current_lang() === 'de' ? 'Klinische Begleitung bei PCOS, Amenorrhö, Zyklusunregelmäßigkeiten, Kinderwunsch und Postpartalphase.' : 'Acompañamiento especializado en SOP, amenorrea hipotalámica, regularidad menstrual, fertilidad y postparto.')) ?></p>
+                <h3><?= e(t('index_048')) ?></h3>
+                <p><?= e(t('index_049')) ?></p>
                 <div class="area-tags">
                     <span>PCOS</span>
                     <span>Fertility</span>
@@ -264,8 +264,8 @@ require __DIR__ . '/../src/content.php';
                 <div class="area-icon-wrap" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="m8 19 4-4 4 4"/></svg>
                 </div>
-                <h3><?= e(current_lang() === 'en' ? 'Body Recomposition & Strength' : (current_lang() === 'de' ? 'Körperzusammensetzung & Kraft' : 'Recomposición Corporal & Fuerza')) ?></h3>
-                <p><?= e(current_lang() === 'en' ? 'Fat loss while preserving metabolic lean mass, joint health, and official ISAK anthropometric tracking.' : (current_lang() === 'de' ? 'Fettabbau bei Erhalt wertvoller Muskelmasse, Stoffwechseloptimierung und ISAK-Körpermessungen.' : 'Pérdida de grasa conservando masa muscular, mejora metabólica y valoración antropométrica avanzada bajo estándar ISAK.')) ?></p>
+                <h3><?= e(t('index_050')) ?></h3>
+                <p><?= e(t('index_051')) ?></p>
                 <div class="area-tags">
                     <span>ISAK</span>
                     <span>Lean Mass</span>
@@ -277,8 +277,8 @@ require __DIR__ . '/../src/content.php';
                 <div class="area-icon-wrap" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                 </div>
-                <h3><?= e(current_lang() === 'en' ? 'Sports Nutrition & Performance' : (current_lang() === 'de' ? 'Sporternährung & Leistung' : 'Nutrición Deportiva & Rendimiento')) ?></h3>
-                <p><?= e(current_lang() === 'en' ? 'Nutritional periodization, science-based supplementation, and rapid post-workout recovery strategies.' : (current_lang() === 'de' ? 'Periodisierte Sporternährung, evidenzbasierte Supplementierung und beschleunigte Regeneration.' : 'Estrategias de alimentación, hidratación y suplementación basada en evidencia adaptadas a tu disciplina y entrenamientos.')) ?></p>
+                <h3><?= e(t('index_052')) ?></h3>
+                <p><?= e(t('index_053')) ?></p>
                 <div class="area-tags">
                     <span>Performance</span>
                     <span>Supplements</span>
@@ -311,12 +311,12 @@ require __DIR__ . '/../src/content.php';
 
                 <div class="roadmap-panel-container">
                     <?php 
-                    $imgList = ['clinica3.jpg', 'plan-semanal.jpg', 'metodo-3.png', 'espacio.png'];
+                    $imgList = ['clinica3.jpg', 'plan-semanal.webp', 'metodo-3.webp', 'espacio.webp'];
                     foreach ($pasos as $idx => $p): 
                     ?>
                         <div class="roadmap-panel-item <?= $idx === 0 ? 'is-active' : '' ?>" id="panel-<?= $idx + 1 ?>" role="tabpanel" aria-labelledby="tab-<?= $idx + 1 ?>" <?= $idx > 0 ? 'hidden' : '' ?>>
                             <div>
-                                <div class="roadmap-badge"><?= e(current_lang() === 'en' ? 'Phase ' . ($idx + 1) : (current_lang() === 'de' ? 'Phase ' . ($idx + 1) : 'Fase ' . ($idx + 1))) ?></div>
+                                <div class="roadmap-badge"><?= e(sprintf(t('label_phase'), $idx + 1)) ?></div>
                                 <h3><?= e($p[0]) ?></h3>
                                 <p><?= e($p[1]) ?></p>
                             </div>
@@ -344,7 +344,7 @@ require __DIR__ . '/../src/content.php';
                     <span class="score-number"><?= e($statsReputacion['puntuacion']) ?></span>
                     <div>
                         <div class="stars-gold" aria-hidden="true">★★★★★</div>
-                        <span class="score-count"><?= e($statsReputacion['opiniones']) ?> <?= e(current_lang() === 'en' ? 'verified ratings' : (current_lang() === 'de' ? 'Bewertungen' : 'opiniones')) ?></span>
+                        <span class="score-count"><?= e($statsReputacion['opiniones']) ?> <?= e(t('index_054')) ?></span>
                     </div>
                 </div>
                 <p class="score-sub">Doctoralia España · <strong>100%</strong></p>
@@ -360,16 +360,16 @@ require __DIR__ . '/../src/content.php';
             <div class="quotes-carousel-top-bar">
                 <div class="quotes-carousel-status">
                     <span class="quotes-live-dot" aria-hidden="true"></span>
-                    <span class="quotes-status-text"><?= e(current_lang() === 'en' ? 'Rotating verified reviews' : (current_lang() === 'de' ? 'Rotierende verifizierte Bewertungen' : 'Opiniones verificadas en rotación')) ?></span>
+                    <span class="quotes-status-text"><?= e(t('index_055')) ?></span>
                 </div>
                 <div class="quotes-carousel-controls">
-                    <button type="button" class="quotes-nav-btn prev" id="quotes-prev" aria-label="<?= e(current_lang() === 'en' ? 'Previous review' : (current_lang() === 'de' ? 'Vorherige Bewertung' : 'Opinión anterior')) ?>">
+                    <button type="button" class="quotes-nav-btn prev" id="quotes-prev" aria-label="<?= e(t('index_056')) ?>">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
                     </button>
                     <div class="quotes-counter" id="quotes-counter" aria-live="polite">
                         <span class="quotes-current">1</span> / <span class="quotes-total"><?= count($testimonios) ?></span>
                     </div>
-                    <button type="button" class="quotes-nav-btn next" id="quotes-next" aria-label="<?= e(current_lang() === 'en' ? 'Next review' : (current_lang() === 'de' ? 'Nächste Bewertung' : 'Siguiente opinión')) ?>">
+                    <button type="button" class="quotes-nav-btn next" id="quotes-next" aria-label="<?= e(t('index_057')) ?>">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </button>
                 </div>
@@ -396,7 +396,7 @@ require __DIR__ . '/../src/content.php';
                 </div>
             </div>
 
-            <div class="quotes-carousel-indicators" id="quotes-indicators" role="tablist" aria-label="<?= e(current_lang() === 'en' ? 'Review indicators' : (current_lang() === 'de' ? 'Bewertungsindikatoren' : 'Indicadores de opiniones')) ?>"></div>
+            <div class="quotes-carousel-indicators" id="quotes-indicators" role="tablist" aria-label="<?= e(t('index_058')) ?>"></div>
         </div>
 
         <!-- Feed Oficial de Doctoralia -->
@@ -404,7 +404,7 @@ require __DIR__ . '/../src/content.php';
             <div class="reviews-embed-bar">
                 <div class="reviews-embed-title">
                     <span class="stars-gold" aria-hidden="true">★★★★★</span>
-                    <span><?= e(current_lang() === 'en' ? 'Real-time verified patient experiences' : (current_lang() === 'de' ? 'Echte Patientenbewertungen in Echtzeit' : 'Opiniones verificadas de pacientes en tiempo real')) ?></span>
+                    <span><?= e(t('index_059')) ?></span>
                 </div>
                 <a href="<?= e(BOOKING_URL) ?>" target="_blank" rel="noopener" class="reviews-embed-link">
                     <span><?= e(t('btn_doctoralia_profile')) ?></span>
@@ -413,7 +413,7 @@ require __DIR__ . '/../src/content.php';
             </div>
             <div class="reviews-widget-body">
                 <a class="zl-url" href="https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="big" data-zlw-opinion="true" data-zlw-hide-branding="true" data-zlw-saas-only="true" data-zlw-a11y-title="Doctoralia widget">Doctoralia Reviews</a>
-                <script>!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
+                <script type="text/plain" data-consent="thirdparty">!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
             </div>
         </div>
     </section>
@@ -423,7 +423,7 @@ require __DIR__ . '/../src/content.php';
         <div class="cta-luxury-banner">
             <div class="cta-luxury-glow" aria-hidden="true"></div>
             <div class="cta-luxury-body">
-                <span class="cta-badge-pill"><?= e(current_lang() === 'en' ? 'Start your journey' : (current_lang() === 'de' ? 'Der beste Zeitpunkt ist jetzt' : 'Tu momento es ahora')) ?></span>
+                <span class="cta-badge-pill"><?= e(t('index_060')) ?></span>
                 <h2><?= e(t('cta_title')) ?></h2>
                 <p><?= e(t('cta_lead')) ?></p>
                 <div class="actions">
@@ -434,8 +434,8 @@ require __DIR__ . '/../src/content.php';
                     <a class="btn btn-ghost-white" href="<?= e(page_url('/contacto.php')) ?>"><?= e(t('btn_contact')) ?></a>
                 </div>
                 <div class="cta-badges-row">
-                    <span>✓ <?= e(current_lang() === 'en' ? 'Direct consultation with Elena' : (current_lang() === 'de' ? 'Direkte Beratung mit Elena' : 'Atención directa con Elena')) ?></span>
-                    <span>✓ <?= e(current_lang() === 'en' ? 'In-Person or Online' : (current_lang() === 'de' ? 'Vor Ort oder Online' : 'Presencial u Online')) ?></span>
+                    <span>✓ <?= e(t('index_061')) ?></span>
+                    <span>✓ <?= e(t('index_062')) ?></span>
                 </div>
             </div>
         </div>

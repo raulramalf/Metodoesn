@@ -113,10 +113,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const COOKIE_KEY = 'esn_cookies_pref';
     const cookieBanner = document.getElementById('cookie');
 
-    if (cookieBanner) {
-        let savedPref = null;
-        try { savedPref = localStorage.getItem(COOKIE_KEY); } catch (e) {}
+    // Contenido de terceros (widgets de Doctoralia, mapa de Google): solo se carga con consentimiento.
+    let thirdPartyLoaded = false;
+    const loadThirdParty = () => {
+        if (thirdPartyLoaded) return;
+        thirdPartyLoaded = true;
+        document.querySelectorAll('script[data-consent="thirdparty"]').forEach((old) => {
+            const s = document.createElement('script');
+            s.textContent = old.textContent;
+            old.parentNode.replaceChild(s, old);
+        });
+        document.querySelectorAll('iframe[data-consent-src]').forEach((f) => {
+            f.src = f.dataset.consentSrc;
+        });
+        document.querySelectorAll('[data-consent-note]').forEach((n) => { n.hidden = true; });
+    };
+    const showConsentNotes = () => {
+        document.querySelectorAll('[data-consent-note]').forEach((n) => { n.hidden = false; });
+    };
 
+    let savedPref = null;
+    try { savedPref = localStorage.getItem(COOKIE_KEY); } catch (e) {}
+    if (savedPref === 'accepted') loadThirdParty(); else showConsentNotes();
+
+    if (cookieBanner) {
         if (savedPref === null) {
             cookieBanner.hidden = false;
         }
@@ -126,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const choice = btn.dataset.cookie;
                 try { localStorage.setItem(COOKIE_KEY, choice); } catch (e) {}
                 cookieBanner.hidden = true;
+                if (choice === 'accepted') loadThirdParty();
             });
         });
 

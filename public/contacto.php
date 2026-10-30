@@ -20,26 +20,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     if (!csrf_check($_POST['csrf'] ?? null)) {
-        $errors[] = current_lang() === 'en' ? 'Session expired. Please reload and try again.' : (current_lang() === 'de' ? 'Sitzung abgelaufen. Bitte neu laden.' : 'La sesión ha caducado. Recarga la página e inténtalo de nuevo.');
+        $errors[] = t('contact_err_csrf');
     }
     if (!filter_var($old['email'], FILTER_VALIDATE_EMAIL)) {
-        $errors[] = current_lang() === 'en' ? 'Please enter a valid email address.' : (current_lang() === 'de' ? 'Bitte geben Sie eine gültige E-Mail-Adresse ein.' : 'Introduce un email válido.');
+        $errors[] = t('contact_err_email');
     }
     if (mb_strlen($old['mensaje']) < 5) {
-        $errors[] = current_lang() === 'en' ? 'Please write a message with at least 5 characters.' : (current_lang() === 'de' ? 'Ihre Nachricht sollte mindestens 5 Zeichen enthalten.' : 'Escribe un mensaje de al menos 5 caracteres.');
+        $errors[] = t('contact_err_short');
     }
     if (mb_strlen($old['mensaje']) > 3000 || mb_strlen($old['nombre']) > 120) {
-        $errors[] = current_lang() === 'en' ? 'The name or message is too long.' : (current_lang() === 'de' ? 'Der Name oder die Nachricht ist zu lang.' : 'El nombre o el mensaje son demasiado largos.');
+        $errors[] = t('contact_err_long');
     }
     if (empty($_POST['privacidad'])) {
-        $errors[] = current_lang() === 'en' ? 'You must agree to the privacy policy.' : (current_lang() === 'de' ? 'Bitte bestätigen Sie die Datenschutzerklärung.' : 'Debes aceptar la información sobre protección de datos.');
+        $errors[] = t('contact_err_privacy');
+    }
+
+    $fingerprint = Database::ipFingerprint($_SERVER['REMOTE_ADDR'] ?? '');
+    $lastSent = $_SESSION['contact_last_sent'] ?? 0;
+
+    if (!$errors && (time() - $lastSent < CONTACT_COOLDOWN_SECONDS
+        || Database::recentContacts($fingerprint, CONTACT_RATE_WINDOW) >= CONTACT_RATE_MAX)) {
+        $errors[] = t('contact_err_rate');
     }
 
     if (!$errors) {
         $stmt = Database::get()->prepare(
             'INSERT INTO contactos (nombre, email, mensaje, ip) VALUES (:nombre, :email, :mensaje, :ip)'
         );
-        $stmt->execute($old + ['ip' => $_SERVER['REMOTE_ADDR'] ?? '']);
+        $stmt->execute($old + ['ip' => $fingerprint]);
+        $_SESSION['contact_last_sent'] = time();
         $ok = true;
         $old = ['nombre' => '', 'email' => '', 'mensaje' => ''];
     }
@@ -70,7 +79,7 @@ require __DIR__ . '/../includes/nav.php';
                             </svg>
                         </div>
                         <div class="contact-channel-meta">
-                            <span><?= e(current_lang() === 'en' ? 'Direct phone & WhatsApp' : (current_lang() === 'de' ? 'Telefon & WhatsApp' : 'Teléfono directo y WhatsApp')) ?></span>
+                            <span><?= e(t('contacto_006')) ?></span>
                             <strong><?= e(SITE_PHONE) ?></strong>
                         </div>
                     </a>
@@ -83,7 +92,7 @@ require __DIR__ . '/../includes/nav.php';
                             </svg>
                         </div>
                         <div class="contact-channel-meta">
-                            <span><?= e(current_lang() === 'en' ? 'Email address' : (current_lang() === 'de' ? 'E-Mail-Adresse' : 'Correo electrónico')) ?></span>
+                            <span><?= e(t('contacto_007')) ?></span>
                             <strong><?= e(SITE_EMAIL) ?></strong>
                         </div>
                     </a>
@@ -111,11 +120,11 @@ require __DIR__ . '/../includes/nav.php';
                     </h4>
                     <p><strong><?= e(SITE_ADDRESS) ?></strong></p>
                     <p style="font-size:0.86rem; color:var(--ink-soft); margin-top:0.4rem;">
-                        <strong><?= e(current_lang() === 'en' ? 'Hours:' : (current_lang() === 'de' ? 'Öffnungszeiten:' : 'Horario de atención:')) ?></strong> <?= e(SITE_HOURS) ?>.<br>
-                        <?= e(current_lang() === 'en' ? 'Convenient public transit (Metro Av. de América) and easy parking.' : (current_lang() === 'de' ? 'Metro Av. de América in 3 Min. fußläufig, Parkmöglichkeiten.' : 'Metro Avenida de América a 3 min a pie. Fácil aparcamiento.')) ?>
+                        <strong><?= e(t('contacto_008')) ?></strong> <?= e(SITE_HOURS) ?>.<br>
+                        <?= e(t('contacto_009')) ?>
                     </p>
                     <a href="#mapa-ubicacion" class="clinic-map-link">
-                        <span><?= e(current_lang() === 'en' ? 'View map & directions' : (current_lang() === 'de' ? 'Karte & Anfahrt ansehen' : 'Ver mapa interactivo y cómo llegar')) ?></span>
+                        <span><?= e(t('contacto_010')) ?></span>
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 13l5 5 5-5M12 4v14"/></svg>
                     </a>
                 </div>
@@ -126,19 +135,19 @@ require __DIR__ . '/../includes/nav.php';
                 <div class="form-card">
                     <h3 style="margin-bottom: 0.6rem;"><?= e(t('contact_form_title')) ?></h3>
                     <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:1.6rem;">
-                        <?= e(current_lang() === 'en' ? 'Fill out the form and Elena will personally reach out.' : (current_lang() === 'de' ? 'Füllen Sie die Felder aus, Elena meldet sich persönlich bei Ihnen.' : 'Rellena los datos y Elena se pondrá en contacto contigo directamente.')) ?>
+                        <?= e(t('contacto_011')) ?>
                     </p>
 
                     <?php if ($ok): ?>
                         <div class="form-alert-success" role="alert">
-                            <strong><?= e(current_lang() === 'en' ? 'Message sent successfully!' : (current_lang() === 'de' ? 'Nachricht erfolgreich gesendet!' : '¡Mensaje recibido con éxito!')) ?></strong><br>
-                            <?= e(current_lang() === 'en' ? 'Thank you for reaching out. We will respond promptly.' : (current_lang() === 'de' ? 'Vielen Dank. Wir antworten Ihnen zeitnah.' : 'Muchas gracias por escribirnos. Te responderemos lo antes posible.')) ?>
+                            <strong><?= e(t('contacto_012')) ?></strong><br>
+                            <?= e(t('contacto_013')) ?>
                         </div>
                     <?php endif; ?>
 
                     <?php if ($errors): ?>
                         <div class="form-alert-error" role="alert">
-                            <strong><?= e(current_lang() === 'en' ? 'Please review the following fields:' : (current_lang() === 'de' ? 'Bitte prüfen Sie folgende Angaben:' : 'Por favor, revisa los siguientes campos:')) ?></strong>
+                            <strong><?= e(t('contacto_014')) ?></strong>
                             <ul style="margin-top:0.5rem; padding-left:1.2rem;">
                                 <?php foreach ($errors as $err): ?>
                                     <li><?= e($err) ?></li>
@@ -158,7 +167,7 @@ require __DIR__ . '/../includes/nav.php';
 
                         <div class="form-group">
                             <label for="nombre"><?= e(t('contact_name')) ?> *</label>
-                            <input type="text" id="nombre" name="nombre" class="form-control" value="<?= e($old['nombre']) ?>" required placeholder="<?= e(current_lang() === 'en' ? 'e.g. Sarah Miller' : (current_lang() === 'de' ? 'z. B. Julia Schneider' : 'Ej. Laura Gómez')) ?>">
+                            <input type="text" id="nombre" name="nombre" class="form-control" value="<?= e($old['nombre']) ?>" required placeholder="<?= e(t('contacto_015')) ?>">
                         </div>
 
                         <div class="form-group">
@@ -167,14 +176,14 @@ require __DIR__ . '/../includes/nav.php';
                         </div>
 
                         <div class="form-group">
-                            <label for="mensaje"><?= e(current_lang() === 'en' ? 'How can we help you? *' : (current_lang() === 'de' ? 'Wie können wir Ihnen helfen? *' : '¿En qué podemos ayudarte? *')) ?></label>
+                            <label for="mensaje"><?= e(t('contacto_016')) ?></label>
                             <textarea id="mensaje" name="mensaje" class="form-control" rows="5" required placeholder="<?= e(t('contact_message')) ?>"><?= e($old['mensaje']) ?></textarea>
                         </div>
 
                         <div class="form-group">
                             <label class="form-checkbox">
                                 <input type="checkbox" name="privacidad" value="1" required>
-                                <span><?= e(current_lang() === 'en' ? 'I have read and accept the privacy policy regarding the processing of my health inquiry.' : (current_lang() === 'de' ? 'Ich habe die Datenschutzerklärung zur Kenntnis genommen und stimme zu.' : 'He leído y acepto la política de privacidad sobre el tratamiento de mis datos personales.')) ?> <a href="<?= e(page_url('/politica-de-privacidad.php')) ?>" target="_blank">(<?= e(t('footer_privacy')) ?>)</a></span>
+                                <span><?= e(t('contacto_017')) ?> <a href="<?= e(page_url('/politica-de-privacidad.php')) ?>" target="_blank">(<?= e(t('footer_privacy')) ?>)</a></span>
                             </label>
                         </div>
 
@@ -196,15 +205,11 @@ require __DIR__ . '/../includes/nav.php';
                 <div class="contact-map-info">
                     <div class="map-badge-pill">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                        <span><?= e(current_lang() === 'en' ? 'In-Person Clinical Practice' : (current_lang() === 'de' ? 'Praxis für persönliche Konsultation' : 'Consulta Presencial en Madrid')) ?></span>
+                        <span><?= e(t('contacto_018')) ?></span>
                     </div>
-                    <h2><?= e(current_lang() === 'en' ? 'How to Reach Clínica SurgEOM' : (current_lang() === 'de' ? 'So finden Sie die Clínica SurgEOM' : 'Cómo llegar a Clínica SurgEOM')) ?></h2>
+                    <h2><?= e(t('contacto_019')) ?></h2>
                     <p class="map-lead">
-                        <?= e(current_lang() === 'en' 
-                            ? 'Our in-person consultations take place at Clínica SurgEOM, a reference medical and dermatological facility located in the heart of Madrid, right by Avenida de América.' 
-                            : (current_lang() === 'de' 
-                                ? 'Unsere persönlichen Sprechstunden finden in der renommierten Fachklinik SurgEOM direkt am Verkehrsknotenpunkt Avenida de América in Madrid statt.' 
-                                : 'Las consultas presenciales del Método ESN se realizan en Clínica SurgEOM, centro médico-quirúrgico y dermatológico de referencia en Madrid, a escasos metros del intercambiador de Avenida de América.')) ?>
+                        <?= e(t('contacto_020')) ?>
                     </p>
 
                     <div class="map-details-list">
@@ -213,7 +218,7 @@ require __DIR__ . '/../includes/nav.php';
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                             </div>
                             <div>
-                                <strong><?= e(current_lang() === 'en' ? 'Exact Address' : (current_lang() === 'de' ? 'Genaue Adresse' : 'Dirección exacta')) ?></strong>
+                                <strong><?= e(t('contacto_021')) ?></strong>
                                 <span>Calle de Coslada, 16 (esquina C/ Agustín Durán, 34)<br>28028 Madrid · Barrio de Salamanca / Guindalera</span>
                             </div>
                         </div>
@@ -223,8 +228,8 @@ require __DIR__ . '/../includes/nav.php';
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                             </div>
                             <div>
-                                <strong><?= e(current_lang() === 'en' ? 'Consultation Hours' : (current_lang() === 'de' ? 'Sprechzeiten' : 'Horario de consulta')) ?></strong>
-                                <span><?= e(SITE_HOURS) ?> (<?= e(current_lang() === 'en' ? 'by appointment' : (current_lang() === 'de' ? 'nach Terminvereinbarung' : 'con cita previa concertada')) ?>)</span>
+                                <strong><?= e(t('contacto_022')) ?></strong>
+                                <span><?= e(SITE_HOURS) ?> (<?= e(t('contacto_023')) ?>)</span>
                             </div>
                         </div>
 
@@ -233,23 +238,19 @@ require __DIR__ . '/../includes/nav.php';
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
                             </div>
                             <div>
-                                <strong><?= e(current_lang() === 'en' ? 'Public Transit & Parking' : (current_lang() === 'de' ? 'Öffentlicher Nahverkehr & Parken' : 'Transporte público y aparcamiento')) ?></strong>
-                                <span><?= e(current_lang() === 'en' 
-                                    ? 'Metro Avenida de América (Lines 4, 6, 7, 9) 3 min walk · Metro Diego de León & Cartagena · Public parking available at Cartagena St. and Intercambiador.' 
-                                    : (current_lang() === 'de' 
-                                        ? 'Metro Avenida de América (Linien 4, 6, 7, 9) 3 Gehminuten · Metro Diego de León & Cartagena · Öffentliche Parkhäuser vorhanden.' 
-                                        : 'Metro Intercambiador de Avenida de América (Líneas 4, 6, 7 y 9) a 3 min a pie · Metro Diego de León y Cartagena · Parkings públicos en C/ Cartagena y en el propio Intercambiador.')) ?></span>
+                                <strong><?= e(t('contacto_024')) ?></strong>
+                                <span><?= e(t('contacto_025')) ?></span>
                             </div>
                         </div>
                     </div>
 
                     <div class="map-actions-row">
                         <a href="<?= e(SITE_MAPS_URL) ?>" target="_blank" rel="noopener" class="btn btn-sm">
-                            <span><?= e(current_lang() === 'en' ? 'Open in Google Maps' : (current_lang() === 'de' ? 'In Google Maps öffnen' : 'Abrir en Google Maps')) ?></span>
+                            <span><?= e(t('contacto_026')) ?></span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         </a>
                         <a href="<?= e(BOOKING_URL) ?>" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
-                            <span><?= e(current_lang() === 'en' ? 'Book in-person visit' : (current_lang() === 'de' ? 'Vor-Ort-Termin buchen' : 'Reservar cita presencial')) ?></span>
+                            <span><?= e(t('contacto_027')) ?></span>
                         </a>
                     </div>
                 </div>
@@ -258,7 +259,7 @@ require __DIR__ . '/../includes/nav.php';
                 <div class="contact-map-image-card">
                     <img src="<?= e(img('dondestamos.jpg')) ?>" alt="Despacho de consulta Elena Sánchez Novo en Clínica SurgEOM Madrid" loading="lazy" width="600" height="750">
                     <div class="map-image-badge">
-                        <span><?= e(current_lang() === 'en' ? 'ESN Consultation Office' : (current_lang() === 'de' ? 'ESN Praxisraum' : 'Despacho Médico ESN')) ?></span>
+                        <span><?= e(t('contacto_028')) ?></span>
                         <strong>Avenida de América · Madrid</strong>
                     </div>
                 </div>
@@ -268,7 +269,7 @@ require __DIR__ . '/../includes/nav.php';
             <div class="contact-map-embed-wrapper">
                 <iframe 
                     title="Mapa interactivo de Google Maps de Clínica SurgEOM en Madrid"
-                    src="<?= e(SITE_MAPS_EMBED) ?>"
+                    data-consent-src="<?= e(SITE_MAPS_EMBED) ?>"
                     width="100%" 
                     height="420" 
                     style="border:0;" 
@@ -276,6 +277,7 @@ require __DIR__ . '/../includes/nav.php';
                     loading="lazy" 
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
+                <p class="map-consent-note" data-consent-note hidden><?= e(t('consent_map_note')) ?> <a href="<?= e(SITE_MAPS_URL) ?>" target="_blank" rel="noopener"><?= e(t('consent_map_link')) ?></a></p>
             </div>
         </div>
     </section>
