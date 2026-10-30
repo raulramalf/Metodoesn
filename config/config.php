@@ -14,8 +14,41 @@ define('SITE_MAPS_EMBED', 'https://maps.google.com/maps?q=Cl%C3%ADnica+SurgEOM,+
 define('SITE_HOURS', 'Lunes a Viernes de 16:00 a 21:00');
 define('BOOKING_URL', 'https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid');
 define('SITE_CANONICAL', 'https://metodoesn.com');
-define('DB_PATH', __DIR__ . '/../data/metodoesn.sqlite');
+if (!defined('DB_PATH')) {
+    define('DB_PATH', __DIR__ . '/../data/metodoesn.sqlite');
+}
+
+// Formulario de contacto: máx. CONTACT_RATE_MAX mensajes por IP en CONTACT_RATE_WINDOW segundos
+// y al menos CONTACT_COOLDOWN_SECONDS entre envíos de una misma sesión.
+define('CONTACT_RATE_MAX', 3);
+define('CONTACT_RATE_WINDOW', 3600);
+define('CONTACT_COOLDOWN_SECONDS', 30);
+// Días que se conserva la huella de IP asociada a un mensaje.
+define('IP_RETENTION_DAYS', 30);
+
+// Aviso por email de cada mensaje del formulario de contacto.
+// El remitente debe ser del propio dominio para que el correo no acabe en spam.
+define('CONTACT_NOTIFY_TO', SITE_EMAIL);
+define('CONTACT_MAIL_FROM', 'web@metodoesn.com');
+
+// Cabeceras de seguridad (se aplican a todas las páginas que cargan la configuración).
+if (!headers_sent()) {
+    header('X-Content-Type-Options: nosniff');
+    header('X-Frame-Options: SAMEORIGIN');
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+    header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
+    // CSP conservadora: no restringe scripts/frames para no romper los widgets de Doctoralia ni el mapa.
+    header("Content-Security-Policy: object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'");
+}
 
 if (session_status() === PHP_SESSION_NONE) {
+    $secure = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => $secure,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
     session_start();
 }

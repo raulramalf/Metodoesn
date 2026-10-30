@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Cerrar al redimensionar a versión de escritorio
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 860 && navMenu.classList.contains('is-open')) {
+            if (window.innerWidth > 900 && navMenu.classList.contains('is-open')) {
                 closeNav();
             }
         });
@@ -113,10 +113,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const COOKIE_KEY = 'esn_cookies_pref';
     const cookieBanner = document.getElementById('cookie');
 
-    if (cookieBanner) {
-        let savedPref = null;
-        try { savedPref = localStorage.getItem(COOKIE_KEY); } catch (e) {}
+    // Contenido de terceros (widgets de Doctoralia, mapa de Google): solo se carga con consentimiento.
+    let thirdPartyLoaded = false;
+    const loadThirdParty = () => {
+        if (thirdPartyLoaded) return;
+        thirdPartyLoaded = true;
+        document.querySelectorAll('script[data-consent="thirdparty"]').forEach((old) => {
+            const s = document.createElement('script');
+            s.textContent = old.textContent;
+            old.parentNode.replaceChild(s, old);
+        });
+        document.querySelectorAll('iframe[data-consent-src]').forEach((f) => {
+            f.src = f.dataset.consentSrc;
+        });
+        document.querySelectorAll('[data-consent-note]').forEach((n) => { n.hidden = true; });
+    };
+    const showConsentNotes = () => {
+        document.querySelectorAll('[data-consent-note]').forEach((n) => { n.hidden = false; });
+    };
 
+    let savedPref = null;
+    try { savedPref = localStorage.getItem(COOKIE_KEY); } catch (e) {}
+    if (savedPref === 'accepted') loadThirdParty(); else showConsentNotes();
+
+    if (cookieBanner) {
         if (savedPref === null) {
             cookieBanner.hidden = false;
         }
@@ -126,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const choice = btn.dataset.cookie;
                 try { localStorage.setItem(COOKIE_KEY, choice); } catch (e) {}
                 cookieBanner.hidden = true;
+                if (choice === 'accepted') loadThirdParty();
             });
         });
 
@@ -144,23 +165,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const tabs   = roadmapBox.querySelectorAll('.roadmap-tab-btn');
         const panels = roadmapBox.querySelectorAll('.roadmap-panel-item');
 
-        tabs.forEach((tab) => {
-            tab.addEventListener('click', () => {
-                const phase = tab.dataset.phase;
-                if (!phase) return;
+        const selectTab = (tab) => {
+            const phase = tab.dataset.phase;
+            if (!phase) return;
 
-                tabs.forEach((t) => {
-                    const isActive = t === tab;
-                    t.classList.toggle('is-active', isActive);
-                    t.setAttribute('aria-selected', String(isActive));
-                });
-
-                panels.forEach((panel) => {
-                    const isTarget = panel.id === `panel-${phase}`;
-                    panel.classList.toggle('is-active', isTarget);
-                    panel.hidden = !isTarget;
-                });
+            tabs.forEach((t) => {
+                const isActive = t === tab;
+                t.classList.toggle('is-active', isActive);
+                t.setAttribute('aria-selected', String(isActive));
+                // Tabulador roving: solo la pestaña activa entra en el orden de tabulación
+                t.tabIndex = isActive ? 0 : -1;
             });
+
+            panels.forEach((panel) => {
+                const isTarget = panel.id === `panel-${phase}`;
+                panel.classList.toggle('is-active', isTarget);
+                panel.hidden = !isTarget;
+            });
+        };
+
+        tabs.forEach((tab) => {
+            tab.tabIndex = tab.classList.contains('is-active') ? 0 : -1;
+            tab.addEventListener('click', () => selectTab(tab));
+        });
+
+        // Flechas, Inicio y Fin mueven entre fases (patrón de pestañas WAI-ARIA)
+        roadmapBox.querySelector('[role="tablist"]')?.addEventListener('keydown', (e) => {
+            const list = Array.from(tabs);
+            const i = list.indexOf(document.activeElement);
+            if (i < 0) return;
+            const next = {
+                ArrowRight: (i + 1) % list.length,
+                ArrowDown: (i + 1) % list.length,
+                ArrowLeft: (i - 1 + list.length) % list.length,
+                ArrowUp: (i - 1 + list.length) % list.length,
+                Home: 0,
+                End: list.length - 1,
+            }[e.key];
+            if (next === undefined) return;
+            e.preventDefault();
+            list[next].focus();
+            selectTab(list[next]);
         });
     }
 
@@ -202,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     dot.type = 'button';
                     dot.className = `quotes-indicator-dot${i === currentIndex ? ' is-active' : ''}`;
                     dot.setAttribute('role', 'tab');
-                    dot.setAttribute('aria-label', `Ir a opinión ${i + 1}`);
+                    dot.setAttribute('aria-label', (quotesCarousel.dataset.labelGoto || '%d').replace('%d', String(i + 1)));
                     dot.setAttribute('aria-selected', String(i === currentIndex));
                     dot.addEventListener('click', () => {
                         goToIndex(i);
@@ -395,9 +440,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (faqCountEl) {
-                faqCountEl.textContent = query
-                    ? `${matches} pregunta${matches !== 1 ? 's' : ''} encontrada${matches !== 1 ? 's' : ''}`
-                    : '';
+                const tpl = matches === 1 ? faqSearchInput.dataset.foundOne : faqSearchInput.dataset.foundMany;
+                faqCountEl.textContent = query && tpl ? tpl.replace('%d', String(matches)) : '';
             }
         });
     }
@@ -434,7 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (submitBtn) {
                 submitBtn.disabled = true;
                 const textSpan = submitBtn.querySelector('.btn-text');
-                if (textSpan) textSpan.textContent = 'Enviando mensaje...';
+                if (textSpan && submitBtn.dataset.sending) textSpan.textContent = submitBtn.dataset.sending;
             }
         });
 
@@ -446,5 +490,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+    }
+    // ─── 9. REVELADO AL HACER SCROLL (transform + opacity; nunca bloquea el scroll) ──
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    if (revealEls.length) {
+        document.querySelectorAll('[data-stagger]').forEach((group) => {
+            group.querySelectorAll(':scope > [data-reveal]').forEach((el, i) => {
+                el.style.setProperty('--d', Math.min(i, 6) * 70 + 'ms');
+            });
+        });
+        if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-in');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+            revealEls.forEach((el) => io.observe(el));
+        } else {
+            revealEls.forEach((el) => el.classList.add('is-in'));
+        }
+    }
+
+    // ─── 10. CTA FLOTANTE MÓVIL: aparece al salir del hero ─────────────────────
+    const dock = document.querySelector('.dock-cta');
+    if (dock) {
+        const onBookingPage = /reserva-de-citas/.test(location.pathname);
+        const updateDock = () => {
+            dock.classList.toggle('is-hidden', onBookingPage || window.scrollY < 520);
+        };
+        window.addEventListener('scroll', updateDock, { passive: true });
+        updateDock();
     }
 });
