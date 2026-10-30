@@ -9,13 +9,18 @@ require __DIR__ . '/../src/content.php';
 <main id="main">
 
     <!-- CABECERA DE SERVICIOS -->
-    <section class="wrap section">
-        <div class="wrap-narrow text-center">
+    <section class="wrap section page-hero">
+        <div>
             <p class="kicker"><?= e(t('services_kicker')) ?></p>
             <h1><?= e(t('services_title')) ?></h1>
-            <p class="lead lead-centered">
-                <?= e(t('services_lead')) ?>
-            </p>
+            <p class="lead"><?= e(t('services_lead')) ?></p>
+            <div class="actions">
+                <a class="btn" href="<?= e(page_url('/reserva-de-citas.php')) ?>"><span><?= e(t('btn_book_now')) ?></span></a>
+                <a class="btn btn-ghost" href="#modalidades"><?= e(t('servicios_090')) ?></a>
+            </div>
+        </div>
+        <div class="page-hero-media">
+            <img src="<?= e(img('foto-mancuerna.webp')) ?>" alt="<?= e(t('alt_mancuerna')) ?>" width="1400" height="933" fetchpriority="high">
         </div>
     </section>
 
@@ -29,48 +34,35 @@ require __DIR__ . '/../src/content.php';
             </div>
 
             <div class="service-pillars-grid">
-                <article class="pillar-card">
-                    <div class="pillar-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6.5 6.5 A5.5 5.5 0 0 1 17.5 6.5"/>
-                            <line x1="12" y1="2" x2="12" y2="5"/>
-                            <polyline points="6 12 10 16 18 8"/>
-                            <circle cx="12" cy="12" r="10"/>
-                        </svg>
+                <article class="pillar-card has-img">
+                    <div class="pillar-img"><img src="<?= e(img('foto-fuerza.webp')) ?>" alt="<?= e(t('alt_fuerza')) ?>" loading="lazy" width="1400" height="935"></div>
+                    <div class="pillar-body">
+                        <h3><?= e(t('servicios_084')) ?></h3>
+                        <p><?= e(t('servicios_085')) ?></p>
                     </div>
-                    <h3><?= e(t('servicios_084')) ?></h3>
-                    <p><?= e(t('servicios_085')) ?></p>
                 </article>
 
-                <article class="pillar-card">
-                    <div class="pillar-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
+                <article class="pillar-card has-img">
+                    <div class="pillar-img"><img src="<?= e(img('foto-salmon.webp')) ?>" alt="<?= e(t('alt_salmon')) ?>" loading="lazy" width="1400" height="933"></div>
+                    <div class="pillar-body">
+                        <h3><?= e(t('servicios_086')) ?></h3>
+                        <p><?= e(t('servicios_087')) ?></p>
                     </div>
-                    <h3><?= e(t('servicios_086')) ?></h3>
-                    <p><?= e(t('servicios_087')) ?></p>
                 </article>
 
-                <article class="pillar-card">
-                    <div class="pillar-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
+                <article class="pillar-card has-img">
+                    <div class="pillar-img"><img src="<?= e(img('foto-planificacion.webp')) ?>" alt="<?= e(t('alt_planificacion')) ?>" loading="lazy" width="1200" height="1600"></div>
+                    <div class="pillar-body">
+                        <h3><?= e(t('servicios_088')) ?></h3>
+                        <p><?= e(t('servicios_089')) ?></p>
                     </div>
-                    <h3><?= e(t('servicios_088')) ?></h3>
-                    <p><?= e(t('servicios_089')) ?></p>
                 </article>
             </div>
         </div>
     </section>
 
     <!-- MODALIDADES: PRESENCIAL VS ONLINE -->
-    <section class="wrap section">
+    <section class="wrap section pb-tight" id="modalidades">
         <div class="section-heading text-center">
             <p class="kicker"><?= e(t('servicios_090')) ?></p>
             <h2><?= e(t('servicios_091')) ?></h2>
@@ -81,7 +73,7 @@ require __DIR__ . '/../src/content.php';
             <!-- Modalidad Presencial -->
             <div class="mode-card is-featured">
                 <div class="mode-header">
-                    <span class="mode-badge">Madrid Clinic</span>
+                    <span class="mode-badge"><?= e(t('services_badge_clinic')) ?></span>
                     <strong style="color:var(--moss);"><?= e(t('services_presential')) ?></strong>
                 </div>
                 <h3><?= e(t('services_presential')) ?></h3>
@@ -149,16 +141,18 @@ require __DIR__ . '/../src/content.php';
     </section>
 
     <!-- CTA FINAL DE SERVICIOS -->
-    <section class="wrap section">
-        <div class="cta-luxury-banner">
-            <div class="cta-luxury-glow" aria-hidden="true"></div>
-            <div class="cta-luxury-body">
+    <section class="section cta">
+        <div class="wrap cta-grid">
+            <div class="cta-body">
                 <h2><?= e(t('cta_title')) ?></h2>
-                <p><?= e(t('cta_lead')) ?></p>
+                <p class="cta-lead"><?= e(t('cta_lead')) ?></p>
                 <div class="actions">
-                    <a class="btn btn-white" href="<?= e(page_url('/reserva-de-citas.php')) ?>"><?= e(t('btn_book_now')) ?></a>
-                    <a class="btn btn-ghost-white" href="<?= e(page_url('/contacto.php')) ?>"><?= e(t('btn_contact')) ?></a>
+                    <a class="btn btn-dark btn-lg" href="<?= e(page_url('/reserva-de-citas.php')) ?>"><span><?= e(t('btn_book_now')) ?></span></a>
+                    <a class="btn btn-outline-dark btn-lg" href="<?= e(page_url('/contacto.php')) ?>"><?= e(t('btn_contact')) ?></a>
                 </div>
+            </div>
+            <div class="cta-media">
+                <img src="<?= e(img('foto-montana.webp')) ?>" alt="<?= e(t('alt_montana')) ?>" width="800" height="1200" loading="lazy">
             </div>
         </div>
     </section>

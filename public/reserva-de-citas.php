@@ -8,44 +8,46 @@ require __DIR__ . '/../includes/nav.php';
 <main id="main">
 
     <!-- CABECERA DE RESERVA -->
-    <section class="wrap section" style="padding-bottom: 2rem;">
-        <div class="wrap-narrow text-center">
-            <p class="kicker"><?= e(t('booking_kicker')) ?></p>
-            <h1><?= e(t('booking_title')) ?></h1>
-            <p class="lead lead-centered">
-                <?= e(t('booking_lead')) ?>
-            </p>
+    <section class="booking-hero">
+        <div class="wrap booking-hero-grid">
+            <div class="booking-hero-text">
+                <p class="booking-hero-kicker"><span class="live-dot" aria-hidden="true"></span><?= e(t('booking_kicker')) ?></p>
+                <h1><?= e(t('booking_title')) ?></h1>
+                <p class="booking-hero-lead"><?= e(t('booking_lead')) ?></p>
+                <ul class="booking-hero-chips">
+                    <li><?= e(t('services_presential')) ?></li>
+                    <li><?= e(t('services_online')) ?></li>
+                    <li><?= e(sprintf(t('rd_col'), SITE_COLLEGIATE_NUMBER)) ?></li>
+                </ul>
+                <a class="btn btn-light btn-lg" href="#agenda"><span><?= e(t('reserva_de_citas_073')) ?></span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- 3 PASOS EXPLICATIVOS -->
-    <section class="wrap" style="margin-bottom: 3rem;">
-        <div class="booking-steps-strip">
-            <div class="booking-step-item">
-                <div class="booking-step-index">1</div>
-                <div>
-                    <strong><?= e(t('reserva_de_citas_071')) ?></strong>
-                    <p><?= e(t('reserva_de_citas_072')) ?></p>
-                </div>
-            </div>
-            <div class="booking-step-item">
-                <div class="booking-step-index">2</div>
-                <div>
-                    <strong><?= e(t('reserva_de_citas_073')) ?></strong>
-                    <p><?= e(t('reserva_de_citas_074')) ?></p>
-                </div>
-            </div>
-            <div class="booking-step-item">
-                <div class="booking-step-index">3</div>
-                <div>
-                    <strong><?= e(t('reserva_de_citas_075')) ?></strong>
-                    <p><?= e(t('reserva_de_citas_076')) ?></p>
-                </div>
-            </div>
-        </div>
+    <section class="wrap page-body booking-body">
+        <ol class="booking-steps-strip">
+            <li class="booking-step-item">
+                <span class="booking-step-index">1</span>
+                <strong><?= e(t('reserva_de_citas_071')) ?></strong>
+                <p><?= e(t('reserva_de_citas_072')) ?></p>
+            </li>
+            <li class="booking-step-item">
+                <span class="booking-step-index">2</span>
+                <strong><?= e(t('reserva_de_citas_073')) ?></strong>
+                <p><?= e(t('reserva_de_citas_074')) ?></p>
+            </li>
+            <li class="booking-step-item">
+                <span class="booking-step-index">3</span>
+                <strong><?= e(t('reserva_de_citas_075')) ?></strong>
+                <p><?= e(t('reserva_de_citas_076')) ?></p>
+            </li>
+        </ol>
 
         <!-- CONTENEDOR DEL WIDGET OFICIAL DE DOCTORALIA -->
-        <div class="booking-frame-wrap">
+        <div class="booking-frame-wrap" id="agenda">
             <div class="booking-frame-header">
                 <div class="booking-live-indicator">
                     <span class="live-dot" aria-hidden="true"></span>
@@ -70,12 +72,13 @@ require __DIR__ . '/../includes/nav.php';
         </div>
 
         <!-- TARJETA DE ASISTENCIA PREVIA -->
-        <div style="margin-top: 3rem; background: var(--mist); border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
-            <div>
-                <h3 style="margin-bottom: 0.3rem;"><?= e(t('reserva_de_citas_079')) ?></h3>
-                <p style="color: var(--ink-soft); font-size: 0.95rem; margin: 0;"><?= e(t('reserva_de_citas_080')) ?></p>
+        <div class="assist-card">
+            <img class="assist-img" src="<?= e(img('clinica.jpeg')) ?>" alt="<?= e(t('alt_despacho')) ?>" width="600" height="400" loading="lazy">
+            <div class="assist-text">
+                <h2><?= e(t('reserva_de_citas_079')) ?></h2>
+                <p><?= e(t('reserva_de_citas_080')) ?></p>
             </div>
-            <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+            <div class="assist-actions">
                 <a href="<?= e(page_url('/contacto.php')) ?>" class="btn btn-sm btn-ghost"><?= e(t('btn_contact')) ?></a>
                 <a href="tel:<?= e(SITE_PHONE_LINK) ?>" class="btn btn-sm"><?= e(SITE_PHONE) ?></a>
             </div>

@@ -26,6 +26,11 @@ define('CONTACT_COOLDOWN_SECONDS', 30);
 // Días que se conserva la huella de IP asociada a un mensaje.
 define('IP_RETENTION_DAYS', 30);
 
+// Aviso por email de cada mensaje del formulario de contacto.
+// El remitente debe ser del propio dominio para que el correo no acabe en spam.
+define('CONTACT_NOTIFY_TO', SITE_EMAIL);
+define('CONTACT_MAIL_FROM', 'web@metodoesn.com');
+
 // Cabeceras de seguridad (se aplican a todas las páginas que cargan la configuración).
 if (!headers_sent()) {
     header('X-Content-Type-Options: nosniff');

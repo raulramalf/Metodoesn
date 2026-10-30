@@ -14,11 +14,11 @@ require __DIR__ . '/../src/content.php';
         <div class="about-media">
             <img class="reveal-scale"
                  src="<?= e(img('elena-1.jpeg')) ?>"
-                 alt="<?= e(SITE_OWNER) ?> · Nutricionista y entrenadora personal"
+                 alt="<?= e(sprintf(t('alt_elena_retrato'), SITE_OWNER)) ?>"
                  width="480" height="600" fetchpriority="high">
             <img class="reveal-scale"
                  src="<?= e(img('elena-2.jpeg')) ?>"
-                 alt="Elena Sánchez Novo en consulta"
+                 alt="<?= e(t('alt_elena_consulta')) ?>"
                  loading="lazy"
                  width="480" height="600">
             
@@ -27,14 +27,8 @@ require __DIR__ . '/../src/content.php';
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 <div>
                     <strong><?= e(t('trust_col')) ?></strong>
-                    <span style="font-size:0.84rem; color:var(--ink-soft); display:block;">Nº <?= e(SITE_COLLEGIATE_NUMBER) ?> · Madrid</span>
+                    <span class="about-col-sub">Nº <?= e(SITE_COLLEGIATE_NUMBER) ?> · Madrid</span>
                 </div>
-            </div>
-
-            <!-- Certificado Oficial Doctoralia -->
-            <div class="about-doctoralia-cert">
-                <a class="zl-url" href="https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid" rel="nofollow" data-zlw-doctor="elena-sanchez-novo" data-zlw-type="certificate" data-zlw-opinion="false" data-zlw-hide-branding="true" data-zlw-saas-only="true" data-zlw-a11y-title="Doctoralia Official Certificate"><?= e(t('footer_view_cert')) ?></a>
-                <script type="text/plain" data-consent="thirdparty">!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
             </div>
         </div>
 
@@ -44,7 +38,7 @@ require __DIR__ . '/../src/content.php';
             <h1><?= e(SITE_OWNER) ?></h1>
             <p class="hero-sub"><?= e(t('about_sub')) ?></p>
 
-            <p class="lead" style="margin-bottom:1.4rem;">
+            <p class="lead">
                 <?= e(t('about_p1')) ?>
             </p>
 
@@ -52,21 +46,29 @@ require __DIR__ . '/../src/content.php';
                 <?= e(t('about_p2')) ?>
             </p>
 
-            <p>
-                <?= e(t('about_p3')) ?>
-            </p>
+            <p class="chip-title"><?= e(t('about_help_title')) ?></p>
+            <ul class="chip-list">
+                <?php for ($i = 1; $i <= 6; $i++): ?>
+                    <li><?= e(t('about_help_' . $i)) ?></li>
+                <?php endfor; ?>
+            </ul>
 
-            <p>
-                <?= e(t('about_p4')) ?>
-            </p>
-
-            <div class="actions" style="margin-top:2.2rem;">
+            <div class="actions">
                 <a class="btn" href="<?= e(page_url('/reserva-de-citas.php')) ?>">
                     <span><?= e(t('btn_book_now')) ?></span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
                 <a class="btn btn-ghost" href="<?= e(page_url('/servicios.php')) ?>"><?= e(t('btn_explore_services')) ?></a>
             </div>
+        </div>
+    </section>
+
+    <!-- FRASE DE FILOSOFÍA SOBRE FOTO -->
+    <section class="quote-band">
+        <img src="<?= e(img('foto-paseo.webp')) ?>" alt="" width="1600" height="1066" loading="lazy">
+        <div class="wrap">
+            <blockquote><?= e(t('about_quote')) ?></blockquote>
+            <cite><?= e(SITE_OWNER) ?></cite>
         </div>
     </section>
 
@@ -104,9 +106,6 @@ require __DIR__ . '/../src/content.php';
         <div class="edu-grid">
             <?php foreach ($formacion as $item): ?>
                 <div class="edu-card">
-                    <div class="edu-card-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                    </div>
                     <p><strong><?= e($item) ?></strong></p>
                 </div>
             <?php endforeach; ?>
@@ -126,15 +125,15 @@ require __DIR__ . '/../src/content.php';
 
             <div class="gallery-strip">
                 <figure class="gallery-card">
-                    <img src="<?= e(img('clinica3.jpg')) ?>" alt="Despacho de valoración nutricional y antropométrica" loading="lazy" width="600" height="400">
+                    <div class="gallery-img"><img src="<?= e(img('clinica3.jpg')) ?>" alt="<?= e(t('alt_valoracion')) ?>" loading="lazy" width="600" height="400"></div>
                     <figcaption><?= e(t('quienes_somos_068')) ?></figcaption>
                 </figure>
                 <figure class="gallery-card">
-                    <img src="<?= e(img('clinica2.jpeg')) ?>" alt="Recepción y sala de espera Clínica SurgEOM" loading="lazy" width="600" height="400">
+                    <div class="gallery-img"><img src="<?= e(img('clinica2.jpeg')) ?>" alt="<?= e(t('alt_recepcion')) ?>" loading="lazy" width="600" height="400"></div>
                     <figcaption><?= e(t('quienes_somos_069')) ?></figcaption>
                 </figure>
                 <figure class="gallery-card">
-                    <img src="<?= e(img('clinicaporfuera.webp')) ?>" alt="Fachada exterior de Clínica SurgEOM en Madrid" loading="lazy" width="600" height="400">
+                    <div class="gallery-img"><img src="<?= e(img('clinicaporfuera.webp')) ?>" alt="<?= e(t('alt_fachada')) ?>" loading="lazy" width="600" height="400"></div>
                     <figcaption><?= e(t('quienes_somos_070')) ?></figcaption>
                 </figure>
             </div>

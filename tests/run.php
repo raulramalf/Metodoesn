@@ -37,6 +37,15 @@ $_GET['lang'] = 'en';
 check('t() usa el idioma pedido', t('nav_skip') === $all['en']['nav_skip']);
 unset($_GET['lang']);
 
+// Email de aviso del formulario
+$m = contact_mail(['nombre' => "Ana\r\nBcc: x@evil.com", 'email' => 'ana@ejemplo.es', 'mensaje' => "Hola\nquiero cita"]);
+check('aviso va a CONTACT_NOTIFY_TO', $m['to'] === CONTACT_NOTIFY_TO);
+check('aviso responde al remitente', $m['headers']['Reply-To'] === 'ana@ejemplo.es');
+check('nombre no inyecta cabeceras', !preg_match('/[\r\n]/', mb_decode_mimeheader($m['subject'])) && !str_contains($m['body'], "Ana\r\nBcc"));
+check('aviso incluye el mensaje', str_contains($m['body'], "Hola\r\nquiero cita"));
+$m = contact_mail(['nombre' => 'X', 'email' => "no-valido\r\nBcc: y@z.com", 'mensaje' => 'hola']);
+check('email inválido no se usa como Reply-To', !isset($m['headers']['Reply-To']));
+
 // Límite de envíos y retención de IP
 $fp = Database::ipFingerprint('203.0.113.7');
 check('huella no es la IP', $fp !== '203.0.113.7' && strlen($fp) === 32);
