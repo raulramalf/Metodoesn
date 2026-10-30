@@ -4,3 +4,4 @@ data/*.sqlite
 vendor/
 node_modules/
 data/.ip_secret
+.taste-skill/

@@ -71,9 +71,6 @@ El sitio combina una presencia institucional de alta gama con un canal funcional
 ```text
 Metodoesn/
 │
-├── bin/                        # Scripts auxiliares y de automatización
-│   └── descargar-imagenes.sh   # Descarga/sincronización de imágenes de producción
-│
 ├── config/                     # Configuración del entorno
 │   └── config.php              # Constantes globales (teléfono, emails, URLs, base de datos)
 │
@@ -169,18 +166,12 @@ Metodoesn/
    cd Metodoesn
    ```
 
-3. **(Opcional) Descargar las imágenes estáticas**:
-   ```bash
-   chmod +x ./bin/descargar-imagenes.sh
-   ./bin/descargar-imagenes.sh
-   ```
-
-4. **Arrancar el servidor de desarrollo**:
+3. **Arrancar el servidor de desarrollo**:
    ```bash
    php -S localhost:8000 -t public
    ```
 
-5. **Acceder**:
+4. **Acceder**:
    Abre tu navegador en [http://localhost:8000](http://localhost:8000).
 
 ---
