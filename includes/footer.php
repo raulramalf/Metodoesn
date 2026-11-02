@@ -5,7 +5,7 @@
         <div class="footer-grid">
             <div class="footer-brand">
                 <h2><?= e(SITE_NAME) ?></h2>
-                <p class="footer-tagline"><strong><?= e(SITE_OWNER) ?></strong> · <?= e(sprintf(t('rd_col'), SITE_COLLEGIATE_NUMBER)) ?> (CODINMA)</p>
+                <p class="footer-tagline"><strong><?= e(SITE_OWNER) ?></strong> · <?= e(sprintf(t('rd_col'), SITE_COLLEGIATE_NUMBER)) ?> (CODINMA) · <?= e(sprintf(t('rd_col_cafyd'), SITE_COLEF_NUMBER)) ?></p>
                 <p class="footer-desc"><?= e(t('footer_desc')) ?></p>
                 <div class="lang-switch lang-switch-footer" role="group" aria-label="Idioma / Language / Sprache">
                     <?php foreach (['es' => 'Español', 'en' => 'English', 'de' => 'Deutsch'] as $code => $name): ?>

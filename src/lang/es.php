@@ -311,4 +311,5 @@ return [
     'alt_fachada' => 'Fachada exterior de Clínica SurgEOM en Madrid',
     'alt_elena_retrato' => '%s · Nutricionista y entrenadora personal',
     'services_badge_clinic' => 'Clínica en Madrid',
+    'rd_col_cafyd' => 'Col. CAFyD Nº %s',
 ];

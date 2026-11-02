@@ -28,6 +28,7 @@ require __DIR__ . '/../src/content.php';
                 <div>
                     <strong><?= e(t('trust_col')) ?></strong>
                     <span class="about-col-sub">Nº <?= e(SITE_COLLEGIATE_NUMBER) ?> · Madrid</span>
+                    <span class="about-col-sub"><?= e(sprintf(t('rd_col_cafyd'), SITE_COLEF_NUMBER)) ?></span>
                 </div>
             </div>
         </div>

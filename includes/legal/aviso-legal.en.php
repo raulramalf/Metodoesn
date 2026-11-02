@@ -11,6 +11,7 @@
             <li><strong>Trade name:</strong> <?= e(SITE_NAME) ?></li>
             <li><strong>Professional qualifications:</strong> Graduate in Physical Activity and Sports Science (CAFyD) and Graduate in Human Nutrition and Dietetics</li>
             <li><strong>Professional licence number:</strong> <?= e(SITE_COLLEGIATE_NUMBER) ?> (Professional Association of Dietitian-Nutritionists of the Community of Madrid - CODINMA)</li>
+            <li><strong>Sport Sciences licence number:</strong> <?= e(SITE_COLEF_NUMBER) ?> (Official Association of Physical Education and Sport Sciences Graduates - COLEF)</li>
             <li><strong>Practice address:</strong> Clínica SurgEOM, <?= e(SITE_ADDRESS) ?></li>
             <li><strong>Email:</strong> <a href="mailto:<?= e(SITE_EMAIL) ?>"><?= e(SITE_EMAIL) ?></a></li>
             <li><strong>Phone:</strong> <a href="tel:<?= e(SITE_PHONE_LINK) ?>"><?= e(SITE_PHONE) ?></a></li>

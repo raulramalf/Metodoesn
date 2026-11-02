@@ -25,7 +25,7 @@ $arrow = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="cu
                 </div>
 
                 <p class="hero-cred">
-                    <strong><?= e(SITE_OWNER) ?></strong> · <?= e(t('rd_dietitian')) ?> · <?= e(sprintf(t('rd_col'), SITE_COLLEGIATE_NUMBER)) ?>
+                    <strong><?= e(SITE_OWNER) ?></strong> · <?= e(t('rd_dietitian')) ?> · <?= e(sprintf(t('rd_col'), SITE_COLLEGIATE_NUMBER)) ?> · <?= e(sprintf(t('rd_col_cafyd'), SITE_COLEF_NUMBER)) ?>
                 </p>
             </div>
 
@@ -211,7 +211,7 @@ $arrow = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="cu
             </div>
             <div class="meet-text" data-reveal>
                 <h2><?= e(SITE_OWNER) ?></h2>
-                <p class="meet-cred"><?= e(t('rd_dietitian')) ?> · <?= e(sprintf(t('rd_col'), SITE_COLLEGIATE_NUMBER)) ?> · CODINMA</p>
+                <p class="meet-cred"><?= e(t('rd_dietitian')) ?> · <?= e(sprintf(t('rd_col'), SITE_COLLEGIATE_NUMBER)) ?> · CODINMA · <?= e(sprintf(t('rd_col_cafyd'), SITE_COLEF_NUMBER)) ?></p>
                 <p class="lead"><?= e(t('about_p1')) ?></p>
                 <ul class="meet-list">
                     <li><?= e(t('trust_univ')) ?>: <?= e(t('trust_univ_sub')) ?></li>

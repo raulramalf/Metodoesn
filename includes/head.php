@@ -75,7 +75,7 @@
                     '@id' => $base . '/#elena',
                     'name' => SITE_OWNER,
                     'jobTitle' => t('rd_dietitian'),
-                    'identifier' => SITE_COLLEGIATE_NUMBER,
+                    'identifier' => [SITE_COLLEGIATE_NUMBER, SITE_COLEF_NUMBER],
                     'worksFor' => ['@id' => $base . '/#business'],
                     'url' => $base . '/quienes-somos.php',
                 ],

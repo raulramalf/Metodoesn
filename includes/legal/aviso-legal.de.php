@@ -11,6 +11,7 @@
             <li><strong>Geschäftsbezeichnung:</strong> <?= e(SITE_NAME) ?></li>
             <li><strong>Berufliche Qualifikation:</strong> Abschluss in Sportwissenschaften (CAFyD) und Abschluss in Humanernährung und Diätetik</li>
             <li><strong>Registrierungsnummer:</strong> <?= e(SITE_COLLEGIATE_NUMBER) ?> (Berufskammer der Diätassistenten und Ernährungswissenschaftler der Autonomen Gemeinschaft Madrid - CODINMA)</li>
+            <li><strong>Registrierungsnummer Sportwissenschaften:</strong> <?= e(SITE_COLEF_NUMBER) ?> (Offizielle Kammer der Absolventen in Sportwissenschaften - COLEF)</li>
             <li><strong>Anschrift der Praxis:</strong> Clínica SurgEOM, <?= e(SITE_ADDRESS) ?></li>
             <li><strong>E-Mail:</strong> <a href="mailto:<?= e(SITE_EMAIL) ?>"><?= e(SITE_EMAIL) ?></a></li>
             <li><strong>Telefon:</strong> <a href="tel:<?= e(SITE_PHONE_LINK) ?>"><?= e(SITE_PHONE) ?></a></li>

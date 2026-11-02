@@ -311,4 +311,5 @@ return [
     'alt_fachada' => 'Exterior of Clínica SurgEOM in Madrid',
     'alt_elena_retrato' => '%s · Dietitian and personal trainer',
     'services_badge_clinic' => 'Madrid clinic',
+    'rd_col_cafyd' => 'Sport Sciences Lic. No. %s',
 ];

@@ -18,6 +18,7 @@ require __DIR__ . '/../includes/nav.php';
                     <li><?= e(t('services_presential')) ?></li>
                     <li><?= e(t('services_online')) ?></li>
                     <li><?= e(sprintf(t('rd_col'), SITE_COLLEGIATE_NUMBER)) ?></li>
+                    <li><?= e(sprintf(t('rd_col_cafyd'), SITE_COLEF_NUMBER)) ?></li>
                 </ul>
                 <a class="btn btn-light btn-lg" href="#agenda"><span><?= e(t('reserva_de_citas_073')) ?></span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>

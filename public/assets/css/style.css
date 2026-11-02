@@ -15,6 +15,10 @@
     --paper-soft: #f5ece9;
     --rosa-c: #efe3df;
     --gold: #c98829;
+    --pink: #ecd5ce;       /* rosa protagonista (tarjetas de visita) */
+    --pink-d: #e2c2b9;
+    --pink-ink: #4a2625;
+    --pink-ink-soft: #6b3f3c;
 
     /* Derivados */
     --bur-dd: #4a2625;
@@ -81,7 +85,7 @@ ul { list-style: none; }
 a { color: var(--bur); text-underline-offset: 0.2em; transition: color 160ms ease; }
 
 :focus-visible { outline: 3px solid var(--bur-d); outline-offset: 3px; }
-:is(.site-header, .hero, .areas, .site-footer, .compare-box-esn, .principle-main, .is-featured, .clinic-location-card, .doctoralia-score-card) :focus-visible {
+.site-footer :focus-visible {
     outline-color: #fff;
 }
 
@@ -754,3 +758,49 @@ textarea.form-control { resize: vertical; min-height: 8rem; }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
+
+/* 21. TEMA ROSA: el rosa de la marca es el color protagonista de las superficies;
+   el burdeos queda para botones, acentos y el footer */
+:is(.site-header, .hero, .areas, .compare-box-esn, .doctoralia-score-card, .about-col-badge, .mode-card.is-featured, .booking-hero, .assist-card, .clinic-location-card) {
+    background: var(--pink); color: var(--pink-ink);
+    --on-dark: var(--pink-ink); --on-dark-soft: var(--pink-ink-soft);
+}
+:is(.principle-main, .area-box) {
+    background: var(--pink-d); color: var(--pink-ink);
+    --on-dark: var(--pink-ink); --on-dark-soft: var(--pink-ink-soft);
+}
+.hero-arch { background: var(--pink-d); }
+:is(.hero-lead, .hero-cred strong, .compare-box-esn h3, .compare-box-esn .compare-footer, .principle-main h3, .principle-tags, .area-box h3, .score-link, .mode-card.is-featured h3, .booking-hero h1, .assist-card h2, .clinic-title, .clinic-map-link) { color: var(--pink-ink); }
+:is(.hero-slogan, .compare-box-esn .compare-tag, .areas .kicker, .areas h2, .score-number, .about-col-badge svg, .booking-hero-kicker) { color: var(--bur); }
+:is(.principle-main .principle-tag, .area-tags) { color: var(--bur-d); }
+.mode-card.is-featured strong { color: var(--bur) !important; }
+.nav-links a.is-active { color: var(--bur-dd); }
+@media (hover: hover) and (pointer: fine) { .nav-links a:hover { color: var(--bur-dd); } .area-box:hover { background: var(--pink); } }
+.nav-toggle { border-color: var(--pink-ink); }
+.nav-toggle span { background: var(--pink-ink); }
+.lang-dropdown-trigger { background: rgb(255 255 255 / 0.55); }
+.booking-hero-kicker { background: rgb(255 255 255 / 0.55); }
+.booking-hero-chips li { color: var(--pink-ink); border-color: rgb(74 38 37 / 0.25); }
+
+/* Botones sobre rosa: burdeos sólido y contorno oscuro */
+:is(.site-header, .hero, .booking-hero) .btn-light,
+.mode-card.is-featured .btn,
+.assist-card .btn:not(.btn-ghost) { background: var(--bur); border-color: var(--bur); color: #fff; }
+:is(.hero, .booking-hero) .btn-outline-light,
+.assist-card .btn-ghost { background: transparent; border-color: var(--bur-dd); color: var(--bur-dd); }
+@media (hover: hover) and (pointer: fine) {
+    :is(.site-header, .hero, .booking-hero) .btn-light:hover,
+    .mode-card.is-featured .btn:hover,
+    .assist-card .btn:not(.btn-ghost):hover { background: var(--bur-d); border-color: var(--bur-d); color: #fff; }
+    :is(.hero, .booking-hero) .btn-outline-light:hover,
+    .assist-card .btn-ghost:hover { background: var(--bur-dd); border-color: var(--bur-dd); color: #fff; }
+}
+
+@media (max-width: 900px) {
+    .nav { background: var(--pink); }
+    .nav-links a { color: var(--pink-ink-soft); }
+    .nav-links a.is-active { color: var(--bur); }
+}
+/* La columna del Método ESN destaca con el rosa de marca más intenso */
+.compare-box-esn { background: var(--rosa); --on-dark-soft: var(--pink-ink); }
+.compare-box-esn .compare-tag { color: var(--pink-ink); }

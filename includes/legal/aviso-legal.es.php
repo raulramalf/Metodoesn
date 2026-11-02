@@ -11,6 +11,7 @@
             <li><strong>Nombre comercial:</strong> <?= e(SITE_NAME) ?></li>
             <li><strong>Cualificación profesional:</strong> Graduada en Ciencias de la Actividad Física y del Deporte (CAFyD) y Graduada en Nutrición Humana y Dietética</li>
             <li><strong>Número de Colegiada:</strong> <?= e(SITE_COLLEGIATE_NUMBER) ?> (Colegio Profesional de Dietistas-Nutricionistas de la Comunidad de Madrid - CODINMA)</li>
+            <li><strong>Número de Colegiada CAFyD:</strong> <?= e(SITE_COLEF_NUMBER) ?> (Colegio Oficial de Licenciados en Educación Física y en Ciencias de la Actividad Física y del Deporte - COLEF)</li>
             <li><strong>Dirección de consulta:</strong> Clínica SurgEOM, <?= e(SITE_ADDRESS) ?></li>
             <li><strong>Correo electrónico:</strong> <a href="mailto:<?= e(SITE_EMAIL) ?>"><?= e(SITE_EMAIL) ?></a></li>
             <li><strong>Teléfono de contacto:</strong> <a href="tel:<?= e(SITE_PHONE_LINK) ?>"><?= e(SITE_PHONE) ?></a></li>

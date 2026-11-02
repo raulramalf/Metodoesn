@@ -311,4 +311,5 @@ return [
     'alt_fachada' => 'Außenansicht der Clínica SurgEOM in Madrid',
     'alt_elena_retrato' => '%s · Ernährungsberaterin und Personal Trainerin',
     'services_badge_clinic' => 'Praxis in Madrid',
+    'rd_col_cafyd' => 'Sportwiss. Reg.-Nr. %s',
 ];
