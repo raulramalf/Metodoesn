@@ -3,3 +3,4 @@ data/*.sqlite
 .DS_Store
 vendor/
 node_modules/
+data/.ip_secret

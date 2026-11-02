@@ -37,18 +37,32 @@ require __DIR__ . '/../includes/nav.php';
                 </thead>
                 <tbody>
                     <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 0.75rem 1rem;"><code>esn_cookies</code></td>
+                        <td style="padding: 0.75rem 1rem;"><code>esn_cookies_pref</code></td>
                         <td style="padding: 0.75rem 1rem;">Propia (Método ESN)</td>
                         <td style="padding: 0.75rem 1rem;">Almacena tu preferencia sobre el consentimiento de cookies (aceptadas o solo necesarias).</td>
                         <td style="padding: 0.75rem 1rem;">Persistente (localStorage)</td>
                         <td style="padding: 0.75rem 1rem;"><strong>Técnica (Obligatoria)</strong></td>
                     </tr>
                     <tr style="border-bottom: 1px solid var(--line);">
+                        <td style="padding: 0.75rem 1rem;"><code>PHPSESSID</code></td>
+                        <td style="padding: 0.75rem 1rem;">Propia (Método ESN)</td>
+                        <td style="padding: 0.75rem 1rem;">Sesión del servidor: protege el formulario de contacto frente a envíos fraudulentos (CSRF) y limita envíos repetidos.</td>
+                        <td style="padding: 0.75rem 1rem;">Hasta cerrar el navegador</td>
+                        <td style="padding: 0.75rem 1rem;"><strong>Técnica (Obligatoria)</strong></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--line);">
+                        <td style="padding: 0.75rem 1rem;"><code>site_lang</code></td>
+                        <td style="padding: 0.75rem 1rem;">Propia (Método ESN)</td>
+                        <td style="padding: 0.75rem 1rem;">Recuerda el idioma elegido (ES, EN o DE).</td>
+                        <td style="padding: 0.75rem 1rem;">30 días</td>
+                        <td style="padding: 0.75rem 1rem;"><strong>Técnica (Obligatoria)</strong></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--line);">
                         <td style="padding: 0.75rem 1rem;">Cookies de Terceros</td>
                         <td style="padding: 0.75rem 1rem;">Doctoralia / Google</td>
-                        <td style="padding: 0.75rem 1rem;">Carga de tipografías web y funcionamiento del widget de reservas o valoraciones clínicas si decides interactuar con ellos.</td>
+                        <td style="padding: 0.75rem 1rem;">Widgets de reservas, certificado y valoraciones de Doctoralia, y mapa de Google Maps. Solo se cargan si pulsas «Aceptar terceros».</td>
                         <td style="padding: 0.75rem 1rem;">Sesión / Tercero</td>
-                        <td style="padding: 0.75rem 1rem;">Funcional / Terceros</td>
+                        <td style="padding: 0.75rem 1rem;">Funcional / Terceros (con consentimiento)</td>
                     </tr>
                 </tbody>
             </table>

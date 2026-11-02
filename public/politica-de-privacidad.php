@@ -44,7 +44,7 @@ require __DIR__ . '/../includes/nav.php';
 
         <h2>4. Conservación de los Datos</h2>
         <p>
-            Los datos facilitados para consultas se conservarán durante el tiempo necesario para resolver tu solicitud. En caso de iniciar una pauta nutricional o de entrenamiento, los datos clínicos se conservarán de conformidad con los plazos legales establecidos por la normativa sanitaria española (mínimo de 5 años desde la última asistencia).
+            Los datos facilitados para consultas se conservarán durante el tiempo necesario para resolver tu solicitud. Junto a cada mensaje del formulario de contacto se guarda únicamente una huella cifrada e irreversible de tu dirección IP (no la IP en claro) para evitar envíos abusivos; esa huella se elimina automáticamente a los <?= IP_RETENTION_DAYS ?> días. En caso de iniciar una pauta nutricional o de entrenamiento, los datos clínicos se conservarán de conformidad con los plazos legales establecidos por la normativa sanitaria española (mínimo de 5 años desde la última asistencia).
         </p>
 
         <h2>5. Destinatarios y Cesión de Datos</h2>

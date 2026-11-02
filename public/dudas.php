@@ -48,8 +48,8 @@ require __DIR__ . '/../src/content.php';
 
             <!-- Mensaje sin resultados -->
             <div id="faq-no-results" style="display:none; text-align:center; padding: 3rem 1.5rem; background:#ffffff; border:1px solid var(--line); border-radius:var(--radius);">
-                <h3><?= e(current_lang() === 'en' ? 'No matching questions found' : (current_lang() === 'de' ? 'Keine passenden Fragen gefunden' : 'No hemos encontrado preguntas con esa búsqueda')) ?></h3>
-                <p style="color:var(--ink-soft); margin-top:0.5rem;"><?= e(current_lang() === 'en' ? 'Would you like to ask us directly?' : (current_lang() === 'de' ? 'Möchten Sie uns direkt kontaktieren?' : '¿Prefieres consultarnos directamente por tu caso?')) ?></p>
+                <h3><?= e(t('dudas_029')) ?></h3>
+                <p style="color:var(--ink-soft); margin-top:0.5rem;"><?= e(t('dudas_030')) ?></p>
                 <a href="<?= e(page_url('/contacto.php')) ?>" class="btn btn-sm" style="margin-top:1rem;"><?= e(t('btn_contact')) ?></a>
             </div>
         </div>
@@ -59,9 +59,9 @@ require __DIR__ . '/../src/content.php';
     <section class="band">
         <div class="wrap section text-center">
             <div class="wrap-narrow">
-                <h2><?= e(current_lang() === 'en' ? 'Do you have a specific question not listed here?' : (current_lang() === 'de' ? 'Haben Sie eine spezifische Frage, die hier nicht aufgeführt ist?' : '¿Tienes una pregunta específica que no aparece aquí?')) ?></h2>
+                <h2><?= e(t('dudas_031')) ?></h2>
                 <p class="lead lead-centered" style="margin-bottom: 2rem;">
-                    <?= e(current_lang() === 'en' ? 'Contact us with zero obligation. We will review your situation and advise you honestly.' : (current_lang() === 'de' ? 'Schreiben Sie uns unverbindlich. Wir prüfen Ihre Situation und beraten Sie ehrlich.' : 'Escríbenos sin compromiso. Analizaremos tu situación y te orientaremos con total sinceridad sobre si el Método ESN es el camino idóneo para ti.')) ?>
+                    <?= e(t('dudas_032')) ?>
                 </p>
                 <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
                     <a class="btn" href="<?= e(page_url('/contacto.php')) ?>"><?= e(t('btn_contact')) ?></a>
