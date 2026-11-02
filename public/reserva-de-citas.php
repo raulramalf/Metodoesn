@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../src/functions.php';
-$pageTitle = t('booking_page_title', 'Reserva de citas · Agenda en vivo');
-$pageDesc  = t('booking_lead', 'Reserva tu cita con Elena Sánchez Novo a través de nuestra agenda oficial en Doctoralia.');
+$pageTitle = t('seo_title_booking');
+$pageDesc  = t('seo_desc_booking');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 ?>

@@ -76,6 +76,17 @@
                     'name' => SITE_OWNER,
                     'jobTitle' => t('rd_dietitian'),
                     'identifier' => [SITE_COLLEGIATE_NUMBER, SITE_COLEF_NUMBER],
+                    'image' => $base . img('elena-2.jpeg'),
+                    'hasCredential' => [
+                        ['@type' => 'EducationalOccupationalCredential', 'credentialCategory' => 'degree', 'name' => 'Grado en Nutrición Humana y Dietética', 'recognizedBy' => ['@type' => 'CollegeOrUniversity', 'name' => 'Universidad de Alcalá']],
+                        ['@type' => 'EducationalOccupationalCredential', 'credentialCategory' => 'degree', 'name' => 'Grado en Ciencias de la Actividad Física y del Deporte', 'recognizedBy' => ['@type' => 'CollegeOrUniversity', 'name' => 'Universidad Rey Juan Carlos']],
+                    ],
+                    'memberOf' => [
+                        ['@type' => 'Organization', 'name' => 'Colegio Profesional de Dietistas-Nutricionistas de la Comunidad de Madrid (CODINMA)'],
+                        ['@type' => 'Organization', 'name' => 'Colegio Oficial de Licenciados en Educación Física y CAFyD (COLEF)'],
+                    ],
+                    'knowsAbout' => ['Nutrición clínica', 'Dietética', 'Entrenamiento de fuerza', 'Composición corporal', 'Salud digestiva', 'Salud hormonal', 'Nutrición deportiva'],
+                    'sameAs' => [SITE_INSTAGRAM_URL, BOOKING_URL],
                     'worksFor' => ['@id' => $base . '/#business'],
                     'url' => $base . '/quienes-somos.php',
                 ],

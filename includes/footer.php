@@ -57,11 +57,11 @@
 </a>
 
 <!-- Banner de Cookies Accesible -->
-<div class="cookie-banner" id="cookie" role="dialog" aria-label="Consentimiento de cookies" hidden>
+<div class="cookie-banner" id="cookie" role="dialog" aria-label="<?= e(t('cookie_dialog_label')) ?>" hidden>
     <p><?= e(t('cookie_text')) ?> <a href="<?= e(page_url('/politica-de-cookies.php')) ?>"><?= e(t('cookie_more')) ?></a>.</p>
     <div class="cookie-actions">
         <button class="btn btn-sm" data-cookie="accepted"><?= e(t('cookie_accept')) ?></button>
-        <button class="btn btn-sm btn-ghost" data-cookie="denied"><?= e(t('cookie_deny')) ?></button>
+        <button class="btn btn-sm" data-cookie="denied"><?= e(t('cookie_deny')) ?></button>
     </div>
 </div>
 

@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../src/functions.php';
-$pageTitle = t('services_page_title', 'Servicios · Nutrición y Entrenamiento');
-$pageDesc  = t('services_lead', 'Entrenamiento, nutrición clínica y acompañamiento forman parte de un mismo proceso individualizado.');
+$pageTitle = t('seo_title_services');
+$pageDesc  = t('seo_desc_services');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 require __DIR__ . '/../src/content.php';

@@ -2,8 +2,8 @@
 require __DIR__ . '/../src/functions.php';
 require __DIR__ . '/../src/Database.php';
 
-$pageTitle = t('contact_page_title', 'Contacto · Consulta con Elena Sánchez Novo');
-$pageDesc  = t('contact_lead', 'Ponte en contacto con el Método ESN. Te escuchamos y resolvemos tus dudas.');
+$pageTitle = t('seo_title_contact');
+$pageDesc  = t('seo_desc_contact');
 
 $errors = [];
 $ok = false;

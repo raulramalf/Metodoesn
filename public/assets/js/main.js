@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     dot.setAttribute('aria-selected', String(i === currentIndex));
                     dot.addEventListener('click', () => {
                         goToIndex(i);
-                        startAutoplay();
+                        userNav();
                     });
                     indicators.appendChild(dot);
                 }
@@ -303,19 +303,33 @@ document.addEventListener('DOMContentLoaded', () => {
             if (nextBtn) {
                 nextBtn.addEventListener('click', () => {
                     nextSlide();
-                    startAutoplay();
+                    userNav();
                 });
             }
             if (prevBtn) {
                 prevBtn.addEventListener('click', () => {
                     prevSlide();
-                    startAutoplay();
+                    userNav();
                 });
             }
 
             // Autoplay cíclico
+            // El avance automático se desactiva con movimiento reducido y en cuanto la persona
+            // navega por su cuenta (WCAG 2.2.2); mientras avanza solo, el contador no se anuncia.
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const liveCounter = document.getElementById('quotes-counter');
+            let userStopped = reduceMotion;
+
+            const userNav = () => {
+                userStopped = true;
+                stopAutoplay();
+                liveCounter?.setAttribute('aria-live', 'polite');
+            };
+
             const startAutoplay = () => {
                 stopAutoplay();
+                if (userStopped) return;
+                liveCounter?.setAttribute('aria-live', 'off');
                 autoTimer = setInterval(nextSlide, AUTO_DELAY);
             };
 
@@ -352,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             prevSlide(); // Deslizar hacia la derecha = retroceder
                         }
                     }
-                    startAutoplay();
+                    userNav();
                 }, { passive: true });
             }
 
@@ -360,10 +374,10 @@ document.addEventListener('DOMContentLoaded', () => {
             quotesCarousel.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowRight') {
                     nextSlide();
-                    startAutoplay();
+                    userNav();
                 } else if (e.key === 'ArrowLeft') {
                     prevSlide();
-                    startAutoplay();
+                    userNav();
                 }
             });
 

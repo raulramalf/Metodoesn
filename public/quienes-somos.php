@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../src/functions.php';
-$pageTitle = t('about_page_title', 'Quiénes somos · Elena Sánchez Novo');
-$pageDesc  = t('about_sub', 'Elena Sánchez Novo (Col. Nº MAD01639): graduada en Nutrición Humana y Dietética y CAFyD.');
+$pageTitle = t('seo_title_about');
+$pageDesc  = t('seo_desc_about');
 require __DIR__ . '/../includes/head.php';
 require __DIR__ . '/../includes/nav.php';
 require __DIR__ . '/../src/content.php';
