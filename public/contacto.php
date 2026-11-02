@@ -180,9 +180,21 @@ require __DIR__ . '/../includes/nav.php';
                             <textarea id="mensaje" name="mensaje" class="form-control" rows="5" required placeholder="<?= e(t('contact_message')) ?>"><?= e($old['mensaje']) ?></textarea>
                         </div>
 
+                        <div class="privacy-basic" id="privacy-basic">
+                            <p class="privacy-basic-title"><?= e(t('pb_title')) ?></p>
+                            <dl>
+                                <dt><?= e(t('pb_controller_k')) ?></dt><dd><?= e(SITE_OWNER) ?></dd>
+                                <dt><?= e(t('pb_purpose_k')) ?></dt><dd><?= e(t('pb_purpose_v')) ?></dd>
+                                <dt><?= e(t('pb_basis_k')) ?></dt><dd><?= e(t('pb_basis_v')) ?></dd>
+                                <dt><?= e(t('pb_recipients_k')) ?></dt><dd><?= e(t('pb_recipients_v')) ?></dd>
+                                <dt><?= e(t('pb_rights_k')) ?></dt><dd><?= e(t('pb_rights_v')) ?> <a href="mailto:<?= e(SITE_EMAIL) ?>"><?= e(SITE_EMAIL) ?></a>.</dd>
+                            </dl>
+                            <p><?= e(t('pb_more')) ?> <a href="<?= e(page_url('/politica-de-privacidad.php')) ?>"><?= e(t('footer_privacy')) ?></a>.</p>
+                        </div>
+
                         <div class="form-group">
                             <label class="form-checkbox">
-                                <input type="checkbox" name="privacidad" value="1" required>
+                                <input type="checkbox" name="privacidad" value="1" required aria-describedby="privacy-basic">
                                 <span><?= e(t('contacto_017')) ?> <a href="<?= e(page_url('/politica-de-privacidad.php')) ?>" target="_blank">(<?= e(t('footer_privacy')) ?>)</a></span>
                             </label>
                         </div>

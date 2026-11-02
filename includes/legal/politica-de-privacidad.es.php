@@ -31,17 +31,24 @@
         </ul>
 
         <h2>3. Categorías de Datos Tratados</h2>
-        <p>A través de la web se tratan datos identificativos y de contacto básicos (nombre, apellidos, correo electrónico, teléfono y motivo general de consulta). No envíes información médica o sensible detallada en el mensaje abierto del formulario general; la anamnesis clínica completa se realiza siempre en el entorno seguro de la consulta o mediante consentimiento médico específico.</p>
+        <p>A través del formulario de contacto tratamos tu nombre, tu correo electrónico y el contenido de tu mensaje. Si llamas o escribes directamente, también tu número de teléfono.</p>
+        <p>Si decides incluir en el mensaje información sobre tu salud, se trata de una categoría especial de datos (art. 9 RGPD). Solo la usamos para responderte y la base jurídica es tu consentimiento explícito al enviar el formulario (art. 9.2.a RGPD). Te recomendamos no enviar detalles clínicos por esta vía: la valoración completa se realiza en consulta.</p>
 
         <h2>4. Conservación de los Datos</h2>
-        <p>
-            Los datos facilitados para consultas se conservarán durante el tiempo necesario para resolver tu solicitud. Junto a cada mensaje del formulario de contacto se guarda únicamente una huella cifrada e irreversible de tu dirección IP (no la IP en claro) para evitar envíos abusivos; esa huella se elimina automáticamente a los <?= IP_RETENTION_DAYS ?> días. En caso de iniciar una pauta nutricional o de entrenamiento, los datos clínicos se conservarán de conformidad con los plazos legales establecidos por la normativa sanitaria española (mínimo de 5 años desde la última asistencia).
-        </p>
+        <ul>
+            <li><strong>Mensajes del formulario:</strong> se eliminan automáticamente <?= (int) (CONTACT_RETENTION_DAYS / 30) ?> meses después de recibirlos, salvo que inicies una relación asistencial.</li>
+            <li><strong>Huella de la dirección IP:</strong> junto a cada mensaje se guarda una huella cifrada e irreversible de tu IP (nunca la IP en claro) para evitar envíos abusivos; se elimina a los <?= IP_RETENTION_DAYS ?> días.</li>
+            <li><strong>Historia clínica:</strong> si inicias una pauta nutricional o de entrenamiento, los datos clínicos se conservan durante los plazos que fija la normativa sanitaria (mínimo de 5 años desde la última asistencia, Ley 41/2002).</li>
+        </ul>
 
-        <h2>5. Destinatarios y Cesión de Datos</h2>
-        <p>
-            Tus datos no serán cedidos a terceros, salvo obligación legal expresa o cuando sea indispensable para la prestación del servicio sanitario (por ejemplo, gestión de citas a través de la plataforma segura de Doctoralia o laboratorios de análisis clínicos con tu autorización previa).
-        </p>
+        <h2>5. Destinatarios, Encargados y Transferencias</h2>
+        <p>Tus datos no se ceden a terceros salvo obligación legal o cuando sea indispensable para prestarte el servicio sanitario con tu autorización (por ejemplo, un laboratorio de análisis clínicos).</p>
+        <p><strong>Encargados del tratamiento.</strong> Para que la web funcione, los siguientes proveedores tratan datos por cuenta de la responsable, con contrato de encargo conforme al art. 28 RGPD y sin poder usarlos para fines propios:</p>
+        <ul>
+            <li>Proveedor de alojamiento web, donde se guardan los mensajes del formulario.</li>
+            <li>Proveedor de correo electrónico, por el que se recibe el aviso de cada mensaje y se te responde.</li>
+        </ul>
+        <p><strong>Servicios de terceros integrados.</strong> Solo si aceptas las cookies de terceros se cargan en tu navegador el calendario y el certificado de Doctoralia (Docplanner, con sede en la UE) y el mapa de Google Maps (Google). Google puede transferir datos técnicos de tu navegación a Estados Unidos; esa transferencia está amparada por el Marco de Privacidad de Datos UE-EE. UU. (decisión de adecuación de la Comisión Europea de 10 de julio de 2023). Si reservas cita a través de Doctoralia, esa plataforma trata tus datos según su propia política de privacidad.</p>
 
         <h2>6. Tus Derechos como Usuario</h2>
         <p>Puedes ejercer en cualquier momento tus derechos de:</p>
@@ -57,6 +64,6 @@
         </p>
 
         <p class="legal-updated">
-            <em>Última actualización: Octubre de <?= date('Y') ?>.</em>
+            <em>Última actualización: noviembre de 2026.</em>
         </p>
     </article>

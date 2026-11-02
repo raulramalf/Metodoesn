@@ -31,17 +31,24 @@
         </ul>
 
         <h2>3. Kategorien verarbeiteter Daten</h2>
-        <p>Über die Website werden grundlegende Identifikations- und Kontaktdaten verarbeitet (Vor- und Nachname, E-Mail-Adresse, Telefonnummer und der allgemeine Grund der Anfrage). Bitte senden Sie keine detaillierten medizinischen oder sensiblen Informationen im offenen Nachrichtenfeld des allgemeinen Formulars; die vollständige Anamnese erfolgt immer im geschützten Rahmen der Sprechstunde oder mit gesonderter medizinischer Einwilligung.</p>
+        <p>Über das Kontaktformular verarbeiten wir Ihren Namen, Ihre E-Mail-Adresse und den Inhalt Ihrer Nachricht. Wenn Sie direkt anrufen oder schreiben, auch Ihre Telefonnummer.</p>
+        <p>Wenn Sie Angaben zu Ihrer Gesundheit machen, handelt es sich um eine besondere Kategorie personenbezogener Daten (Art. 9 DSGVO). Wir nutzen sie nur zur Beantwortung; Rechtsgrundlage ist Ihre ausdrückliche Einwilligung beim Absenden des Formulars (Art. 9 Abs. 2 lit. a DSGVO). Wir empfehlen, keine klinischen Details auf diesem Weg zu senden: Die vollständige Analyse erfolgt in der Sprechstunde.</p>
 
         <h2>4. Speicherdauer</h2>
-        <p>
-            Daten, die für Anfragen angegeben werden, werden so lange gespeichert, wie es zur Bearbeitung Ihrer Anfrage erforderlich ist. Zu jeder Nachricht des Kontaktformulars wird lediglich ein verschlüsselter, nicht umkehrbarer Fingerabdruck Ihrer IP-Adresse (nicht die IP-Adresse im Klartext) gespeichert, um missbräuchliche Zusendungen zu verhindern; dieser Fingerabdruck wird nach <?= IP_RETENTION_DAYS ?> Tagen automatisch gelöscht. Wird ein Ernährungs- oder Trainingsplan begonnen, werden die klinischen Daten gemäß den gesetzlichen Fristen des spanischen Gesundheitsrechts aufbewahrt (mindestens 5 Jahre ab der letzten Behandlung).
-        </p>
+        <ul>
+            <li><strong>Formularnachrichten:</strong> werden <?= (int) (CONTACT_RETENTION_DAYS / 30) ?> Monate nach Eingang automatisch gelöscht, sofern keine Behandlung beginnt.</li>
+            <li><strong>Fingerabdruck der IP-Adresse:</strong> Zu jeder Nachricht wird ein verschlüsselter, nicht umkehrbarer Fingerabdruck Ihrer IP gespeichert (nie die IP selbst), um Missbrauch zu verhindern; er wird nach <?= IP_RETENTION_DAYS ?> Tagen gelöscht.</li>
+            <li><strong>Patientenakte:</strong> Wenn Sie einen Ernährungs- oder Trainingsplan beginnen, werden klinische Daten so lange aufbewahrt, wie es das spanische Gesundheitsrecht vorschreibt (mindestens 5 Jahre nach dem letzten Termin, Gesetz 41/2002).</li>
+        </ul>
 
-        <h2>5. Empfänger und Weitergabe von Daten</h2>
-        <p>
-            Ihre Daten werden nicht an Dritte weitergegeben, es sei denn, dies ist gesetzlich ausdrücklich vorgeschrieben oder für die Erbringung der Gesundheitsleistung unerlässlich (z. B. Terminverwaltung über die sichere Plattform Doctoralia oder klinische Analyselabore mit Ihrer vorherigen Zustimmung).
-        </p>
+        <h2>5. Empfänger, Auftragsverarbeiter und Übermittlungen</h2>
+        <p>Ihre Daten werden nicht an Dritte weitergegeben, außer bei gesetzlicher Verpflichtung oder wenn dies mit Ihrer Zustimmung für die Gesundheitsleistung nötig ist (z. B. ein Labor).</p>
+        <p><strong>Auftragsverarbeiter.</strong> Damit die Website funktioniert, verarbeiten folgende Anbieter Daten im Auftrag der Verantwortlichen, mit Vertrag nach Art. 28 DSGVO und ohne eigene Nutzung:</p>
+        <ul>
+            <li>Webhosting-Anbieter, bei dem die Formularnachrichten gespeichert werden.</li>
+            <li>E-Mail-Anbieter, über den die Benachrichtigung zu jeder Nachricht eingeht und geantwortet wird.</li>
+        </ul>
+        <p><strong>Eingebundene Drittdienste.</strong> Nur wenn Sie Drittanbieter-Cookies akzeptieren, werden der Kalender und das Zertifikat von Doctoralia (Docplanner, Sitz in der EU) und die Karte von Google Maps (Google) in Ihrem Browser geladen. Google kann technische Nutzungsdaten in die USA übermitteln; diese Übermittlung ist durch das EU-US-Datenschutzrahmenabkommen gedeckt (Angemessenheitsbeschluss der Europäischen Kommission vom 10. Juli 2023). Wenn Sie über Doctoralia buchen, verarbeitet diese Plattform Ihre Daten nach ihrer eigenen Datenschutzerklärung.</p>
 
         <h2>6. Ihre Rechte als Nutzer</h2>
         <p>Sie können jederzeit folgende Rechte ausüben:</p>
@@ -57,6 +64,6 @@
         </p>
 
         <p class="legal-updated">
-            <em>Letzte Aktualisierung: Oktober <?= date('Y') ?>.</em>
+            <em>Letzte Aktualisierung: November 2026.</em>
         </p>
     </article>

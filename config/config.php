@@ -26,6 +26,7 @@ define('CONTACT_RATE_WINDOW', 3600);
 define('CONTACT_COOLDOWN_SECONDS', 30);
 // Días que se conserva la huella de IP asociada a un mensaje.
 define('IP_RETENTION_DAYS', 30);
+define('CONTACT_RETENTION_DAYS', 365); // los mensajes del formulario se borran pasado un año
 
 // Aviso por email de cada mensaje del formulario de contacto.
 // El remitente debe ser del propio dominio para que el correo no acabe en spam.

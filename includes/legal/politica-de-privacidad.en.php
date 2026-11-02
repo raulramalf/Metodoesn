@@ -31,17 +31,24 @@
         </ul>
 
         <h2>3. Categories of Data Processed</h2>
-        <p>Through the website we process basic identification and contact data (name, surname, email address, phone number and the general reason for your enquiry). Please do not send detailed medical or sensitive information in the open message of the general form; the full clinical history is always taken in the secure setting of the consultation or with specific medical consent.</p>
+        <p>Through the contact form we process your name, your email address and the content of your message. If you call or write directly, also your phone number.</p>
+        <p>If you choose to include information about your health, it is a special category of data (Art. 9 GDPR). We use it only to reply to you, and the legal basis is your explicit consent when submitting the form (Art. 9(2)(a) GDPR). We recommend not sending clinical details this way: the full assessment takes place during the consultation.</p>
 
         <h2>4. Data Retention</h2>
-        <p>
-            Data provided for enquiries is kept for as long as necessary to resolve your request. With each contact form message we store only an encrypted, irreversible fingerprint of your IP address (not the IP address itself) to prevent abusive submissions; this fingerprint is deleted automatically after <?= IP_RETENTION_DAYS ?> days. If a nutrition or training plan is started, clinical data is kept in accordance with the legal periods set by Spanish healthcare regulations (at least 5 years from the last care provided).
-        </p>
+        <ul>
+            <li><strong>Form messages:</strong> automatically deleted <?= (int) (CONTACT_RETENTION_DAYS / 30) ?> months after receipt, unless you start a care relationship.</li>
+            <li><strong>IP address fingerprint:</strong> each message stores an encrypted, irreversible fingerprint of your IP (never the IP itself) to prevent abuse; it is deleted after <?= IP_RETENTION_DAYS ?> days.</li>
+            <li><strong>Clinical records:</strong> if you start a nutrition or training plan, clinical data are kept for the periods required by Spanish health law (at least 5 years from the last visit, Law 41/2002).</li>
+        </ul>
 
-        <h2>5. Recipients and Data Sharing</h2>
-        <p>
-            Your data will not be disclosed to third parties, except where expressly required by law or where indispensable for providing the healthcare service (for example, appointment management through the secure Doctoralia platform or clinical analysis laboratories with your prior authorisation).
-        </p>
+        <h2>5. Recipients, Processors and Transfers</h2>
+        <p>Your data are not shared with third parties except where required by law or where necessary to provide the health service with your authorisation (for example, a clinical laboratory).</p>
+        <p><strong>Data processors.</strong> For the website to work, the following providers process data on behalf of the controller, under a processing agreement in line with Art. 28 GDPR and without being able to use it for their own purposes:</p>
+        <ul>
+            <li>Web hosting provider, where form messages are stored.</li>
+            <li>Email provider, through which each message notification is received and replies are sent.</li>
+        </ul>
+        <p><strong>Embedded third-party services.</strong> Only if you accept third-party cookies are the Doctoralia calendar and certificate (Docplanner, based in the EU) and the Google Maps map (Google) loaded in your browser. Google may transfer technical browsing data to the United States; this transfer is covered by the EU-US Data Privacy Framework (European Commission adequacy decision of 10 July 2023). If you book through Doctoralia, that platform processes your data under its own privacy policy.</p>
 
         <h2>6. Your Rights as a User</h2>
         <p>You may exercise your rights at any time:</p>
@@ -57,6 +64,6 @@
         </p>
 
         <p class="legal-updated">
-            <em>Last updated: October <?= date('Y') ?>.</em>
+            <em>Last updated: November 2026.</em>
         </p>
     </article>

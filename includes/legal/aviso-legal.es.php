@@ -9,9 +9,11 @@
         <ul>
             <li><strong>Titular:</strong> Elena Sánchez Novo</li>
             <li><strong>Nombre comercial:</strong> <?= e(SITE_NAME) ?></li>
-            <li><strong>Cualificación profesional:</strong> Graduada en Ciencias de la Actividad Física y del Deporte (CAFyD) y Graduada en Nutrición Humana y Dietética</li>
+            <li><strong>Cualificación profesional:</strong> Graduada en Nutrición Humana y Dietética (Universidad de Alcalá) y Graduada en Ciencias de la Actividad Física y del Deporte – CAFyD (Universidad Rey Juan Carlos). Títulos expedidos en España.</li>
+            <li><strong>Profesión regulada:</strong> dietista-nutricionista, profesión sanitaria titulada y regulada por la Ley 44/2003, de 21 de noviembre, de ordenación de las profesiones sanitarias.</li>
             <li><strong>Número de Colegiada:</strong> <?= e(SITE_COLLEGIATE_NUMBER) ?> (Colegio Profesional de Dietistas-Nutricionistas de la Comunidad de Madrid - CODINMA)</li>
             <li><strong>Número de Colegiada CAFyD:</strong> <?= e(SITE_COLEF_NUMBER) ?> (Colegio Oficial de Licenciados en Educación Física y en Ciencias de la Actividad Física y del Deporte - COLEF)</li>
+            <li><strong>Normas profesionales aplicables:</strong> <a href="https://www.consejodietistasnutricionistas.com/codigo-deontologico/" target="_blank" rel="noopener">Código Deontológico del Consejo General de Dietistas-Nutricionistas</a>, <a href="https://codinma.es/deontologiaprofesional/" target="_blank" rel="noopener">normas deontológicas de CODINMA</a> y <a href="https://www.consejo-colef.es" target="_blank" rel="noopener">normativa del Consejo COLEF</a>.</li>
             <li><strong>Dirección de consulta:</strong> Clínica SurgEOM, <?= e(SITE_ADDRESS) ?></li>
             <li><strong>Correo electrónico:</strong> <a href="mailto:<?= e(SITE_EMAIL) ?>"><?= e(SITE_EMAIL) ?></a></li>
             <li><strong>Teléfono de contacto:</strong> <a href="tel:<?= e(SITE_PHONE_LINK) ?>"><?= e(SITE_PHONE) ?></a></li>
@@ -47,6 +49,6 @@
         </p>
 
         <p class="legal-updated">
-            <em>Última actualización: Octubre de <?= date('Y') ?>.</em>
+            <em>Última actualización: noviembre de 2026.</em>
         </p>
     </article>
