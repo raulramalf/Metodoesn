@@ -804,3 +804,10 @@ textarea.form-control { resize: vertical; min-height: 8rem; }
 /* La columna del Método ESN destaca con el rosa de marca más intenso */
 .compare-box-esn { background: var(--rosa); --on-dark-soft: var(--pink-ink); }
 .compare-box-esn .compare-tag { color: var(--pink-ink); }
+
+/* Primera capa de información de privacidad junto al formulario (RGPD art. 13) */
+.privacy-basic { margin-bottom: 1.25rem; padding: 1rem 1.25rem; background: var(--paper); border-left: 3px solid var(--bur); font-size: 0.8125rem; line-height: 1.5; color: var(--ink-soft); }
+.privacy-basic-title { font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; }
+.privacy-basic dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.3rem 0.9rem; margin-bottom: 0.5rem; }
+.privacy-basic dt { font-weight: 600; color: var(--ink); }
+@media (max-width: 480px) { .privacy-basic dl { grid-template-columns: 1fr; gap: 0 0; } .privacy-basic dd { margin-bottom: 0.4rem; } }

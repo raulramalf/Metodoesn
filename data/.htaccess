@@ -1,0 +1,2 @@
+# La base de datos y la clave de huellas de IP nunca deben servirse por web
+Require all denied

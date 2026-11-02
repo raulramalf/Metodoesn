@@ -64,6 +64,11 @@ Database::get();
 $left = (int) Database::get()->query('SELECT COUNT(*) FROM contactos WHERE ip IS NOT NULL')->fetchColumn();
 check('IP se elimina pasados IP_RETENTION_DAYS', $left === 0);
 
+Database::get()->exec("UPDATE contactos SET creado_en = datetime('now', '-" . (CONTACT_RETENTION_DAYS + 1) . " days')");
+$r->setValue(null, null);
+$quedan = (int) Database::get()->query('SELECT COUNT(*) FROM contactos')->fetchColumn();
+check('mensajes se borran pasados CONTACT_RETENTION_DAYS', $quedan === 0);
+
 $r->setValue(null, null);
 gc_collect_cycles();
 foreach (glob($tmp . "/{*,.[!.]*}", GLOB_BRACE) as $f) { @unlink($f); }

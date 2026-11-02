@@ -91,6 +91,6 @@
         </ul>
 
         <p class="legal-updated">
-            <em>Letzte Aktualisierung: Oktober <?= date('Y') ?>.</em>
+            <em>Letzte Aktualisierung: Oktober 2026.</em>
         </p>
     </article>

@@ -8,10 +8,13 @@
         <h2>1. Identification of the Owner</h2>
         <ul>
             <li><strong>Owner:</strong> Elena Sánchez Novo</li>
+            <li><strong>Tax ID (NIF):</strong> <?= e(SITE_NIF) ?></li>
             <li><strong>Trade name:</strong> <?= e(SITE_NAME) ?></li>
-            <li><strong>Professional qualifications:</strong> Graduate in Physical Activity and Sports Science (CAFyD) and Graduate in Human Nutrition and Dietetics</li>
+            <li><strong>Professional qualifications:</strong> Degree in Human Nutrition and Dietetics (University of Alcalá) and Degree in Physical Activity and Sport Sciences – CAFyD (Rey Juan Carlos University). Degrees awarded in Spain.</li>
+            <li><strong>Regulated profession:</strong> dietitian-nutritionist, a regulated health profession under Spanish Law 44/2003 of 21 November on the organisation of health professions.</li>
             <li><strong>Professional licence number:</strong> <?= e(SITE_COLLEGIATE_NUMBER) ?> (Professional Association of Dietitian-Nutritionists of the Community of Madrid - CODINMA)</li>
             <li><strong>Sport Sciences licence number:</strong> <?= e(SITE_COLEF_NUMBER) ?> (Official Association of Physical Education and Sport Sciences Graduates - COLEF)</li>
+            <li><strong>Applicable professional rules:</strong> <a href="https://www.consejodietistasnutricionistas.com/codigo-deontologico/" target="_blank" rel="noopener">Code of Ethics of the Spanish General Council of Dietitians-Nutritionists</a>, <a href="https://codinma.es/deontologiaprofesional/" target="_blank" rel="noopener">CODINMA ethical rules</a> and <a href="https://www.consejo-colef.es" target="_blank" rel="noopener">COLEF Council regulations</a> (in Spanish).</li>
             <li><strong>Practice address:</strong> Clínica SurgEOM, <?= e(SITE_ADDRESS) ?></li>
             <li><strong>Email:</strong> <a href="mailto:<?= e(SITE_EMAIL) ?>"><?= e(SITE_EMAIL) ?></a></li>
             <li><strong>Phone:</strong> <a href="tel:<?= e(SITE_PHONE_LINK) ?>"><?= e(SITE_PHONE) ?></a></li>
@@ -47,6 +50,6 @@
         </p>
 
         <p class="legal-updated">
-            <em>Last updated: October <?= date('Y') ?>.</em>
+            <em>Last updated: November 2026.</em>
         </p>
     </article>

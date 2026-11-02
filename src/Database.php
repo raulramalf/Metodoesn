@@ -43,13 +43,17 @@ class Database {
     }
 
     /**
-     * Elimina la huella de IP pasados IP_RETENTION_DAYS días (minimización de datos, RGPD).
+     * Minimización de datos (RGPD): borra la huella de IP pasados IP_RETENTION_DAYS días
+     * y el mensaje completo pasados CONTACT_RETENTION_DAYS.
      */
     private static function purgeExpired(PDO $pdo): void {
         $stmt = $pdo->prepare(
             "UPDATE contactos SET ip = NULL WHERE ip IS NOT NULL AND creado_en < datetime('now', :limite)"
         );
         $stmt->execute(['limite' => '-' . IP_RETENTION_DAYS . ' days']);
+
+        $stmt = $pdo->prepare("DELETE FROM contactos WHERE creado_en < datetime('now', :limite)");
+        $stmt->execute(['limite' => '-' . CONTACT_RETENTION_DAYS . ' days']);
     }
 
     private static function secret(): string {

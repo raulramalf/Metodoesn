@@ -2,6 +2,7 @@
 define('SITE_NAME', 'Método ESN');
 define('SITE_TAGLINE', 'Entrenamiento | Salud | Nutrición');
 define('SITE_OWNER', 'Elena Sánchez Novo');
+define('SITE_NIF', '02569546D'); // obligatorio en el aviso legal (LSSI art. 10)
 define('SITE_COLLEGIATE_NUMBER', 'MAD01639');
 define('SITE_COLEF_NUMBER', '71.935'); // Colegiación como graduada en CAFyD
 define('SITE_EMAIL', 'contacto@metodoesn.com');
@@ -26,6 +27,7 @@ define('CONTACT_RATE_WINDOW', 3600);
 define('CONTACT_COOLDOWN_SECONDS', 30);
 // Días que se conserva la huella de IP asociada a un mensaje.
 define('IP_RETENTION_DAYS', 30);
+define('CONTACT_RETENTION_DAYS', 365); // los mensajes del formulario se borran pasado un año
 
 // Aviso por email de cada mensaje del formulario de contacto.
 // El remitente debe ser del propio dominio para que el correo no acabe en spam.
@@ -38,6 +40,9 @@ if (!headers_sent()) {
     header('X-Frame-Options: SAMEORIGIN');
     header('Referrer-Policy: strict-origin-when-cross-origin');
     header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
+    if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+        header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
+    }
     // CSP conservadora: no restringe scripts/frames para no romper los widgets de Doctoralia ni el mapa.
     header("Content-Security-Policy: object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'");
 }
