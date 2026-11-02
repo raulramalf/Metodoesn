@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'INSERT INTO contactos (nombre, email, mensaje, ip) VALUES (:nombre, :email, :mensaje, :ip)'
         );
         $stmt->execute($old + ['ip' => $fingerprint]);
+        send_contact_mail($old);
         $_SESSION['contact_last_sent'] = time();
         $ok = true;
         $old = ['nombre' => '', 'email' => '', 'mensaje' => ''];
@@ -66,7 +67,7 @@ require __DIR__ . '/../includes/nav.php';
             <div>
                 <p class="kicker"><?= e(t('contact_kicker')) ?></p>
                 <h1><?= e(t('contact_title')) ?></h1>
-                <p class="lead" style="margin-bottom: 2rem;">
+                <p class="lead">
                     <?= e(t('contact_lead')) ?>
                 </p>
 
@@ -114,12 +115,11 @@ require __DIR__ . '/../includes/nav.php';
 
                 <!-- Tarjeta de consulta física en Clínica SurgEOM -->
                 <div class="clinic-location-card">
-                    <h4>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <h2 class="clinic-title">
                         <span><?= e(t('trust_clinic')) ?></span>
-                    </h4>
+                    </h2>
                     <p><strong><?= e(SITE_ADDRESS) ?></strong></p>
-                    <p style="font-size:0.86rem; color:var(--ink-soft); margin-top:0.4rem;">
+                    <p class="clinic-hours">
                         <strong><?= e(t('contacto_008')) ?></strong> <?= e(SITE_HOURS) ?>.<br>
                         <?= e(t('contacto_009')) ?>
                     </p>
@@ -133,8 +133,8 @@ require __DIR__ . '/../includes/nav.php';
             <!-- COLUMNA DERECHA: FORMULARIO ESTILIZADO -->
             <div>
                 <div class="form-card">
-                    <h3 style="margin-bottom: 0.6rem;"><?= e(t('contact_form_title')) ?></h3>
-                    <p style="font-size:0.95rem; color:var(--ink-soft); margin-bottom:1.6rem;">
+                    <h2><?= e(t('contact_form_title')) ?></h2>
+                    <p class="form-intro">
                         <?= e(t('contacto_011')) ?>
                     </p>
 
@@ -187,7 +187,7 @@ require __DIR__ . '/../includes/nav.php';
                             </label>
                         </div>
 
-                        <button type="submit" class="btn" style="width: 100%;" id="btn-submit">
+                        <button type="submit" class="btn btn-block" id="btn-submit" data-sending="<?= e(t('rd_js_sending')) ?>">
                             <span class="btn-text"><?= e(t('contact_send')) ?></span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                         </button>
@@ -198,7 +198,7 @@ require __DIR__ . '/../includes/nav.php';
     </section>
 
     <!-- SECCIÓN INTERACTIVA DE GOOGLE MAPS Y UBICACIÓN CLÍNICA -->
-    <section class="wrap section-compact" id="mapa-ubicacion" style="margin-bottom: 5.5rem;">
+    <section class="wrap section-compact" id="mapa-ubicacion">
         <div class="contact-map-card">
             <div class="contact-map-grid">
                 <!-- Información detallada de ubicación y transporte -->
@@ -257,7 +257,7 @@ require __DIR__ . '/../includes/nav.php';
 
                 <!-- Tarjeta fotográfica del despacho -->
                 <div class="contact-map-image-card">
-                    <img src="<?= e(img('dondestamos.jpg')) ?>" alt="Despacho de consulta Elena Sánchez Novo en Clínica SurgEOM Madrid" loading="lazy" width="600" height="750">
+                    <img src="<?= e(img('dondestamos.jpg')) ?>" alt="<?= e(t('alt_despacho')) ?>" loading="lazy" width="600" height="750">
                     <div class="map-image-badge">
                         <span><?= e(t('contacto_028')) ?></span>
                         <strong>Avenida de América · Madrid</strong>

@@ -3,6 +3,7 @@ define('SITE_NAME', 'Método ESN');
 define('SITE_TAGLINE', 'Entrenamiento | Salud | Nutrición');
 define('SITE_OWNER', 'Elena Sánchez Novo');
 define('SITE_COLLEGIATE_NUMBER', 'MAD01639');
+define('SITE_COLEF_NUMBER', '71.935'); // Colegiación como graduada en CAFyD
 define('SITE_EMAIL', 'contacto@metodoesn.com');
 define('SITE_PHONE', '+34 614 467 084');
 define('SITE_PHONE_LINK', '+34614467084');
@@ -25,6 +26,11 @@ define('CONTACT_RATE_WINDOW', 3600);
 define('CONTACT_COOLDOWN_SECONDS', 30);
 // Días que se conserva la huella de IP asociada a un mensaje.
 define('IP_RETENTION_DAYS', 30);
+
+// Aviso por email de cada mensaje del formulario de contacto.
+// El remitente debe ser del propio dominio para que el correo no acabe en spam.
+define('CONTACT_NOTIFY_TO', SITE_EMAIL);
+define('CONTACT_MAIL_FROM', 'web@metodoesn.com');
 
 // Cabeceras de seguridad (se aplican a todas las páginas que cargan la configuración).
 if (!headers_sent()) {
