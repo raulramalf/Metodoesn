@@ -8,6 +8,7 @@
         <h2>1. Angaben zur Verantwortlichen</h2>
         <ul>
             <li><strong>Inhaberin:</strong> Elena Sánchez Novo</li>
+            <li><strong>Steuernummer (NIF):</strong> <?= e(SITE_NIF) ?></li>
             <li><strong>Geschäftsbezeichnung:</strong> <?= e(SITE_NAME) ?></li>
             <li><strong>Berufliche Qualifikation:</strong> Abschluss in Humanernährung und Diätetik (Universität Alcalá) und Abschluss in Sportwissenschaften – CAFyD (Universität Rey Juan Carlos). In Spanien verliehene Abschlüsse.</li>
             <li><strong>Reglementierter Beruf:</strong> Diätassistentin-Ernährungswissenschaftlerin, reglementierter Gesundheitsberuf nach dem spanischen Gesetz 44/2003 vom 21. November über die Gesundheitsberufe.</li>

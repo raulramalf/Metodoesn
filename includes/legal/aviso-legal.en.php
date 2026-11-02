@@ -8,6 +8,7 @@
         <h2>1. Identification of the Owner</h2>
         <ul>
             <li><strong>Owner:</strong> Elena Sánchez Novo</li>
+            <li><strong>Tax ID (NIF):</strong> <?= e(SITE_NIF) ?></li>
             <li><strong>Trade name:</strong> <?= e(SITE_NAME) ?></li>
             <li><strong>Professional qualifications:</strong> Degree in Human Nutrition and Dietetics (University of Alcalá) and Degree in Physical Activity and Sport Sciences – CAFyD (Rey Juan Carlos University). Degrees awarded in Spain.</li>
             <li><strong>Regulated profession:</strong> dietitian-nutritionist, a regulated health profession under Spanish Law 44/2003 of 21 November on the organisation of health professions.</li>

@@ -2,6 +2,7 @@
 define('SITE_NAME', 'Método ESN');
 define('SITE_TAGLINE', 'Entrenamiento | Salud | Nutrición');
 define('SITE_OWNER', 'Elena Sánchez Novo');
+define('SITE_NIF', '02569546D'); // obligatorio en el aviso legal (LSSI art. 10)
 define('SITE_COLLEGIATE_NUMBER', 'MAD01639');
 define('SITE_COLEF_NUMBER', '71.935'); // Colegiación como graduada en CAFyD
 define('SITE_EMAIL', 'contacto@metodoesn.com');

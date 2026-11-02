@@ -8,6 +8,7 @@
         <h2>1. Datos Identificativos del Responsable</h2>
         <ul>
             <li><strong>Titular:</strong> Elena Sánchez Novo</li>
+            <li><strong>NIF:</strong> <?= e(SITE_NIF) ?></li>
             <li><strong>Nombre comercial:</strong> <?= e(SITE_NAME) ?></li>
             <li><strong>Cualificación profesional:</strong> Graduada en Nutrición Humana y Dietética (Universidad de Alcalá) y Graduada en Ciencias de la Actividad Física y del Deporte – CAFyD (Universidad Rey Juan Carlos). Títulos expedidos en España.</li>
             <li><strong>Profesión regulada:</strong> dietista-nutricionista, profesión sanitaria titulada y regulada por la Ley 44/2003, de 21 de noviembre, de ordenación de las profesiones sanitarias.</li>
