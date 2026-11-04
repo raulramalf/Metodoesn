@@ -99,6 +99,9 @@
     <link rel="preload" href="<?= e(asset('fonts/instrument-sans-normal-400-latin.woff2')) ?>" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="<?= e(asset('css/fonts.css')) ?>">
     <link rel="stylesheet" href="<?= e(asset('css/style.css')) ?>">
+<?php if (CF_ANALYTICS_TOKEN !== ''): ?>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='<?= e(json_encode(['token' => CF_ANALYTICS_TOKEN])) ?>'></script>
+<?php endif; ?>
 </head>
 <body>
 <a class="skip" href="#main"><?= e(t('nav_skip', 'Saltar al contenido')) ?></a>

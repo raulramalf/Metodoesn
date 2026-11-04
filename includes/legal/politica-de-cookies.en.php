@@ -55,6 +55,13 @@
                         <td>Session / Third party</td>
                         <td>Functional / Third party (with consent)</td>
                     </tr>
+                    <tr>
+                        <td>(no cookies)</td>
+                        <td>Cloudflare Web Analytics</td>
+                        <td>Anonymous, aggregated visit statistics (page views, country, browser). It sets no cookies, stores nothing on your device, does not use your IP to identify you and does not track you across sites.</td>
+                        <td>—</td>
+                        <td><strong>Cookieless analytics</strong></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

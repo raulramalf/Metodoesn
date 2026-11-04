@@ -55,6 +55,13 @@
                         <td>Sitzung / Dritter</td>
                         <td>Funktional / Dritte (mit Einwilligung)</td>
                     </tr>
+                    <tr>
+                        <td>(keine Cookies)</td>
+                        <td>Cloudflare Web Analytics</td>
+                        <td>Anonyme, aggregierte Besuchsstatistiken (Seitenaufrufe, Land, Browser). Es werden keine Cookies gesetzt und nichts auf Ihrem Gerät gespeichert; Ihre IP wird nicht zur Identifizierung genutzt und Sie werden nicht seitenübergreifend verfolgt.</td>
+                        <td>—</td>
+                        <td><strong>Cookielose Analyse</strong></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

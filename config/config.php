@@ -16,6 +16,8 @@ define('SITE_MAPS_EMBED', 'https://maps.google.com/maps?q=Cl%C3%ADnica+SurgEOM,+
 define('SITE_HOURS', 'Lunes a Viernes de 16:00 a 21:00');
 define('BOOKING_URL', 'https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid');
 define('SITE_CANONICAL', 'https://metodoesn.com');
+// Token de Cloudflare Web Analytics (analítica sin cookies). Vacío = no se carga el script.
+define('CF_ANALYTICS_TOKEN', 'da9e1f12147b47c1964f85f263d511c9');
 if (!defined('DB_PATH')) {
     define('DB_PATH', __DIR__ . '/../data/metodoesn.sqlite');
 }

@@ -55,6 +55,13 @@
                         <td>Sesión / Tercero</td>
                         <td>Funcional / Terceros (con consentimiento)</td>
                     </tr>
+                    <tr>
+                        <td>(no usa cookies)</td>
+                        <td>Cloudflare Web Analytics</td>
+                        <td>Estadísticas anónimas y agregadas de visitas (páginas vistas, país, navegador). No instala cookies ni guarda nada en tu dispositivo, no usa tu IP para identificarte y no te sigue entre sitios.</td>
+                        <td>—</td>
+                        <td><strong>Analítica sin cookies</strong></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
