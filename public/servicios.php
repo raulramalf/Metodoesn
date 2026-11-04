@@ -51,7 +51,7 @@ require __DIR__ . '/../src/content.php';
                 </article>
 
                 <article class="pillar-card has-img">
-                    <div class="pillar-img"><img src="<?= e(img('foto-planificacion.webp')) ?>" alt="<?= e(t('alt_planificacion')) ?>" loading="lazy" width="1200" height="1600"></div>
+                    <div class="pillar-img"><img src="<?= e(img('foto-desayunos.webp')) ?>" alt="<?= e(t('alt_desayunos')) ?>" loading="lazy" width="960" height="1438"></div>
                     <div class="pillar-body">
                         <h3><?= e(t('servicios_088')) ?></h3>
                         <p><?= e(t('servicios_089')) ?></p>
