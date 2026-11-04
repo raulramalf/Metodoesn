@@ -31,7 +31,7 @@ $arrow = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="cu
 
             <div class="hero-media">
                 <div class="hero-arch">
-                    <img src="<?= e(img('foto-desayunos.webp')) ?>" alt="<?= e(t('alt_desayunos')) ?>" width="960" height="1438" fetchpriority="high">
+                    <img src="<?= e(img('hero-1.webp')) ?>" alt="<?= e(t('alt_hero')) ?>" width="682" height="1024" fetchpriority="high">
                 </div>
                 <p class="hero-direct"><strong><?= e(t('rd_direct')) ?></strong> <?= e(t('rd_direct_sub')) ?></p>
             </div>

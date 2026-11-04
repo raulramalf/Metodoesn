@@ -336,4 +336,5 @@ return [
     'pb_rights_k' => 'Rights',
     'pb_rights_v' => 'Access, rectification, erasure, objection, restriction and portability, by writing to',
     'pb_more' => 'More information in the',
+    'alt_hero' => 'Still life with a healthy bowl, dumbbells, mat and a Método ESN bottle',
 ];
