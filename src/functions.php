@@ -13,9 +13,11 @@ function e(?string $v): string {
 function asset(string $path): string {
     $url = '/assets/' . ltrim($path, '/');
     if (preg_match('/\.(css|js)$/', $path)) {
-        $file = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/\\') . $url;
-        if (is_file($file)) {
-            $url .= '?v=' . filemtime($file);
+        // Repo: src/../public/assets · Hostinger (todo en public_html): src/../assets
+        foreach ([__DIR__ . '/../public' . $url, __DIR__ . '/..' . $url] as $file) {
+            if (is_file($file)) {
+                return $url . '?v=' . filemtime($file);
+            }
         }
     }
     return $url;
