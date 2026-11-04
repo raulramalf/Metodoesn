@@ -6,8 +6,19 @@ function e(?string $v): string {
     return htmlspecialchars($v ?? '', ENT_QUOTES, 'UTF-8');
 }
 
+/**
+ * URL de un recurso estático. CSS y JS llevan ?v=fecha de modificación para que,
+ * tras cada actualización, los navegadores y la CDN pidan la versión nueva.
+ */
 function asset(string $path): string {
-    return '/assets/' . ltrim($path, '/');
+    $url = '/assets/' . ltrim($path, '/');
+    if (preg_match('/\.(css|js)$/', $path)) {
+        $file = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/\\') . $url;
+        if (is_file($file)) {
+            $url .= '?v=' . filemtime($file);
+        }
+    }
+    return $url;
 }
 
 function img(string $name): string {
