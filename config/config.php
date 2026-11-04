@@ -32,7 +32,7 @@ define('CONTACT_RETENTION_DAYS', 365); // los mensajes del formulario se borran 
 // Aviso por email de cada mensaje del formulario de contacto.
 // El remitente debe ser del propio dominio para que el correo no acabe en spam.
 define('CONTACT_NOTIFY_TO', SITE_EMAIL);
-define('CONTACT_MAIL_FROM', 'web@metodoesn.com');
+define('CONTACT_MAIL_FROM', SITE_EMAIL);
 
 // Cabeceras de seguridad (se aplican a todas las páginas que cargan la configuración).
 if (!headers_sent()) {
