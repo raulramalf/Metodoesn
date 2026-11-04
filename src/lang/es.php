@@ -336,4 +336,5 @@ return [
     'pb_rights_k' => 'Derechos',
     'pb_rights_v' => 'Acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a',
     'pb_more' => 'Más información en la',
+    'alt_hero' => 'Bodegón con bowl saludable, mancuernas, esterilla y botella de Método ESN',
 ];

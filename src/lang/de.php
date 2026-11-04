@@ -336,4 +336,5 @@ return [
     'pb_rights_k' => 'Rechte',
     'pb_rights_v' => 'Auskunft, Berichtigung, Löschung, Widerspruch, Einschränkung und Übertragbarkeit, per E-Mail an',
     'pb_more' => 'Weitere Informationen in der',
+    'alt_hero' => 'Stillleben mit gesunder Bowl, Hanteln, Matte und Método-ESN-Flasche',
 ];
