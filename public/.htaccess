@@ -1,0 +1,28 @@
+# Producción (Hostinger / LiteSpeed). El servidor local php -S ignora este archivo.
+
+Options -Indexes
+DirectoryIndex index.php
+
+RewriteEngine On
+
+# Siempre HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Dominio canónico sin www (coincide con SITE_CANONICAL)
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# Archivos ocultos (.git, .env…) nunca accesibles; se permite .well-known para certificados
+RewriteRule (^|/)\.(?!well-known/) - [F]
+
+# Caché larga para recursos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
