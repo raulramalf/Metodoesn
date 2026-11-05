@@ -11,8 +11,8 @@ define('SITE_PHONE_LINK', '+34614467084');
 define('SITE_INSTAGRAM', '@metodoESN');
 define('SITE_INSTAGRAM_URL', 'https://www.instagram.com/metodo.esn/');
 define('SITE_ADDRESS', 'Clínica SurgEOM · C/ de Coslada, 16, 28028 Madrid');
-define('SITE_MAPS_URL', 'https://maps.google.com/?q=Cl%C3%ADnica+SurgEOM,+Calle+de+Coslada+16,+28028+Madrid');
-define('SITE_MAPS_EMBED', 'https://maps.google.com/maps?q=Cl%C3%ADnica+SurgEOM,+Calle+de+Coslada,+16,+28028+Madrid&t=&z=16&ie=UTF8&iwloc=&output=embed');
+define('SITE_MAPS_URL', 'https://maps.app.goo.gl/oPWsBptzjLEvEbvq8'); // Ficha de Google Business Profile
+define('SITE_MAPS_EMBED', 'https://maps.google.com/maps?q=Elena+S%C3%A1nchez+Novo,+Calle+de+Coslada,+16,+28028+Madrid&t=&z=16&ie=UTF8&iwloc=&output=embed');
 define('SITE_HOURS', 'Lunes a Viernes de 16:00 a 21:00');
 define('BOOKING_URL', 'https://www.doctoralia.es/elena-sanchez-novo/dietista-nutricionista/madrid');
 define('SITE_CANONICAL', 'https://metodoesn.com');

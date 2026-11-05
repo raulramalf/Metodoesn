@@ -67,7 +67,8 @@
                         'closes' => '21:00',
                     ]],
                     'areaServed' => 'Madrid',
-                    'sameAs' => [SITE_INSTAGRAM_URL, BOOKING_URL],
+                    'hasMap' => SITE_MAPS_URL,
+                    'sameAs' => [SITE_INSTAGRAM_URL, BOOKING_URL, SITE_MAPS_URL],
                     'founder' => ['@id' => $base . '/#elena'],
                 ],
                 [
@@ -86,7 +87,7 @@
                         ['@type' => 'Organization', 'name' => 'Colegio Oficial de Licenciados en Educación Física y CAFyD (COLEF)'],
                     ],
                     'knowsAbout' => ['Nutrición clínica', 'Dietética', 'Entrenamiento de fuerza', 'Composición corporal', 'Salud digestiva', 'Salud hormonal', 'Nutrición deportiva'],
-                    'sameAs' => [SITE_INSTAGRAM_URL, BOOKING_URL],
+                    'sameAs' => [SITE_INSTAGRAM_URL, BOOKING_URL, SITE_MAPS_URL],
                     'worksFor' => ['@id' => $base . '/#business'],
                     'url' => $base . '/quienes-somos.php',
                 ],
