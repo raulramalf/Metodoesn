@@ -30,7 +30,7 @@
     <meta name="twitter:title" content="<?= e($seoTitle) ?>">
     <meta name="twitter:description" content="<?= e($seoDesc) ?>">
     <meta name="twitter:image" content="<?= e($seoImage) ?>">
-    <meta name="theme-color" content="#8a4f4d">
+    <meta name="theme-color" content="#ecd5ce">
     <?php
         $base = rtrim(SITE_CANONICAL, '/');
         $ld = [

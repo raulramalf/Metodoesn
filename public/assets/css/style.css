@@ -1,15 +1,15 @@
 /* ============================================================
    MÉTODO ESN — SISTEMA DE DISEÑO v4 · "Burdeos Pleno"
    Campos de color planos, arcos, tipografía grande.
-   Paleta heredada del logotipo (#c79c95 / #8a4f4d).
+   Paleta heredada del logotipo (#c79c95 / #8a4f4d), con el burdeos aclarado.
    ============================================================ */
 
 /* 1. TOKENS */
 :root {
     /* Paleta original */
     --rosa: #c79c95;
-    --bur: #8a4f4d;
-    --bur-d: #6e3a38;
+    --bur: #9d5f5c;        /* burdeos original (#8a4f4d) aclarado; mantiene texto blanco AA */
+    --bur-d: #84504d;
     --ink: #1f1818;
     --paper: #faf5f4;
     --paper-soft: #f5ece9;
@@ -17,11 +17,11 @@
     --gold: #c98829;
     --pink: #ecd5ce;       /* rosa protagonista (tarjetas de visita) */
     --pink-d: #e2c2b9;
-    --pink-ink: #4a2625;
-    --pink-ink-soft: #6b3f3c;
+    --pink-ink: #5a3230;
+    --pink-ink-soft: #7a4a47;
 
     /* Derivados */
-    --bur-dd: #4a2625;
+    --bur-dd: #5a3230;
     --ink-soft: #4a3e3e;
     --ink-muted: #6b5958;
     --on-dark: #faf5f4;
@@ -159,7 +159,7 @@ p + p { margin-top: 1rem; }
 .btn-sm { padding: 0.6rem 1.15rem; min-height: 2.5rem; font-size: 0.9375rem; }
 .btn-lg { padding: 1.1rem 2rem; font-size: 1.0625rem; }
 
-.btn-ghost { background: transparent; color: var(--bur); }
+.btn-ghost { background: transparent; color: var(--bur-d); }
 .btn-light { background: var(--rosa-c); border-color: var(--rosa-c); color: var(--bur-d); }
 .btn-outline-light { background: transparent; border-color: var(--rosa-c); color: var(--rosa-c); }
 .btn-dark { background: var(--bur-dd); border-color: var(--bur-dd); color: #fff; }
@@ -705,7 +705,9 @@ textarea.form-control { resize: vertical; min-height: 8rem; }
     .hero-grid { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); gap: 0; }
     .hero-text { padding-bottom: 1.25rem; }
     .hero-media { width: min(100%, 32rem); justify-self: center; padding-top: 0; }
-    .hero-arch { min-height: 7rem; }
+    /* En móvil el arco tiene alto propio y enseña la mesa (cuenco y botella), no la pared vacía */
+    .hero-arch { flex: none; min-height: 0; height: min(78vw, 26rem); }
+    .hero-arch img { object-position: center 82%; }
 
     .about, .meet-grid, .contact-layout, .contact-map-grid { grid-template-columns: 1fr; }
     .about-media { max-width: 30rem; }
@@ -780,20 +782,20 @@ textarea.form-control { resize: vertical; min-height: 8rem; }
 .nav-toggle span { background: var(--pink-ink); }
 .lang-dropdown-trigger { background: rgb(255 255 255 / 0.55); }
 .booking-hero-kicker { background: rgb(255 255 255 / 0.55); }
-.booking-hero-chips li { color: var(--pink-ink); border-color: rgb(74 38 37 / 0.25); }
+.booking-hero-chips li { color: var(--pink-ink); border-color: rgb(90 50 48 / 0.25); }
 
 /* Botones sobre rosa: burdeos sólido y contorno oscuro */
 :is(.site-header, .hero, .booking-hero) .btn-light,
 .mode-card.is-featured .btn,
 .assist-card .btn:not(.btn-ghost) { background: var(--bur); border-color: var(--bur); color: #fff; }
 :is(.hero, .booking-hero) .btn-outline-light,
-.assist-card .btn-ghost { background: transparent; border-color: var(--bur-dd); color: var(--bur-dd); }
+.assist-card .btn-ghost { background: transparent; border-color: var(--bur-d); color: var(--bur-d); }
 @media (hover: hover) and (pointer: fine) {
     :is(.site-header, .hero, .booking-hero) .btn-light:hover,
     .mode-card.is-featured .btn:hover,
     .assist-card .btn:not(.btn-ghost):hover { background: var(--bur-d); border-color: var(--bur-d); color: #fff; }
     :is(.hero, .booking-hero) .btn-outline-light:hover,
-    .assist-card .btn-ghost:hover { background: var(--bur-dd); border-color: var(--bur-dd); color: #fff; }
+    .assist-card .btn-ghost:hover { background: var(--bur-d); border-color: var(--bur-d); color: #fff; }
 }
 
 @media (max-width: 900px) {
